@@ -1,0 +1,2 @@
+-GetMovies deve retornar só informações básicas sem includes (qdo n necessário).
+-Adicionar roles para artistas nos filmes (director, actor, ...).
