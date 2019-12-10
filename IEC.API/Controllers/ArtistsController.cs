@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using AutoMapper;
-using IEC.API.Data;
+using IEC.API.Core.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IEC.API.Controllers

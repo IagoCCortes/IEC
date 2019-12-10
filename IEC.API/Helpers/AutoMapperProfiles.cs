@@ -1,7 +1,7 @@
 using System.Linq;
 using AutoMapper;
 using IEC.API.Dtos;
-using IEC.API.Models;
+using IEC.API.Core.Domain;
 
 namespace IEC.API.Helpers
 {

@@ -2,19 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using IEC.API.Models;
+using IEC.API.Core.Domain;
 using Microsoft.EntityFrameworkCore;
+using IEC.API.Core.Repositories;
 
-namespace IEC.API.Data
+namespace IEC.API.Persistence.Repositories
 {
-    public class MovieRepository : GenericRepository, IMovieRepository
+    public class MovieRepository : GenericRepository<Movie>, IMovieRepository
     {
         public MovieRepository(DataContext context) :base(context) { }
-
-        public void DeleteGenres(int movieId)
-        {
-            Context.RemoveRange(Context.MovieMovieGenres.Where(m => movieId == m.MovieId));
-        }
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync(IEnumerable<int> genreIds = null)
         {

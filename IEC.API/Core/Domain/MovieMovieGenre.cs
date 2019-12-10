@@ -1,4 +1,4 @@
-namespace IEC.API.Models
+namespace IEC.API.Core.Domain
 {
     public class MovieMovieGenre
     {

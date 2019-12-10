@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using IEC.API.Models;
+using IEC.API.Core.Domain;
+using IEC.API.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
 
-namespace IEC.API.Data
+namespace IEC.API.Persistence.Repositories
 {
-    public class ArtistRepository : GenericRepository, IArtistRepository
+    public class ArtistRepository : GenericRepository<Artist>, IArtistRepository
     {
         public ArtistRepository(DataContext context) : base(context) {}
         public async Task<IEnumerable<Artist>> GetArtistsAsync()

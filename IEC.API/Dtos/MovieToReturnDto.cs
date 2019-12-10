@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using IEC.API.Models;
+using IEC.API.Core.Domain;
 
 namespace IEC.API.Dtos
 {
