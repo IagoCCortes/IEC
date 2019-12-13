@@ -1,0 +1,37 @@
+.img-thumbnail {
+    margin: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 85%;
+    height: 85%;
+}
+
+.backdrop {
+    background-color: #282828;
+    border-top-right-radius: 0.25rem;
+    border-top-left-radius: 0.25rem;
+    border: 1px solid rgba(0,0,0,0.125);
+}
+
+.hr-color {
+    border-top: 1px solid rgb(173, 175, 174);
+}
+
+.plot {
+    text-align: justify;
+    margin: 25px;
+}
+
+.sleek-heading {
+    font-weight: 50;
+}
+
+.card-body {
+    padding: 0 25px;
+}
+
+.card-footer {
+    padding: 10px 15px;
+    background-color: #fff;
+    border-top: none;
+}

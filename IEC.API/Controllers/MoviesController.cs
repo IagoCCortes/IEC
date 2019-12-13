@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using IEC.API.Core.Repositories;
 using IEC.API.Dtos;
 using IEC.API.Helpers;
 using IEC.API.Core.Domain;
@@ -28,7 +27,7 @@ namespace IEC.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetMoviesAsync([FromQuery]MovieParams movieParams)
         {
-            var movies = await _unitOfWork.Movies.GetMoviesAsync(movieParams.genre);
+            var movies = await _unitOfWork.Movies.GetMoviesAsync(movieParams);
 
             var moviesToReturn = _mapper.Map<IEnumerable<MovieToReturnDto>>(movies);
 

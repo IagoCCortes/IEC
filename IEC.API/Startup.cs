@@ -9,6 +9,10 @@ using IEC.API.Persistence.Repositories;
 using IEC.API.Persistence;
 using IEC.API.Core.Repositories;
 using IEC.API.Core;
+using System.Net;
+using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http;
+using IEC.API.Helpers;
 
 namespace IEC.API
 {
@@ -29,6 +33,8 @@ namespace IEC.API
             // services.AddScoped<IArtistRepository, ArtistRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            services.AddCors();
+
             services.AddControllers().AddNewtonsoftJson(opt => {
                 opt.SerializerSettings.ReferenceLoopHandling = 
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
@@ -46,10 +52,26 @@ namespace IEC.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseExceptionHandler(builder => {
+                    builder.Run(async context => {
+                        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+                        var error = context.Features.Get<IExceptionHandlerFeature>();
+                        if (error != null) 
+                        {
+                            context.Response.AddApplicationError(error.Error.Message);
+                            await context.Response.WriteAsync(error.Error.Message);
+                        }
+                    });
+                });
+            }
             //app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseAuthorization();
 

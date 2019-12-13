@@ -10,6 +10,7 @@ namespace IEC.API.Dtos
         public int Runtime { get; set; }
         public DateTime ReleaseDate { get; set; }
         public DateTime Created { get; set; }
+        public string PosterUrl { get; set; }
         public List<int> GenreIds { get; set; }
 
         public MovieForCreationDto()

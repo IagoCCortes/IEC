@@ -6,7 +6,6 @@ namespace IEC.API.Core.Repositories
 {
     public interface IArtistRepository : IGenericRepository<Artist>
     {
-        Task<IEnumerable<Artist>> GetArtistsAsync();
-        Task<Artist> GetArtistAsync(int id);
+        
     }
 }

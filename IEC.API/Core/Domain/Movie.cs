@@ -17,6 +17,7 @@ namespace IEC.API.Core.Domain
         public int Runtime { get; set; }
         public DateTime ReleaseDate { get; set; }
         public DateTime Created { get; set; }
+        public string PosterUrl { get; set; }
         public ICollection<MovieMovieGenre> MovieMovieGenres { get; private set; }
         public ICollection<MovieArtist> MovieArtists { get; private set; }
     }

@@ -17,6 +17,10 @@ namespace IEC.API.Helpers
                                  .Select(mg => mg.MovieGenre.Genre)));
                                  
             CreateMap<MovieForUpdateDto, Movie>();
+
+            CreateMap<ArtistForCreationDto, Artist>();
+
+            CreateMap<Artist, ArtistToReturnDto>();
         }
     }
 }

@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-sm-12 col backdrop">
+            <h1 class="text-center">{{movie.title}}</h1>
+        </div>
+    </div>
+    <div class="row bg-dark p-2 rounded-bottom">
+        <div class="col-sm-4 col">
+            <div class="card">
+                <img class="card-img-top img-thumbnail" src="{{movie.posterUrl}}" alt="poster for {{movie.title}}">
+                <div class="card-body">
+                    <div>
+                        <p>{{movie.genres.join(', ')}} &#x25cf; {{movie.releaseDate | date: 'mediumDate'}} &#x25cf;
+                            {{runtime}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8 col backdrop">
+            <div class="plot">
+                <h5 class="sleek-heading">Plot</h5>
+                <hr class="hr-color">
+                <p>{{movie.plot}}</p>
+            </div>
+        </div>
+    </div>
+</div>
