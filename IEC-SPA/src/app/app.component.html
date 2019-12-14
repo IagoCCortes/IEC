@@ -1,2 +1,3 @@
-<app-nav></app-nav>
+<app-nav *ngIf="!admin" (changedToAdmin)="onChangedToAdmin($event)"></app-nav>
+<app-nav-admin *ngIf="admin" (changedToAdmin)="onChangedToAdmin($event)"></app-nav-admin>
 <router-outlet></router-outlet>

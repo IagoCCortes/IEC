@@ -15,13 +15,13 @@ namespace IEC.API.Persistence.Repositories
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync(MovieParams movieParams)
         {
-            if(movieParams.genreIds == null)
-                return await Context.Movies.Include(m => m.MovieMovieGenres).ThenInclude(mg => mg.MovieGenre).ToListAsync();
+            var movies = Context.Movies.Include(m => m.MovieMovieGenres);
 
-            return await Context.Movies.Include(m => m.MovieMovieGenres)
-                                        .ThenInclude(mg => mg.MovieGenre)
-                                        .Where(m => m.MovieMovieGenres.Any(mg => movieParams.genreIds.Contains(mg.MovieGenreId)))
-                                        .ToListAsync();
+            if(movieParams.genreIds == null)
+                return await movies.ToListAsync();
+
+            return await movies.Where(m => m.MovieMovieGenres.Any(mg => movieParams.genreIds.Contains(mg.MovieGenreId)))
+                               .ToListAsync();
             
             // return await Context.Movies
             //     .FromSqlRaw($"SELECT M.* FROM MOVIES M LEFT JOIN MOVIEMOVIEGENRES MG ON M.ID = MG.MOVIEID LEFT JOIN MOVIEGENRES G on MG.MOVIEGENREID = G.ID WHERE G.ID IN ({string.Join(',', genreIds)})")
@@ -30,7 +30,9 @@ namespace IEC.API.Persistence.Repositories
 
         public async Task<Movie> GetMovieAsync(int id)
         {
-            return await Context.Movies.Include(m => m.MovieMovieGenres).ThenInclude(mg => mg.MovieGenre).FirstOrDefaultAsync(m => m.Id == id);
+            return await Context.Movies.Include(m => m.MovieMovieGenres)//.ThenInclude(mg => mg.MovieGenre)
+                                       .Include(m => m.MovieArtists).ThenInclude(ma => ma.Artist)
+                                       .FirstOrDefaultAsync(m => m.Id == id);
         }
     }
 }

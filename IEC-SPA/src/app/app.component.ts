@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'IEC-SPA';
+  admin = false;
+
+  onChangedToAdmin(admin: boolean) {
+    this.admin = admin;
+  }
 }

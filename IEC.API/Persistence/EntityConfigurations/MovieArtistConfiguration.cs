@@ -8,7 +8,7 @@ namespace IEC.API.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<MovieArtist> builder)
         {
-            builder.HasKey(mg => new { mg.MovieId, mg.ArtistId });  
+            builder.HasKey(mg => new { mg.MovieId, mg.ArtistId, mg.RoleId });  
 
             builder.HasOne(mg => mg.Movie).WithMany(m => m.MovieArtists)
                 .HasForeignKey(mg => mg.MovieId).OnDelete(DeleteBehavior.Restrict);

@@ -8,9 +8,6 @@ namespace IEC.API.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<Artist> builder)
         {
-            builder.Property(a => a.ArtistName).IsRequired();
-
-            builder.Property(a => a.Bio).IsRequired();
         }
     }
 }

@@ -13,7 +13,7 @@ namespace IEC.API.Core.Domain
         public int Id { get; set; }
         public string ArtistName { get; set; }
         public string RealName { get; set; }
-        public DateTime Birthdate { get; set; }
+        public DateTime? Birthdate { get; set; }
         public string Birthplace { get; set; }
         public int? Height { get; set; }
         public string Bio { get; set; }

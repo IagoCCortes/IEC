@@ -4,13 +4,19 @@
     margin-right: auto;
     width: 85%;
     height: 85%;
+    background-color: #1a1a1b;
 }
 
 .backdrop {
-    background-color: #282828;
+    background-color: #1a1a1b;
     border-top-right-radius: 0.25rem;
     border-top-left-radius: 0.25rem;
     border: 1px solid rgba(0,0,0,0.125);
+    padding: 16px;
+}
+
+.card {
+    background-color: #1a1a1b;
 }
 
 .hr-color {
@@ -22,11 +28,8 @@
     margin: 25px;
 }
 
-.sleek-heading {
-    font-weight: 50;
-}
-
 .card-body {
+    background-color: #1a1a1b;
     padding: 0 25px;
 }
 
@@ -34,4 +37,20 @@
     padding: 10px 15px;
     background-color: #fff;
     border-top: none;
+}
+
+.side-lines {
+   border-bottom: 1px solid rgb(173, 175, 174); 
+   line-height: 0.1em;
+   margin: 10px 0 20px;
+}
+
+.side-lines > span {
+    background:#1a1a1b; 
+    padding:0 10px; 
+}
+
+.detail-area {
+    border-radius: 5%;
+    background-color: #C796FF;
 }

@@ -6,15 +6,17 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { MovieListComponent } from './movies/movie-list/movie-list.component';
-import { NavComponent } from './nav/nav.component';
+import { MovieListComponent } from './regular-user/movies/movie-list/movie-list.component';
+import { NavComponent } from './regular-user/nav/nav.component';
 import { MovieService } from './_services/movie.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { MovieCardComponent } from './movies/movie-card/movie-card.component';
-import { MovieDetailComponent } from './movies/movie-detail/movie-detail.component';
+import { MovieCardComponent } from './regular-user/movies/movie-card/movie-card.component';
+import { MovieDetailComponent } from './regular-user/movies/movie-detail/movie-detail.component';
 import { appRoutes } from './routes';
 import { MovieDetailResolver } from './_resolver/movie-detail.resolver';
 import { MovieListResolver } from './_resolver/movie-list.resolver';
+import { NavAdminComponent } from './admin/nav-admin/nav-admin.component';
+import { MovieAdminListComponent } from './admin/movies-admin/movie-admin-list/movie-admin-list.component';
 
 @NgModule({
    declarations: [
@@ -22,7 +24,9 @@ import { MovieListResolver } from './_resolver/movie-list.resolver';
       MovieListComponent,
       NavComponent,
       MovieCardComponent,
-      MovieDetailComponent
+      MovieDetailComponent,
+      NavAdminComponent,
+      MovieAdminListComponent
    ],
    imports: [
       BrowserModule,

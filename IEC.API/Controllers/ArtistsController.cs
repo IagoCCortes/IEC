@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using IEC.API.Core;
 using IEC.API.Core.Domain;
-using IEC.API.Dtos;
+using IEC.API.Dtos.Artist;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IEC.API.Controllers

@@ -5,4 +5,21 @@
 
 body {  
     padding-top: 60px;
+    overflow-x: hidden;
 }
+
+/* body {
+    background-color: #8092E4;
+    color: #000;
+    font-family: 'Lato', 'Arial', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+} */
+
+.main {
+    margin-left: 160px; /* Same as the width of the sidenav */
+    font-size: 28px; /* Increased text to enable scrolling */
+    padding: 0px 10px;
+  }

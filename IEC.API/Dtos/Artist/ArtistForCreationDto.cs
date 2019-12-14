@@ -1,6 +1,6 @@
 using System;
 
-namespace IEC.API.Dtos
+namespace IEC.API.Dtos.Artist
 {
     public class ArtistForCreationDto
     {

@@ -9,7 +9,7 @@ namespace IEC.API.Persistence.Repositories
     {
         public MovieMovieGenreRepository(DataContext context) :base(context) {}
 
-        public void DeleteGenres(int movieId)
+        public void DeleteMovieGenres(int movieId)
         {
             Context.RemoveRange(Context.MovieMovieGenres.Where(m => movieId == m.MovieId));
         }

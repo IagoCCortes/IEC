@@ -4,6 +4,6 @@ namespace IEC.API.Core.Repositories
 {
     public interface IMovieMovieGenreRepository : IGenericRepository<MovieMovieGenre>
     {
-         void DeleteGenres(int movieId);
+         void DeleteMovieGenres(int movieId);
     }
 }

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IEC.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191213010104_AddedMovieRoleEntity")]
-    partial class AddedMovieRoleEntity
+    [Migration("20191214162032_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,14 +25,12 @@ namespace IEC.API.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("ArtistName")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Birthdate")
+                    b.Property<DateTime?>("Birthdate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Birthplace")
@@ -89,13 +87,13 @@ namespace IEC.API.Migrations
                     b.Property<int>("RoleId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("MovieId", "ArtistId");
+                    b.HasKey("MovieId", "ArtistId", "RoleId");
 
                     b.HasIndex("ArtistId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("MovieArtist");
+                    b.ToTable("MovieArtists");
                 });
 
             modelBuilder.Entity("IEC.API.Core.Domain.MovieGenre", b =>
