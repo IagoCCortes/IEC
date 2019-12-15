@@ -10,6 +10,6 @@ namespace IEC.API.Core
         IArtistRepository Artists { get; }
         IMovieMovieGenreRepository MovieMovieGenres { get; }
         IMovieArtistRepository MovieArtists { get; }
-        Task<bool> CompleteAsync();
+        Task<int> CompleteAsync();
     }
 }

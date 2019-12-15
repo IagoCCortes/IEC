@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IEC.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191214162032_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20191215215936_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,9 +156,9 @@ namespace IEC.API.Migrations
                         .IsRequired();
 
                     b.HasOne("IEC.API.Core.Domain.MovieRole", "Role")
-                        .WithMany()
+                        .WithMany("MovieArtists")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

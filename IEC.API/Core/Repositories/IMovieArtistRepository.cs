@@ -1,9 +1,10 @@
+using System.Collections.Generic;
 using IEC.API.Core.Domain;
 
 namespace IEC.API.Core.Repositories
 {
     public interface IMovieArtistRepository : IGenericRepository<MovieArtist>
     {
-        void DeleteMovieArtists(int movieId);
+        void DeleteMovieArtists(int movieId, List<int> artistIds, List<int> roleIds);
     }
 }

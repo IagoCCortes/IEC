@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace IEC.API.Dtos.Movie
 {
-    public class MovieArtistForCreateDto
+    public class MovieArtistForCreationDto
     {
         public List<int> ActorIds { get; set; }
         public List<int> DirectorIds { get; set; }

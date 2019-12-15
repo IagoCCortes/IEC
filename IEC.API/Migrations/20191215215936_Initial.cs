@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IEC.API.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -97,7 +97,7 @@ namespace IEC.API.Migrations
                         column: x => x.RoleId,
                         principalTable: "MovieRoles",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -150,7 +150,11 @@ namespace IEC.API.Migrations
                                                    new [] {8, 8}, new [] {3, 8}, new [] {3, 22}, new [] {4, 8},
                                                    new [] {4, 16}, new [] {4, 18}, new [] {2, 1}, new [] {2, 6},
                                                    new [] {7, 1}, new [] {9, 1}, new [] {9, 18}, new [] {10, 1},
-                                                   new [] {10, 8}, new [] {10, 16}};
+                                                   new [] {10, 8}, new [] {10, 16}, new [] {11, 1}, new [] {11, 6},
+                                                   new [] {11, 22}};
+
+            var MovieArtistRelations = new[] {new [] {11, 3, 1}, new [] {11, 4, 1}, new [] {11, 6, 2}, new [] {11, 5, 4},
+                                              new [] {11, 6, 3}};
 
             var movieRoles = new[] { "Actor", "Director", "Producer", "Writer" };
 
@@ -164,6 +168,7 @@ namespace IEC.API.Migrations
             migrationBuilder.Sql("INSERT INTO Movies (Title, Plot, Runtime, ReleaseDate, Created, PosterUrl) VALUES ('Avengers: Endgame', 'After the devastating events of Avengers: Infinity War (2018), the universe is in ruins. With the help of remaining allies, the Avengers assemble once more in order to reverse Thanos'' actions and restore balance to the universe.', '181', '2019-04-26 00:00:00', '2019-12-09 11:58:44.0270397', 'https://m.media-amazon.com/images/M/MV5BMTc5MDE2ODcwNV5BMl5BanBnXkFtZTgwMzI2NzQ2NzM@._V1_SY1000_CR0,0,674,1000_AL_.jpg')");
             migrationBuilder.Sql("INSERT INTO Movies (Title, Plot, Runtime, ReleaseDate, Created, PosterUrl) VALUES ('The Matrix', 'A computer hacker learns from mysterious rebels about the true nature of his reality and his role in the war against its controllers.', '136', '1999-03-31', '2019-12-13', 'https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SY1000_CR0,0,665,1000_AL_.jpg')");
             migrationBuilder.Sql("INSERT INTO Movies (Title, Plot, Runtime, ReleaseDate, Created, PosterUrl) VALUES ('Blade Runner 2049', 'A young blade runner''s discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who''s been missing for thirty years.', '166', '2017-10-06 00:00:00', '2019-12-14 08:53:10.4099731', 'https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_SY1000_CR0,0,674,1000_AL_.jpg')");
+            migrationBuilder.Sql("INSERT INTO Movies (Title, Plot, Runtime, ReleaseDate, Created, PosterUrl) VALUES ('John Wick: Chapter 3 - Parabellum', 'John Wick is on the run after killing a member of the international assassin''s guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.', '131', '2019-05-17 00:00:00', '2019-12-14 13:30:00.2113849', 'https://m.media-amazon.com/images/M/MV5BMDg2YzI0ODctYjliMy00NTU0LTkxODYtYTNkNjQwMzVmOTcxXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_SY1000_CR0,0,648,1000_AL_.jpg')");
 
             foreach (var genre in genres)
             {
@@ -186,6 +191,11 @@ namespace IEC.API.Migrations
             migrationBuilder.Sql("INSERT INTO Artists (ArtistName, RealName, Birthdate, Birthplace, Height) VALUES ('Halle Berry', 'Maria Halle Berry', '1966-08-14 00:00:00', 'Cleveland, Ohio, USA', '166')");
             migrationBuilder.Sql("INSERT INTO Artists (ArtistName) VALUES ('Derek Kolstad')");
             migrationBuilder.Sql("INSERT INTO Artists (ArtistName, RealName, Birthdate, Birthplace, Height) VALUES ('Chad Stahelski', 'Charles F. Stahelski', '1968-09-20 00:00:00', 'USA', '185')");
+
+            foreach (var movieArtist in MovieArtistRelations)
+            {
+                migrationBuilder.Sql($"INSERT INTO movieArtists VALUES ({movieArtist[0]}, {movieArtist[1]}, {movieArtist[2]})");
+            }
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

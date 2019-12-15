@@ -154,9 +154,9 @@ namespace IEC.API.Migrations
                         .IsRequired();
 
                     b.HasOne("IEC.API.Core.Domain.MovieRole", "Role")
-                        .WithMany()
+                        .WithMany("MovieArtists")
                         .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });
 

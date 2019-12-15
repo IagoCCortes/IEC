@@ -23,9 +23,9 @@ namespace IEC.API.Persistence
         public IMovieMovieGenreRepository MovieMovieGenres { get; set; }
         public IMovieArtistRepository MovieArtists { get; set; }
 
-        public async Task<bool> CompleteAsync()
+        public async Task<int> CompleteAsync()
         {
-            return await _context.SaveChangesAsync() > 0;
+            return await _context.SaveChangesAsync();
         }
 
         public void Dispose()

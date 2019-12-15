@@ -15,6 +15,9 @@ namespace IEC.API.Persistence.EntityConfigurations
 
             builder.HasOne(mg => mg.Artist).WithMany(g => g.MoviesArtist)
                 .HasForeignKey(bc => bc.ArtistId).OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(mg => mg.Role).WithMany(g => g.MovieArtists)
+                .HasForeignKey(bc => bc.RoleId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

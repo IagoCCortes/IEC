@@ -47,7 +47,7 @@ namespace IEC.API.Controllers
 
             _unitOfWork.Artists.Add(artist);            
 
-            if(await _unitOfWork.CompleteAsync()) 
+            if(await _unitOfWork.CompleteAsync() > 0) 
             {
                 var artistToReturn = _mapper.Map<ArtistToReturnDto>(artist);
 

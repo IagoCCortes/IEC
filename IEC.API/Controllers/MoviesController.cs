@@ -58,7 +58,7 @@ namespace IEC.API.Controllers
 
             _unitOfWork.Movies.Add(movie);            
 
-            if(await _unitOfWork.CompleteAsync()) 
+            if(await _unitOfWork.CompleteAsync() > 0) 
             {
                 var movieToReturn = _mapper.Map<MovieListToReturnDto>(movie);
 
@@ -71,21 +71,33 @@ namespace IEC.API.Controllers
         [HttpPost("{id}/Genres")]
         public async Task<IActionResult> AddMovieGenres(int id, List<int> genres)
         {
+            var movie = await _unitOfWork.Movies.GetAsync(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
             _unitOfWork.MovieMovieGenres.DeleteMovieGenres(id);
 
             foreach(var genre in genres)
                 _unitOfWork.MovieMovieGenres.Add(new MovieMovieGenre {MovieId = id, MovieGenreId = genre });
 
-            if(await _unitOfWork.CompleteAsync())
+            if(await _unitOfWork.CompleteAsync() >= 0)
                 return NoContent();
 
             throw new Exception($"Adding genres failed on save");
         }
 
         [HttpPost("{id}/Artists")]
-        public async Task<IActionResult> AddMovieArtists(int id, MovieArtistForCreateDto movieArtistForCreateDto)
-        {
-            _unitOfWork.MovieArtists.DeleteMovieArtists(id);
+        public async Task<IActionResult> AddMovieArtists(int id, MovieArtistForCreationDto movieArtistForCreationDto)
+        {   
+            var movie = await _unitOfWork.Movies.GetAsync(id);
+
+            if (movie == null)
+            {
+                return NotFound();
+            }
 
             var artists = _unitOfWork.MovieArtists;
 
@@ -95,15 +107,29 @@ namespace IEC.API.Controllers
                     foreach (var aId in artistIds) repository.Add(new MovieArtist { MovieId = id, ArtistId = aId, RoleId = role });
                 });
 
-            AddArtistsToContext(artists, movieArtistForCreateDto.ActorIds, (int)MovieRoleEnum.Actor);
-            AddArtistsToContext(artists, movieArtistForCreateDto.DirectorIds, (int)MovieRoleEnum.Director);
-            AddArtistsToContext(artists, movieArtistForCreateDto.WriterIds, (int)MovieRoleEnum.Writer);
-            AddArtistsToContext(artists, movieArtistForCreateDto.ProducerIds, (int)MovieRoleEnum.Producer);
+            AddArtistsToContext(artists, movieArtistForCreationDto.ActorIds, (int)MovieRoleEnum.Actor);
+            AddArtistsToContext(artists, movieArtistForCreationDto.DirectorIds, (int)MovieRoleEnum.Director);
+            AddArtistsToContext(artists, movieArtistForCreationDto.WriterIds, (int)MovieRoleEnum.Writer);
+            AddArtistsToContext(artists, movieArtistForCreationDto.ProducerIds, (int)MovieRoleEnum.Producer);
 
-            if(await _unitOfWork.CompleteAsync())
+            if(await _unitOfWork.CompleteAsync() > 0)
                 return NoContent();
 
-            throw new Exception($"Adding artists failed on save");
+            throw new Exception($"Adding artists to movie failed on save");
+        }
+
+        [HttpPost("{id}/DeleteArtists")]
+        public async Task<IActionResult> DeleteMovieArtists(int id, MovieArtistForDeleteDto movieArtistForDeleteDto)
+        {
+            if(movieArtistForDeleteDto.ArtistIds.Count != movieArtistForDeleteDto.RoleIds.Count)
+                return BadRequest("All artists must have a role");
+
+            _unitOfWork.MovieArtists.DeleteMovieArtists(id, movieArtistForDeleteDto.ArtistIds, movieArtistForDeleteDto.RoleIds);
+
+            if(await _unitOfWork.CompleteAsync() > 0)
+                return NoContent();
+
+            throw new Exception("Deleting artists from movie failed on save");
         }
 
         [HttpPut("{id}")]
@@ -113,7 +139,7 @@ namespace IEC.API.Controllers
 
             _mapper.Map(movieForUpdateDto, movie);
 
-            if(await _unitOfWork.CompleteAsync())
+            if(await _unitOfWork.CompleteAsync() >= 0)
                 return NoContent();
 
             throw new Exception($"Updating movie with {id} failed on save");
