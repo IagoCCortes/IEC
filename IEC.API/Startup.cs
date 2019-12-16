@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using IEC.API.Persistence.Repositories;
 using IEC.API.Persistence;
-using IEC.API.Core.Repositories;
 using IEC.API.Core;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;

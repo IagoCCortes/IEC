@@ -1,9 +1,11 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using IEC.API.Core;
 using IEC.API.Core.Domain;
 using IEC.API.Dtos.Artist;
+using IEC.API.Helpers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IEC.API.Controllers
@@ -24,15 +26,17 @@ namespace IEC.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetArtistsAsync()
         {
-            var artists = await _unitOfWork.Artists.GetAllAsync();
+            var artists = await _unitOfWork.Artists.GetArtistsAsync();
 
-            return Ok(artists);
+            var artistListToReturn = _mapper.Map<IEnumerable<ArtistListToReturn>>(artists);
+
+            return Ok(artistListToReturn);
         }
 
         [HttpGet("{id}", Name = "GetArtist")]
         public async Task<IActionResult> GetArtistAsync(int id)
         {
-            var artist = await _unitOfWork.Artists.GetAsync(id);
+            var artist = await _unitOfWork.Artists.GetArtistAsync(id);
 
             if(artist == null)
                 return NotFound();
@@ -49,7 +53,7 @@ namespace IEC.API.Controllers
 
             if(await _unitOfWork.CompleteAsync() > 0) 
             {
-                var artistToReturn = _mapper.Map<ArtistToReturnDto>(artist);
+                var artistToReturn = _mapper.Map<ArtistDetailToReturnDto>(artist);
 
                 return CreatedAtRoute("GetArtist", new {id = artist.Id}, artistToReturn);
             }

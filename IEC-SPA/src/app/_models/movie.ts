@@ -7,4 +7,7 @@ export interface Movie {
     created: Date;
     posterUrl: string;
     genres: string[];
+    stars: string[];
+    directors: string[];
+    writers: string[];
 }

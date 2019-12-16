@@ -4,6 +4,6 @@ namespace IEC.API.Helpers
 {
     public class MovieParams
     {
-        public List<int> genreIds { get; set; }
+        public List<string> Genres { get; set; }
     }
 }

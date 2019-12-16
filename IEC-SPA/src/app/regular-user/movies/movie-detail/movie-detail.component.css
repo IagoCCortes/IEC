@@ -23,11 +23,6 @@
     border-top: 1px solid rgb(173, 175, 174);
 }
 
-.plot {
-    text-align: justify;
-    margin: 25px;
-}
-
 .card-body {
     background-color: #1a1a1b;
     padding: 0 25px;

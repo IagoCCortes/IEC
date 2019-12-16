@@ -10,6 +10,5 @@ namespace IEC.API.Dtos.Movie
         public int Runtime { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string PosterUrl { get; set; }
-        public List<string> Genres { get; set; }
     }
 }

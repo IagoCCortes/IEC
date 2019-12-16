@@ -12,9 +12,8 @@ namespace IEC.API.Dtos.Movie
         public DateTime ReleaseDate { get; set; }
         public string PosterUrl { get; set; }
         public List<string> Genres { get; set; }
-        public List<string> Actors { get; set; }
+        public List<string> Stars { get; set; }
         public List<string> Directors { get; set; }
         public List<string> Writers { get; set; }
-        public List<string> Producers { get; set; }
     }
 }

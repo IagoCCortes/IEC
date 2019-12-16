@@ -107,10 +107,9 @@ namespace IEC.API.Controllers
                     foreach (var aId in artistIds) repository.Add(new MovieArtist { MovieId = id, ArtistId = aId, RoleId = role });
                 });
 
-            AddArtistsToContext(artists, movieArtistForCreationDto.ActorIds, (int)MovieRoleEnum.Actor);
+            AddArtistsToContext(artists, movieArtistForCreationDto.ActorIds, (int)MovieRoleEnum.Star);
             AddArtistsToContext(artists, movieArtistForCreationDto.DirectorIds, (int)MovieRoleEnum.Director);
             AddArtistsToContext(artists, movieArtistForCreationDto.WriterIds, (int)MovieRoleEnum.Writer);
-            AddArtistsToContext(artists, movieArtistForCreationDto.ProducerIds, (int)MovieRoleEnum.Producer);
 
             if(await _unitOfWork.CompleteAsync() > 0)
                 return NoContent();

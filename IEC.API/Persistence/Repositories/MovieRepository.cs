@@ -6,6 +6,7 @@ using IEC.API.Core.Domain;
 using Microsoft.EntityFrameworkCore;
 using IEC.API.Core.Repositories;
 using IEC.API.Helpers;
+using IEC.API.Core.Enums;
 
 namespace IEC.API.Persistence.Repositories
 {
@@ -15,22 +16,27 @@ namespace IEC.API.Persistence.Repositories
 
         public async Task<IEnumerable<Movie>> GetMoviesAsync(MovieParams movieParams)
         {
-            var movies = Context.Movies.Include(m => m.MovieMovieGenres);
+            var movies = Context.Movies;
 
-            if(movieParams.genreIds == null)
+            if(movieParams.Genres == null)
                 return await movies.ToListAsync();
 
-            return await movies.Where(m => m.MovieMovieGenres.Any(mg => movieParams.genreIds.Contains(mg.MovieGenreId)))
+            var genreIds = new List<int>();
+
+            foreach(var genre in movieParams.Genres)
+            {
+                Enum.TryParse(genre, out MovieGenreEnum movieGenre);
+                genreIds.Add((int) movieGenre);
+            }
+                
+            return await movies.Where(m => m.MovieMovieGenres.Any(mg => genreIds.Contains(mg.MovieGenreId)))
+                               .Select(m => new Movie {Id = m.Id, Title = m.Title, ReleaseDate = m.ReleaseDate, Runtime= m.Runtime, PosterUrl = m.PosterUrl})
                                .ToListAsync();
-            
-            // return await Context.Movies
-            //     .FromSqlRaw($"SELECT M.* FROM MOVIES M LEFT JOIN MOVIEMOVIEGENRES MG ON M.ID = MG.MOVIEID LEFT JOIN MOVIEGENRES G on MG.MOVIEGENREID = G.ID WHERE G.ID IN ({string.Join(',', genreIds)})")
-            //     .Include(m => m.MovieMovieGenres).ThenInclude(mg => mg.MovieGenre).ToListAsync();
         }
 
         public async Task<Movie> GetMovieAsync(int id)
         {
-            return await Context.Movies.Include(m => m.MovieMovieGenres)//.ThenInclude(mg => mg.MovieGenre)
+            return await Context.Movies.Include(m => m.MovieMovieGenres)
                                        .Include(m => m.MovieArtists).ThenInclude(ma => ma.Artist)
                                        .FirstOrDefaultAsync(m => m.Id == id);
         }

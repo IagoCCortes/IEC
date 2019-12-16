@@ -17,11 +17,19 @@
             </div>
         </div>
         <div class="col-sm-8 col backdrop">
-            <div class="plot">
-                <h5 class="sleek-heading">Plot</h5>
-                <hr class="hr-color">
-                <p>{{movie.plot}}</p>
-            </div>
+            <tabset [justified]="true">
+                <tab heading="Plot">
+                    <p class="mt-4">{{movie.plot}}</p>
+                </tab>
+                <tab heading="Cast">
+                    <h5 class="mt-4">Director</h5>
+                    <p>{{movie.directors}}</p>
+                    <h5>Writer</h5>
+                    <p>{{movie.writers}}</p>
+                    <h5>Stars</h5>
+                    <p>{{movie.stars}}</p>
+                </tab>
+            </tabset>
         </div>
     </div>
 </div>

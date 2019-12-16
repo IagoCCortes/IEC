@@ -156,7 +156,7 @@ namespace IEC.API.Migrations
             var MovieArtistRelations = new[] {new [] {11, 3, 1}, new [] {11, 4, 1}, new [] {11, 6, 2}, new [] {11, 5, 4},
                                               new [] {11, 6, 3}};
 
-            var movieRoles = new[] { "Actor", "Director", "Producer", "Writer" };
+            var movieRoles = new[] { "Star", "Director", "Writer" };
 
             migrationBuilder.Sql("INSERT INTO Movies (Title, Plot, Runtime, ReleaseDate, Created, PosterUrl) VALUES (\"The Irishman\", \"A mob hitman recalls his possible involvement with the slaying of Jimmy Hoffa.\", \"209\", \"2019-11-27 00:00:00\", \"2019-12-07 22:48:55.512604\", \"https://m.media-amazon.com/images/M/MV5BMGUyM2ZiZmUtMWY0OC00NTQ4LThkOGUtNjY2NjkzMDJiMWMwXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_SY1000_CR0,0,682,1000_AL_.jpg\")");
             migrationBuilder.Sql("INSERT INTO Movies (Title, Plot, Runtime, ReleaseDate, Created, PosterUrl) VALUES ('The Dark Knight', 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.', '152', '2008-07-18 00:00:00', '2019-12-07 22:49:33.6713224', 'https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SY1000_CR0,0,675,1000_AL_.jpg')");
@@ -170,14 +170,18 @@ namespace IEC.API.Migrations
             migrationBuilder.Sql("INSERT INTO Movies (Title, Plot, Runtime, ReleaseDate, Created, PosterUrl) VALUES ('Blade Runner 2049', 'A young blade runner''s discovery of a long-buried secret leads him to track down former blade runner Rick Deckard, who''s been missing for thirty years.', '166', '2017-10-06 00:00:00', '2019-12-14 08:53:10.4099731', 'https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_SY1000_CR0,0,674,1000_AL_.jpg')");
             migrationBuilder.Sql("INSERT INTO Movies (Title, Plot, Runtime, ReleaseDate, Created, PosterUrl) VALUES ('John Wick: Chapter 3 - Parabellum', 'John Wick is on the run after killing a member of the international assassin''s guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.', '131', '2019-05-17 00:00:00', '2019-12-14 13:30:00.2113849', 'https://m.media-amazon.com/images/M/MV5BMDg2YzI0ODctYjliMy00NTU0LTkxODYtYTNkNjQwMzVmOTcxXkEyXkFqcGdeQXVyNjg2NjQwMDQ@._V1_SY1000_CR0,0,648,1000_AL_.jpg')");
 
+            var i = 0;
             foreach (var genre in genres)
             {
-                migrationBuilder.Sql($"insert into MovieGenres (Genre) values ('{genre}')");
+                migrationBuilder.Sql($"insert into MovieGenres (Id, Genre) values ({i}, '{genre}')");
+                i++;
             }
 
+            i = 0;
             foreach (var role in movieRoles)
             {
-                migrationBuilder.Sql($"insert into MovieRoles (Role) values ('{role}')");
+                migrationBuilder.Sql($"insert into MovieRoles (Id, Role) values ({i}, '{role}')");
+                i++;
             }
 
             foreach (var movieMovieGenre in movieMovieGenreRelations)
