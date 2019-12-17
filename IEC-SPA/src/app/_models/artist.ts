@@ -1,3 +1,5 @@
+import { MovieArtist } from './movieArtist';
+
 export class Artist {
     id: number;
     artistName: string;
@@ -6,5 +8,6 @@ export class Artist {
     birthplace: string;
     height: number;
     bio: string;
-    movies: object;
+    pictureUrl: string;
+    movies: MovieArtist;
 }

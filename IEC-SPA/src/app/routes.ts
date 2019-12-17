@@ -6,6 +6,8 @@ import { MovieDetailResolver } from './_resolver/movie-detail.resolver';
 import { MovieAdminListComponent } from './admin/movies-admin/movie-admin-list/movie-admin-list.component';
 import { ArtistListComponent } from './regular-user/artists/artist-list/artist-list.component';
 import { ArtistListResolver } from './_resolver/artist-list.resolver';
+import { ArtistDetailResolver } from './_resolver/artist-detail.resolver';
+import { ArtistDetailComponent } from './regular-user/artists/artist-detail/artist-detail.component';
 
 export const appRoutes: Routes = [
     {path: 'movies', component: MovieListComponent,
@@ -14,6 +16,8 @@ export const appRoutes: Routes = [
         resolve: {movie: MovieDetailResolver}},
     {path: 'artists', component: ArtistListComponent,
         resolve: {artists: ArtistListResolver}},
+    {path: 'artists/:id', component: ArtistDetailComponent,
+        resolve: {artist: ArtistDetailResolver}},
     {path: 'admin/movies', component: MovieAdminListComponent},
     {path: '**', redirectTo: 'movies', pathMatch: 'full'}
 ];

@@ -27,7 +27,7 @@ namespace IEC.API.Persistence.Repositories
             return await Context.Artists.Select(a => new{  Id = a.Id,  ArtistName = a.ArtistName,
                                RealName = a.RealName, Birthdate = a.Birthdate,
                                Birthplace = a.Birthplace, Height = a.Height,
-                               Bio = a.Bio, 
+                               Bio = a.Bio, PictureUrl = a.PictureUrl,
                                Movies = new {MovieId = a.MoviesArtist.Select(ma => ma.MovieId), 
                                              MovieTitle = a.MoviesArtist.Select(ma => ma.Movie.Title),
                                              RoleId = a.MoviesArtist.Select(ma => ma.RoleId)}})

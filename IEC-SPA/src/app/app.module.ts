@@ -21,11 +21,14 @@ import { ArtistListComponent } from './regular-user/artists/artist-list/artist-l
 import { ArtistService } from './_services/artist.service';
 import { ArtistCardComponent } from './regular-user/artists/artist-card/artist-card.component';
 import { ArtistListResolver } from './_resolver/artist-list.resolver';
+import { ArtistDetailComponent } from './regular-user/artists/artist-detail/artist-detail.component';
+import { ArtistDetailResolver } from './_resolver/artist-detail.resolver';
 
 @NgModule({
    declarations: [
       AppComponent,
       ArtistCardComponent,
+      ArtistDetailComponent,
       ArtistListComponent,
       MovieAdminListComponent,
       MovieCardComponent,
@@ -44,6 +47,7 @@ import { ArtistListResolver } from './_resolver/artist-list.resolver';
       TabsModule.forRoot()
    ],
    providers: [
+      ArtistDetailResolver,
       ArtistListResolver,
       ArtistService,
       ErrorInterceptorProvider,
