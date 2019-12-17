@@ -17,6 +17,7 @@ namespace IEC.API.Core.Domain
         public string Birthplace { get; set; }
         public int? Height { get; set; }
         public string Bio { get; set; }
+        public string PictureUrl { get; set; }
         public ICollection<MovieArtist> MoviesArtist { get; private set; }
     }
 }

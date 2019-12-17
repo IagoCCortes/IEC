@@ -37,6 +37,9 @@ namespace IEC.API.Migrations
                     b.Property<int?>("Height")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("RealName")
                         .HasColumnType("TEXT");
 

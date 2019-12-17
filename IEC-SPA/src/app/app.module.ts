@@ -17,31 +17,39 @@ import { MovieDetailResolver } from './_resolver/movie-detail.resolver';
 import { MovieListResolver } from './_resolver/movie-list.resolver';
 import { NavAdminComponent } from './admin/nav-admin/nav-admin.component';
 import { MovieAdminListComponent } from './admin/movies-admin/movie-admin-list/movie-admin-list.component';
+import { ArtistListComponent } from './regular-user/artists/artist-list/artist-list.component';
+import { ArtistService } from './_services/artist.service';
+import { ArtistCardComponent } from './regular-user/artists/artist-card/artist-card.component';
+import { ArtistListResolver } from './_resolver/artist-list.resolver';
 
 @NgModule({
    declarations: [
       AppComponent,
-      MovieListComponent,
-      NavComponent,
+      ArtistCardComponent,
+      ArtistListComponent,
+      MovieAdminListComponent,
       MovieCardComponent,
       MovieDetailComponent,
+      MovieListComponent,
       NavAdminComponent,
-      MovieAdminListComponent
+      NavComponent
    ],
    imports: [
+      BrowserAnimationsModule,
       BrowserModule,
-      HttpClientModule,
       BsDropdownModule.forRoot(),
       CollapseModule.forRoot(),
-      BrowserAnimationsModule,
+      HttpClientModule,
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot()
    ],
    providers: [
-    MovieService,
-    ErrorInterceptorProvider,
-    MovieDetailResolver,
-    MovieListResolver
+      ArtistListResolver,
+      ArtistService,
+      ErrorInterceptorProvider,
+      MovieDetailResolver,
+      MovieListResolver,
+      MovieService
    ],
    bootstrap: [
       AppComponent

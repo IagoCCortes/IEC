@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IEC.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191215215936_Initial")]
-    partial class Initial
+    [Migration("20191217012213_FirstMigration")]
+    partial class FirstMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,9 @@ namespace IEC.API.Migrations
 
                     b.Property<int?>("Height")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("PictureUrl")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("RealName")
                         .HasColumnType("TEXT");

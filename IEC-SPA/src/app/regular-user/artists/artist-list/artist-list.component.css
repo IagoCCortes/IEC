@@ -1,0 +1,25 @@
+.card-wrapper {
+    padding: 0;
+    margin: 0 2px 0 2px;
+}
+
+@media (min-width: 650px) {
+    .col-sm-p {
+        flex: 0 0 30%;
+        max-width: 30%;
+    }
+}
+
+@media (min-width: 990px) {
+    .col-md-p {
+        flex: 0 0 20%;
+        max-width: 20%;
+    }
+}
+
+@media (min-width: 1350px) {
+    .col-lg-p {
+        flex: 0 0 15%;
+        max-width: 15%;
+    }
+}

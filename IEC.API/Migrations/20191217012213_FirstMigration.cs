@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace IEC.API.Migrations
 {
-    public partial class Initial : Migration
+    public partial class FirstMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,7 +18,8 @@ namespace IEC.API.Migrations
                     Birthdate = table.Column<DateTime>(nullable: true),
                     Birthplace = table.Column<string>(nullable: true),
                     Height = table.Column<int>(nullable: true),
-                    Bio = table.Column<string>(nullable: true)
+                    Bio = table.Column<string>(nullable: true),
+                    PictureUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -153,8 +154,7 @@ namespace IEC.API.Migrations
                                                    new [] {10, 8}, new [] {10, 16}, new [] {11, 1}, new [] {11, 6},
                                                    new [] {11, 22}};
 
-            var MovieArtistRelations = new[] {new [] {11, 3, 1}, new [] {11, 4, 1}, new [] {11, 6, 2}, new [] {11, 5, 4},
-                                              new [] {11, 6, 3}};
+            var MovieArtistRelations = new[] { new[] { 11, 3, 1 }, new[] { 11, 4, 1 }, new[] { 11, 6, 2 }};//, new[] { 11, 5, 3 } };
 
             var movieRoles = new[] { "Star", "Director", "Writer" };
 
@@ -189,16 +189,16 @@ namespace IEC.API.Migrations
                 migrationBuilder.Sql($"INSERT INTO MovieMovieGenres VALUES ({movieMovieGenre[0]}, {movieMovieGenre[1]})");
             }
 
-            migrationBuilder.Sql("insert into artists (ArtistName, RealName, Birthdate, Birthplace, Height) values (\"Amy Adams\", \"Amy Lou Adams\", \"1974-08-20 00:00:00\", \"Vicenza, Veneto, Italy\", 163)");
-            migrationBuilder.Sql("insert into artists (ArtistName, RealName, Birthdate, Birthplace, Height) values (\"Robert Downey Jr.\", \"Robert John Downey Jr\", \"04/04/1965\", \"Manhattan, New York City, New York, USA\", 174)");
-            migrationBuilder.Sql("INSERT INTO Artists (ArtistName, RealName, Birthdate, Birthplace, Height) VALUES ('Keanu Reeves', 'Keanu Charles Reeves', '1964-09-02 00:00:00', 'Beirut, Lebanon', '186')");
-            migrationBuilder.Sql("INSERT INTO Artists (ArtistName, RealName, Birthdate, Birthplace, Height) VALUES ('Halle Berry', 'Maria Halle Berry', '1966-08-14 00:00:00', 'Cleveland, Ohio, USA', '166')");
-            migrationBuilder.Sql("INSERT INTO Artists (ArtistName) VALUES ('Derek Kolstad')");
-            migrationBuilder.Sql("INSERT INTO Artists (ArtistName, RealName, Birthdate, Birthplace, Height) VALUES ('Chad Stahelski', 'Charles F. Stahelski', '1968-09-20 00:00:00', 'USA', '185')");
+            migrationBuilder.Sql("insert into artists (ArtistName, RealName, Birthdate, Birthplace, Height, PictureUrl) values (\"Amy Adams\", \"Amy Lou Adams\", \"1974-08-20 00:00:00\", \"Vicenza, Veneto, Italy\", 163, 'https://m.media-amazon.com/images/M/MV5BMTg2NTk2MTgxMV5BMl5BanBnXkFtZTgwNjcxMjAzMTI@._V1_SY1000_CR0,0,654,1000_AL_.jpg')");
+            migrationBuilder.Sql("insert into artists (ArtistName, RealName, Birthdate, Birthplace, Height, PictureUrl) values (\"Robert Downey Jr.\", \"Robert John Downey Jr\", \"04/04/1965\", \"Manhattan, New York City, New York, USA\", 174, 'https://m.media-amazon.com/images/M/MV5BNzg1MTUyNDYxOF5BMl5BanBnXkFtZTgwNTQ4MTE2MjE@._V1_SY1000_CR0,0,664,1000_AL_.jpg')");
+            migrationBuilder.Sql("INSERT INTO Artists (ArtistName, RealName, Birthdate, Birthplace, Height, PictureUrl) VALUES ('Keanu Reeves', 'Keanu Charles Reeves', '1964-09-02 00:00:00', 'Beirut, Lebanon', '186', 'https://m.media-amazon.com/images/M/MV5BNjUxNDcwMTg4Ml5BMl5BanBnXkFtZTcwMjU4NDYyOA@@._V1_SY1000_CR0,0,771,1000_AL_.jpg')");
+            migrationBuilder.Sql("INSERT INTO Artists (ArtistName, RealName, Birthdate, Birthplace, Height, PictureUrl) VALUES ('Halle Berry', 'Maria Halle Berry', '1966-08-14 00:00:00', 'Cleveland, Ohio, USA', '166', 'https://m.media-amazon.com/images/M/MV5BMjIxNzc5MDAzOV5BMl5BanBnXkFtZTcwMDUxMjMxMw@@._V1_.jpg')");
+            migrationBuilder.Sql("INSERT INTO Artists (ArtistName, PictureUrl) VALUES ('Derek Kolstad', 'https://m.media-amazon.com/images/M/MV5BMjE2NTI0NDYzNF5BMl5BanBnXkFtZTgwMDQ0NzEzMDI@._V1_SY1000_CR0,0,666,1000_AL_.jpg')");
+            migrationBuilder.Sql("INSERT INTO Artists (ArtistName, RealName, Birthdate, Birthplace, Height, PictureUrl) VALUES ('Chad Stahelski', 'Charles F. Stahelski', '1968-09-20 00:00:00', 'USA', '185', 'https://m.media-amazon.com/images/M/MV5BNjgwNzc0NTc2Nl5BMl5BanBnXkFtZTgwMjM0NzEzMDI@._V1_SY1000_CR0,0,666,1000_AL_.jpg')");
 
             foreach (var movieArtist in MovieArtistRelations)
             {
-                migrationBuilder.Sql($"INSERT INTO movieArtists VALUES ({movieArtist[0]}, {movieArtist[1]}, {movieArtist[2]})");
+                migrationBuilder.Sql($"INSERT INTO movieArtists (movieId, artistId, roleId) VALUES ({movieArtist[0]}, {movieArtist[1]}, {movieArtist[2]})");
             }
         }
 

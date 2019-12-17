@@ -16,7 +16,7 @@ namespace IEC.API.Persistence.Repositories
         {
             var artists = Context.Artists;
 
-            return await artists.Select(a => new Artist {ArtistName = a.ArtistName, Birthdate = a.Birthdate, Birthplace = a.Birthplace})
+            return await artists.Select(a => new Artist {Id = a.Id, ArtistName = a.ArtistName, Birthdate = a.Birthdate, Birthplace = a.Birthplace, PictureUrl = a.PictureUrl})
                                 .ToListAsync();
 
             // Func<DateTime?, DateTime> BirthDate = (birthDate => { return (birthDate ?? DateTime.Now);});
