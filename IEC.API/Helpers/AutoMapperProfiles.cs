@@ -5,16 +5,20 @@ using IEC.API.Core.Domain;
 using IEC.API.Core.Enums;
 using System;
 using IEC.API.Dtos.Artist;
+using IEC.API.Dtos.User;
 
 namespace IEC.API.Helpers
 {
     public class AutoMapperProfiles : Profile
     {
         public AutoMapperProfiles() {
+            CreateMap<ArtistForCreationDto, Artist>();
+            CreateMap<Artist, ArtistListToReturn>();
+            CreateMap<Artist, ArtistDetailToReturnDto>();
+
             CreateMap<MovieForCreationDto, Movie>();
-
             CreateMap<Movie, MovieListToReturnDto>();
-
+            CreateMap<MovieForUpdateDto, Movie>();
             CreateMap<Movie, MovieDetailToReturnDto>()
             .ForMember(m => m.Genres, 
                        opt => opt.MapFrom(ps => ps.MovieMovieGenres.Select(mg => mg.MovieGenreId)
@@ -30,18 +34,10 @@ namespace IEC.API.Helpers
             .ForMember(m => m.Writers,
                        opt => opt.MapFrom(ps => ps.MovieArtists
                                  .Where(ma => ma.RoleId == (int) MovieRoleEnum.Writer)
-                                 .Select(ma => ma.Artist.ArtistName)));
-                                 
-            CreateMap<MovieForUpdateDto, Movie>();
+                                 .Select(ma => ma.Artist.ArtistName)));            
 
-            CreateMap<ArtistForCreationDto, Artist>();
-
-            CreateMap<Artist, ArtistListToReturn>();
-
-            CreateMap<Artist, ArtistDetailToReturnDto>();
-            // .ForMember(a => a.Movies.MovieId,
-            //            opt => opt.MapFrom(a => .MoviesArtist
-            //                      .Select(ma => new { ma.MovieId, ma.Movie.Title, ma.RoleId })));
+            CreateMap<UserForRegisterDto, User>();
+            CreateMap<User, UserForDetailedDto>();
         }
     }
 }

@@ -4,3 +4,4 @@ obj
 *.db*
 zzToDozz.txt
 zzDesignPatternszz.txt
+appsettings.json

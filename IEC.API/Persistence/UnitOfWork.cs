@@ -16,12 +16,16 @@ namespace IEC.API.Persistence
             Artists = new ArtistRepository(_context);
             MovieMovieGenres = new MovieMovieGenreRepository(_context);
             MovieArtists = new MovieArtistRepository(_context);
+            Auth = new AuthRepository(_context);
+            Users = new UserRepository(_context);
         }
 
         public IMovieRepository Movies { get; private set; }
         public IArtistRepository Artists { get; private set; }
         public IMovieMovieGenreRepository MovieMovieGenres { get; set; }
         public IMovieArtistRepository MovieArtists { get; set; }
+        public IAuthRepository Auth { get; set; }
+        public IUserRepository Users { get; set; }
 
         public async Task<int> CompleteAsync()
         {

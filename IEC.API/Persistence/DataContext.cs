@@ -17,6 +17,7 @@ namespace IEC.API.Persistence
         public DbSet<MovieMovieGenre> MovieMovieGenres { get; set; }
         public DbSet<MovieRole> MovieRoles { get; set; }
         public DbSet<MovieArtist> MovieArtists { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -29,6 +30,7 @@ namespace IEC.API.Persistence
             modelBuilder.ApplyConfiguration(new MovieArtistConfiguration());
 
             modelBuilder.ApplyConfiguration(new MovieRoleConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
         }
     }
 }

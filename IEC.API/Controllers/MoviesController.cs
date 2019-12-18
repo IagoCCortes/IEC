@@ -9,15 +9,16 @@ using IEC.API.Core;
 using IEC.API.Core.Repositories;
 using IEC.API.Core.Enums;
 using IEC.API.Dtos.Movie;
+using Microsoft.AspNetCore.Authorization;
 
 namespace IEC.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
     [ApiController]
+    [Route("api/[controller]")]
     public class MoviesController : ControllerBase
     {
         private readonly IMapper _mapper;
-
         private readonly IUnitOfWork _unitOfWork;
 
         public MoviesController(IUnitOfWork unitOfWork, IMapper mapper)
@@ -26,6 +27,7 @@ namespace IEC.API.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetMoviesAsync([FromQuery]MovieParams movieParams)
         {
@@ -36,6 +38,7 @@ namespace IEC.API.Controllers
             return Ok(moviesToReturn);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}", Name = "GetMovie")]
         public async Task<IActionResult> GetMovieAsync(int id)
         {
