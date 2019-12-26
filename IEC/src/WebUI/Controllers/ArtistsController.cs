@@ -11,10 +11,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    // [Authorize]
+    [AllowAnonymous]
     public class ArtistsController : BaseController
     {
-        // [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<ArtistListVM>> GetArtistsAsync()
         {
@@ -23,7 +22,6 @@ namespace WebUI.Controllers
             return Ok(artists);
         }
 
-        // [AllowAnonymous]
         [HttpGet("{id}", Name = "GetArtist")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

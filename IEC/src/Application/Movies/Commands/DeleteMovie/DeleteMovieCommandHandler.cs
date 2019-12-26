@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
@@ -23,11 +24,11 @@ namespace Application.Movies.Commands.DeleteMovie
             if (movie == null)
                 throw new NotFoundException(nameof(Movie), request.Id);
 
-            // var hasOrders = _context.Orders.Any(o => o.CustomerId == entity.CustomerId);
-            // if (hasOrders)
-            // {
-            //     throw new DeleteFailureException(nameof(Artist), request.Id, "There are existing orders associated with this customer.");
-            // }
+            var hasArtists = _context.MovieArtists.Any(m => m.MovieId == movie.Id);
+            if (hasArtists)
+                throw new DeleteFailureException(nameof(Artist), request.Id, "There are existing orders associated with this customer.");
+
+            _context.MovieMovieGenres.RemoveRange(_context.MovieMovieGenres.Where(m => m.MovieId == request.Id));
 
             _context.Movies.Remove(movie);
 

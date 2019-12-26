@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
@@ -24,11 +25,9 @@ namespace Application.Artists.Commands.DeleteArtist
                 throw new NotFoundException(nameof(Artist), request.Id);
             }
 
-            // var hasOrders = _context.Orders.Any(o => o.CustomerId == entity.CustomerId);
-            // if (hasOrders)
-            // {
-            //     throw new DeleteFailureException(nameof(Artist), request.Id, "There are existing orders associated with this customer.");
-            // }
+            var hasConnections = _context.MovieArtists.Any(a => a.ArtistId == artist.Id);
+            if (hasConnections)
+                throw new DeleteFailureException(nameof(Artist), request.Id, "There are existing movies associated with this artist.");
 
             _context.Artists.Remove(artist);
 

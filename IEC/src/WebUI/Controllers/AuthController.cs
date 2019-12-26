@@ -3,121 +3,97 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using Infrastructure.Identity;
+using Infrastructure.Identity.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace WebUI.Controllers
 {
-    public class AuthController
+    [Route("api/[controller]/[action]")]
+    [ApiController]
+    [AllowAnonymous]
+    public class AuthController : ControllerBase
     {
-        // [Route("api/[controller]")]
-        // [ApiController]
-        // public class AuthController : ControllerBase
-        // {
-        //     private readonly IUnitOfWork _unitOfWork;
-        //     private readonly IMapper _mapper;
-        //     private readonly IConfiguration _config;
-        //     public AuthController(IUnitOfWork unitOfWork, IMapper mapper, IConfiguration config)
-        //     {
-        //         _config = config;
-        //         _mapper = mapper;
-        //         _unitOfWork = unitOfWork;
-        //     }
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IConfiguration _config;
+        public AuthController(IConfiguration config, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        {
+            _signInManager = signInManager;
+            _userManager = userManager;
+            _config = config;
+        }
 
-        //     // public event EventHandler UserRegistered;
+        // public event EventHandler UserRegistered;
 
-        //     [HttpPost("register")]
-        //     public async Task<IActionResult> RegisterUserAsync(UserForRegisterDto userForRegisterDto)
-        //     {
-        //         userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
+        [HttpPost]
+        public async Task<IActionResult> RegisterUserAsync([FromBody]RegisterViewModel registerViewModel)
+        {
+            var userToCreate = new ApplicationUser {
+                UserName = registerViewModel.Username,
+                Email = registerViewModel.Email
+            };
 
-        //         if (await _unitOfWork.Auth.UserExistis(userForRegisterDto.Username))
-        //             return BadRequest("Username already exists");
+            var result = await _userManager.CreateAsync(userToCreate, registerViewModel.Password);
 
-        //         var userToCreate = _mapper.Map<User>(userForRegisterDto);
+            if(result.Succeeded)
+                return Ok();
 
-        //         byte[] passwordHash, passwordSalt;
+            return BadRequest(result.Errors);
+        }
 
-        //         CreatePasswordHash(userForRegisterDto.Password, out passwordHash, out passwordSalt);
+        [HttpPost]
+        public async Task<IActionResult> LoginAsync(LoginViewModel loginViewModel)
+        {
+            var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
 
-        //         userToCreate.PasswordHash = passwordHash;
-        //         userToCreate.PasswordSalt = passwordSalt;
+            if (user == null)
+                return Unauthorized();
 
-        //         _unitOfWork.Auth.Add(userToCreate);
+            var result = await _signInManager.CheckPasswordSignInAsync(user, loginViewModel.Password, false);
 
-        //         if (await _unitOfWork.CompleteAsync() > 0)
-        //         {
-        //             var userToReturn = _mapper.Map<UserForDetailedDto>(userToCreate);
+            if (result.Succeeded)
+            {
+                //var userToReturn = _mapper.Map<UserForDetailedDto>(user);
 
-        //             // UserRegistered();
+                return Ok(new
+                {
+                    token = GenerateJwtToken(user),
+                    user
+                });
+            }
 
-        //             return Ok(userToReturn);
-        //             //return CreatedAtRoute("GetUser", new {controller = "Users", id = userToCreate.Id}, userToReturn);
-        //         }
+            return Unauthorized();
+        }
 
-        //         throw new Exception("Registering user failed on save");
-        //     }
+        private string GenerateJwtToken(ApplicationUser user)
+        {
+            var claims = new[]{
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.UserName)
+            };
 
-        //     private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
-        //     {
-        //         using (var hmac = new System.Security.Cryptography.HMACSHA512())
-        //         {
-        //             passwordSalt = hmac.Key;
-        //             passwordHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-        //         }
-        //     }
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
 
-        //     [HttpPost("login")]
-        //     public async Task<IActionResult> LoginAsync(UserForLoginDto userForLoginDto)
-        //     {
-        //         var user = await _unitOfWork.Users.GetUserByUsernameAsync(userForLoginDto.Username);
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
-        //         if ((user == null) || (!VerifyPasswordHash(userForLoginDto.Password, user.PasswordHash, user.PasswordSalt)))
-        //             return Unauthorized();
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(10),
+                SigningCredentials = creds
+            };
 
-        //         var claims = new[]{
-        //         new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-        //         new Claim(ClaimTypes.Name, user.Username)
-        //     };
+            var tokenHandler = new JwtSecurityTokenHandler();
 
-        //         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+            var token = tokenHandler.CreateToken(tokenDescriptor);
 
-        //         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-        //         var tokenDescriptor = new SecurityTokenDescriptor
-        //         {
-        //             Subject = new ClaimsIdentity(claims),
-        //             Expires = DateTime.Now.AddDays(10),
-        //             SigningCredentials = creds
-        //         };
-
-        //         var tokenHandler = new JwtSecurityTokenHandler();
-
-        //         var token = tokenHandler.CreateToken(tokenDescriptor);
-
-        //         var userToReturn = _mapper.Map<UserForDetailedDto>(user);
-
-        //         return Ok(new
-        //         {
-        //             token = tokenHandler.WriteToken(token),
-        //             user
-        //         });
-        //     }
-
-        //     private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
-        //     {
-        //         using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
-        //         {
-        //             var computedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-
-        //             for (int i = 0; i < computedHash.Length; i++)
-        //             {
-        //                 if (computedHash[i] != passwordHash[i]) return false;
-        //             }
-        //         }
-        //         return true;
-        //     }
-        // }
+            return tokenHandler.WriteToken(token);
+        }
     }
 }

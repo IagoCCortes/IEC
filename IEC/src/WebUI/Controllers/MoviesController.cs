@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Application.Movies.Commands.CreateMovie;
 using Application.Movies.Commands.CreateMovieArtist;
 using Application.Movies.Commands.CreateMovieGenre;
+using Application.Movies.Commands.DeleteMovie;
 using Application.Movies.Commands.DeleteMovieArtist;
 using Application.Movies.Commands.UpdateMovie;
 using Application.Movies.Queries.GetMovieDetail;
@@ -13,11 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-
-    // [Authorize]
+    [AllowAnonymous]
     public class MoviesController : BaseController
     {
-        // [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<MovieListVM>> GetMoviesAsync()
         {
@@ -26,7 +25,6 @@ namespace WebUI.Controllers
             return Ok(movies);
         }
 
-        // [AllowAnonymous]
         [HttpGet("{id}", Name = "GetMovie")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -53,6 +51,16 @@ namespace WebUI.Controllers
         public async Task<IActionResult> UpdateMovieAsync([FromBody]UpdateMovieCommand command)
         {
             await Mediator.Send(command);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> DeleteMovieAsync(int id)
+        {
+            await Mediator.Send(new DeleteMovieCommand { Id = id });
 
             return NoContent();
         }
