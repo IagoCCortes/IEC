@@ -10,11 +10,11 @@ namespace Application.Artists.Commands.CreateArtist
     {
         public int Id { get; set; }
 
-        public class CustomerCreatedHandler : INotificationHandler<ArtistCreated>
+        public class ArtistCreatedHandler : INotificationHandler<ArtistCreated>
         {
             private readonly INotificationService _notification;
 
-            public CustomerCreatedHandler(INotificationService notification)
+            public ArtistCreatedHandler(INotificationService notification)
             {
                 _notification = notification;
             }

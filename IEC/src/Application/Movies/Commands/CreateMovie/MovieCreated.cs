@@ -10,11 +10,11 @@ namespace Application.Movies.Commands.CreateMovie
     {
         public int Id { get; set; }
 
-        public class CustomerCreatedHandler : INotificationHandler<MovieCreated>
+        public class MovieCreatedHandler : INotificationHandler<MovieCreated>
         {
             private readonly INotificationService _notification;
 
-            public CustomerCreatedHandler(INotificationService notification)
+            public MovieCreatedHandler(INotificationService notification)
             {
                 _notification = notification;
             }

@@ -3,9 +3,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Application.Users.Commands.CreateUser;
 using AutoMapper;
 using Infrastructure.Identity;
 using Infrastructure.Identity.ViewModels;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -22,8 +24,10 @@ namespace WebUI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _config;
-        public AuthController(IConfiguration config, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
+        private readonly IMediator _mediator;
+        public AuthController(IConfiguration config, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IMediator mediator)
         {
+            _mediator = mediator;
             _signInManager = signInManager;
             _userManager = userManager;
             _config = config;
@@ -34,15 +38,19 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> RegisterUserAsync([FromBody]RegisterViewModel registerViewModel)
         {
-            var userToCreate = new ApplicationUser {
+            var userToCreate = new ApplicationUser
+            {
                 UserName = registerViewModel.Username,
                 Email = registerViewModel.Email
             };
 
             var result = await _userManager.CreateAsync(userToCreate, registerViewModel.Password);
 
-            if(result.Succeeded)
+            if (result.Succeeded)
+            {
+                await _mediator.Send(new CreateUserCommand{ UserId = userToCreate.Id, Email = userToCreate.Email});
                 return Ok();
+            }
 
             return BadRequest(result.Errors);
         }

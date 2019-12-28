@@ -22,15 +22,11 @@
             <p class="mt-4">{{artist.bio}}</p>
           </div>
         </tab>
-        <tab *ngIf="roles.director.length + roles.star.length + roles.writer.length" heading="Cast">
+        <tab *ngIf="roles.director.length + roles.star.length" heading="Cast">
           <div class="mt-4 mb-4">
             <div *ngIf="roles.director.length !== 0">
               <h5>Director</h5>
               <p>{{roles.director}}</p>
-            </div>
-            <div *ngIf="roles.writer.length !== 0">
-              <h5>Writer</h5>
-              <p>{{roles.writer}}</p>
             </div>
             <div *ngIf="roles.star.length !== 0">
               <h5>Stars</h5>

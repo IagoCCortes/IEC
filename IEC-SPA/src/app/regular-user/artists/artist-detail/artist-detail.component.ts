@@ -11,7 +11,7 @@ import { MovieArtist } from 'src/app/_models/movieArtist';
 })
 export class ArtistDetailComponent implements OnInit {
   artist: Artist;
-  roles = {star: [], director: [], writer: []};
+  roles = {star: [], director: []};
 
   constructor(
     private route: ActivatedRoute,
@@ -32,16 +32,13 @@ export class ArtistDetailComponent implements OnInit {
   }
 
   splitMoviesByRoles(movieArtist: MovieArtist) {
-    for (let i = 0; i < movieArtist.roleId.length; i++) {
-      switch (movieArtist.roleId[i]) {
+    for (let i = 0; i < movieArtist.roleIds.length; i++) {
+      switch (movieArtist.roleIds[i]) {
         case 1: // star
-          this.roles.star.push(movieArtist.movieTitle[i]);
+          this.roles.star.push(movieArtist.movieTitles[i]);
           break;
         case 2: // director
-          this.roles.director.push(movieArtist.movieTitle[i]);
-          break;
-        case 3: // writer
-          this.roles.writer.push(movieArtist.movieTitle[i]);
+          this.roles.director.push(movieArtist.movieTitles[i]);
           break;
       }
     }

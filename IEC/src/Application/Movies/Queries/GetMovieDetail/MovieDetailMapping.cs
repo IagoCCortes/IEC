@@ -22,11 +22,11 @@ namespace Application.Movies.Queries.GetMovieDetail
             .ForMember(m => m.Directors,
                        opt => opt.MapFrom(ps => ps.MovieArtists
                                  .Where(ma => ma.RoleId == (int) MovieRoleEnum.Director)
-                                 .Select(ma => ma.Artist.ArtistName)))
-            .ForMember(m => m.Writers,
-                       opt => opt.MapFrom(ps => ps.MovieArtists
-                                 .Where(ma => ma.RoleId == (int) MovieRoleEnum.Writer)
-                                 .Select(ma => ma.Artist.ArtistName)));     
+                                 .Select(ma => ma.Artist.ArtistName)));
+            // .ForMember(m => m.Writers,
+            //            opt => opt.MapFrom(ps => ps.MovieArtists
+            //                      .Where(ma => ma.RoleId == (int) MovieRoleEnum.Writer)
+            //                      .Select(ma => ma.Artist.ArtistName)));     
         }
     }
 }

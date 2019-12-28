@@ -14,6 +14,6 @@ namespace Application.Movies.Queries.GetMovieDetail
         public List<string> Genres { get; set; }
         public List<string> Stars { get; set; }
         public List<string> Directors { get; set; }
-        public List<string> Writers { get; set; }
+        // public List<string> Writers { get; set; }
     } 
 }

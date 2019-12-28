@@ -1,5 +1,5 @@
 export class MovieArtist {
   movieId: number[];
-  movieTitle: string[];
-  roleId: number[];
+  movieTitles: string[];
+  roleIds: number[];
 }

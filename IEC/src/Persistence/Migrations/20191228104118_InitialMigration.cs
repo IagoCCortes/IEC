@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Persistence.Migrations
 {
-    public partial class InitialMig : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,6 +20,7 @@ namespace Persistence.Migrations
                     ArtistName = table.Column<string>(nullable: false),
                     RealName = table.Column<string>(nullable: true),
                     Birthdate = table.Column<DateTime>(nullable: true),
+                    Deathdate = table.Column<DateTime>(nullable: true),
                     Birthplace = table.Column<string>(nullable: true),
                     Height = table.Column<int>(nullable: true),
                     Bio = table.Column<string>(nullable: true),
@@ -68,13 +69,30 @@ namespace Persistence.Migrations
                     LastModified = table.Column<DateTime>(nullable: true),
                     Title = table.Column<string>(nullable: false),
                     Plot = table.Column<string>(nullable: true),
-                    Runtime = table.Column<int>(nullable: false),
+                    Runtime = table.Column<int>(nullable: true),
                     ReleaseDate = table.Column<DateTime>(nullable: false),
                     PosterUrl = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Movies", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    Created = table.Column<DateTime>(nullable: false),
+                    LastModifiedBy = table.Column<string>(nullable: true),
+                    LastModified = table.Column<DateTime>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -132,6 +150,32 @@ namespace Persistence.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "UserMovies",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(nullable: false),
+                    MovieId = table.Column<int>(nullable: false),
+                    Review = table.Column<string>(nullable: true),
+                    rating = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserMovies", x => new { x.UserId, x.MovieId });
+                    table.ForeignKey(
+                        name: "FK_UserMovies_Movies_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserMovies_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_MovieArtists_ArtistId",
                 table: "MovieArtists",
@@ -146,6 +190,11 @@ namespace Persistence.Migrations
                 name: "IX_MovieMovieGenres_MovieGenreId",
                 table: "MovieMovieGenres",
                 column: "MovieGenreId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMovies_MovieId",
+                table: "UserMovies",
+                column: "MovieId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -155,6 +204,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "MovieMovieGenres");
+
+            migrationBuilder.DropTable(
+                name: "UserMovies");
 
             migrationBuilder.DropTable(
                 name: "Artists");
@@ -167,6 +219,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Movies");
+
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
