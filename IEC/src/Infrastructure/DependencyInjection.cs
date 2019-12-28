@@ -3,6 +3,7 @@ using System.Text;
 using Application.Common.Interfaces;
 using Common;
 using Infrastructure.Identity;
+using Infrastructure.SendGrid;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -54,6 +55,10 @@ namespace Infrastructure
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddTransient<IEmailSender, EmailSender>();
+            services.Configure<AuthMessageSenderOptions>(options =>
+                configuration.GetSection("SendGridEmailSettings").Bind(options));
 
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IDateTime, MachineDateTime>();

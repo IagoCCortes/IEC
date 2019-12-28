@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Identity.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20191228004434_AddedidentityFW")]
-    partial class AddedidentityFW
+    [Migration("20191228221745_IdentityMigration")]
+    partial class IdentityMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

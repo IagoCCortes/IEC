@@ -18,6 +18,7 @@ namespace Application.Common.System.Commands.SeedSampleData
         private readonly Dictionary<int, MovieRole> MovieRoles = new Dictionary<int, MovieRole>();
         private readonly Dictionary<int, MovieArtist> MovieArtists = new Dictionary<int, MovieArtist>();
         private readonly Dictionary<int, MovieMovieGenre> MovieMovieGenres = new Dictionary<int, MovieMovieGenre>();
+        private readonly Dictionary<int, UserMovieStatus> UserMovieStatus = new Dictionary<int, UserMovieStatus>();
 
         public SampleDataSeeder(IIECDbContext context)
         {
@@ -40,6 +41,23 @@ namespace Application.Common.System.Commands.SeedSampleData
             await SeedMovieArtistsAsync(cancellationToken);
 
             await SeedMovieMovieGenresAsync(cancellationToken);
+            
+            await SeedUserMovieStatusAsync(cancellationToken);
+        }
+
+        private async Task SeedUserMovieStatusAsync(CancellationToken cancellationToken)
+        {
+            var userMovieStatuses = new[]
+            {
+                new UserMovieStatus {Id = 1, Status = "to watch"},
+                new UserMovieStatus {Id = 2, Status = "watching"},
+                new UserMovieStatus {Id = 3, Status = "watched"},
+                new UserMovieStatus {Id = 4, Status = "dropped"}
+            };
+            
+            _context.UserMovieStatuses.AddRange(userMovieStatuses);
+            
+            await _context.SaveChangesAsync(cancellationToken);
         }
 
         private async Task SeedArtistsAsync(CancellationToken cancellationToken)

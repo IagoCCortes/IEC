@@ -29,6 +29,7 @@ namespace Persistence
         public DbSet<Movie> Movies { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserMovie> UserMovies { get; set; }
+        public DbSet<UserMovieStatus> UserMovieStatuses { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

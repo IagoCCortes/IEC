@@ -202,8 +202,14 @@ namespace Persistence.Migrations
                     b.Property<int>("MovieId")
                         .HasColumnType("INTEGER");
 
+                    b.Property<bool>("Favorited")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Review")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("UserMovieStatusId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("rating")
                         .HasColumnType("INTEGER");
@@ -212,7 +218,23 @@ namespace Persistence.Migrations
 
                     b.HasIndex("MovieId");
 
+                    b.HasIndex("UserMovieStatusId");
+
                     b.ToTable("UserMovies");
+                });
+
+            modelBuilder.Entity("Domain.Entities.UserMovieStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserMovieStatuses");
                 });
 
             modelBuilder.Entity("Domain.Entities.MovieArtist", b =>
@@ -262,6 +284,12 @@ namespace Persistence.Migrations
                     b.HasOne("Domain.Entities.User", "User")
                         .WithMany("UserMovies")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.UserMovieStatus", "UserMovieStatus")
+                        .WithMany("UserMovies")
+                        .HasForeignKey("UserMovieStatusId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

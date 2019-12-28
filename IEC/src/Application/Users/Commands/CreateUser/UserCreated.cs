@@ -11,18 +11,21 @@ namespace Application.Users.Commands.CreateUser
         public string Id { get; set; }
         public string Email { get; set; }
 
-        public class CustomerCreatedHandler : INotificationHandler<UserCreated>
+        public class UserCreatedHandler : INotificationHandler<UserCreated>
         {
             private readonly INotificationService _notification;
 
-            public CustomerCreatedHandler(INotificationService notification)
+            public UserCreatedHandler(INotificationService notification)
             {
                 _notification = notification;
             }
 
             public async Task Handle(UserCreated notification, CancellationToken cancellationToken)
             {
-                await _notification.SendAsync(new MessageDto());
+                var MailBody = "<button href='google.com' target='_blank'>Welcome</button>";
+
+                await _notification.SendAsync(new MessageDto { From = "no-reply@IEC.com", FromAlias = "The Internet Entertainment Center", 
+                                                               To = notification.Email, Subject = "IEC - Please confirm your email", Body = MailBody});
             }
         }
     }

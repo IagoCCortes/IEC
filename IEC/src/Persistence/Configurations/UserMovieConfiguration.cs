@@ -15,6 +15,10 @@ namespace Persistence.Configurations
 
             builder.HasOne(um => um.User).WithMany(u => u.UserMovies)
                 .HasForeignKey(um => um.UserId).OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasOne(um => um.UserMovieStatus)
+                .WithMany(us => us.UserMovies).HasForeignKey(um => um.UserMovieStatusId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -14,6 +14,8 @@ namespace Application.Common.Interfaces
         DbSet<MovieRole> MovieRoles { get; set; }
         DbSet<Movie> Movies { get; set; }
         DbSet<User> Users { get; set; }
+        DbSet<UserMovie> UserMovies { get; set; }
+        DbSet<UserMovieStatus> UserMovieStatuses { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
