@@ -19,7 +19,7 @@ namespace WebUI.Controllers
         public async Task<ActionResult<ArtistListVM>> GetArtistsAsync()
         {
             var artists = await Mediator.Send(new GetArtistListQuery());
-            //var x = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
             return Ok(artists);
         }
 

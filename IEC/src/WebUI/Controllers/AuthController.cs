@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Application.Users.Commands.CreateUser;
+using Application.Users.Queries.GetUserId;
 using AutoMapper;
 using Infrastructure.Identity;
 using Infrastructure.Identity.ViewModels;
@@ -68,10 +69,11 @@ namespace WebUI.Controllers
             if (result.Succeeded)
             {
                 //var userToReturn = _mapper.Map<UserForDetailedDto>(user);
+                var userId = await _mediator.Send(new GetUserIdQuery { Id = user.Id});
 
                 return Ok(new
                 {
-                    token = GenerateJwtToken(user),
+                    token = GenerateJwtToken(user, userId.Id),
                     user
                 });
             }
@@ -79,10 +81,10 @@ namespace WebUI.Controllers
             return Unauthorized();
         }
 
-        private string GenerateJwtToken(ApplicationUser user)
+        private string GenerateJwtToken(ApplicationUser user, int userId)
         {
             var claims = new[]{
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
                 new Claim(ClaimTypes.Name, user.UserName)
             };
 

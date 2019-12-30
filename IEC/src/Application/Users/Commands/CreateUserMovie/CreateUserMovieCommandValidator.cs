@@ -8,6 +8,7 @@ namespace Application.Users.Commands.CreateUserMovie
         {
             RuleFor(um => um.UserId).NotEmpty().WithMessage("Required Field.");
             RuleFor(um => um.MovieId).NotEmpty().WithMessage("Required Field.");
+            RuleFor(um => um.UserMovieStatusId).NotEmpty().WithMessage("Required Field.");
         }
     }
 }

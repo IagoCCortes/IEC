@@ -6,5 +6,6 @@ namespace Application.Users.Commands.CreateUserMovie
     {
         public int UserId { get; set; }
         public int MovieId { get; set; }
+        public int UserMovieStatusId { get; set; }
     }
 }
