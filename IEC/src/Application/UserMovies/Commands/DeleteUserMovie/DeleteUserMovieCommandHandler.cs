@@ -5,8 +5,9 @@ using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
-namespace Application.Users.Commands.DeleteUserMovie
+namespace Application.UserMovies.Commands.DeleteUserMovie
 {
     public class DeleteUserMovieCommandHandler : IRequestHandler<DeleteUserMovieCommand>
     {
@@ -18,7 +19,7 @@ namespace Application.Users.Commands.DeleteUserMovie
         }
         public async Task<Unit> Handle(DeleteUserMovieCommand request, CancellationToken cancellationToken)
         {
-            var entity = _context.UserMovies.FirstOrDefault(us => us.MovieId == request.MovieId && us.UserId == request.UserId);
+            var entity = await _context.UserMovies.FirstOrDefaultAsync(us => us.MovieId == request.MovieId && us.UserId == request.UserId);
 
             if(entity == null)
                 throw new NotFoundException(nameof(UserMovie), new { request.UserId, request.MovieId });

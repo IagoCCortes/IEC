@@ -1,6 +1,7 @@
 using Application;
 using Application.Common.Interfaces;
 using Infrastructure;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -37,9 +38,8 @@ namespace WebUI
 
             // services.AddHttpContextAccessor();
 
-            // services.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IIECDbContext>());
-
-            services.AddControllers(options => 
+            services
+            .AddControllers(options => 
             {
                 var policy = new AuthorizationPolicyBuilder()
                     .RequireAuthenticatedUser()
@@ -50,7 +50,8 @@ namespace WebUI
             .AddNewtonsoftJson(opt => {
                 opt.SerializerSettings.ReferenceLoopHandling = 
                 Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            })
+            .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<IIECDbContext>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

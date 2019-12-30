@@ -28,11 +28,11 @@ namespace Application.Movies.Queries.GetMovieDetail
             var movie = await _mapper.ProjectTo<MovieDetailVM>(_context.Movies)
                                      .FirstOrDefaultAsync(m => m.Id == request.Id);
 
+            if(movie == null)
+                throw new NotFoundException(nameof(Movie), request.Id);
+
             for (int i = 0; i < movie.Genres.Count; i++)
                 movie.Genres[i] = Enum.GetName(typeof(MovieGenreEnum), Int32.Parse(movie.Genres[i])).Replace('_', ' ').Replace('1', '-');
-
-            if (movie == null)
-                throw new NotFoundException(nameof(Movie), request.Id);
 
             return movie;
         }

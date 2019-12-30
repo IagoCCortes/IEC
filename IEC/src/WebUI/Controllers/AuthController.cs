@@ -17,18 +17,14 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace WebUI.Controllers
 {
-    [Route("api/[controller]/[action]")]
-    [ApiController]
     [AllowAnonymous]
-    public class AuthController : ControllerBase
+    public class AuthController : BaseController
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _config;
-        private readonly IMediator _mediator;
-        public AuthController(IConfiguration config, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IMediator mediator)
+        public AuthController(IConfiguration config, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager)
         {
-            _mediator = mediator;
             _signInManager = signInManager;
             _userManager = userManager;
             _config = config;
@@ -36,7 +32,7 @@ namespace WebUI.Controllers
 
         // public event EventHandler UserRegistered;
 
-        [HttpPost]
+        [HttpPost("register")]
         public async Task<IActionResult> RegisterUserAsync([FromBody]RegisterViewModel registerViewModel)
         {
             var userToCreate = new ApplicationUser
@@ -49,14 +45,14 @@ namespace WebUI.Controllers
 
             if (result.Succeeded)
             {
-                await _mediator.Send(new CreateUserCommand{ UserId = userToCreate.Id, Email = userToCreate.Email});
+                await Mediator.Send(new CreateUserCommand{ UserId = userToCreate.Id, Email = userToCreate.Email});
                 return Ok();
             }
 
             return BadRequest(result.Errors);
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> LoginAsync(LoginViewModel loginViewModel)
         {
             var user = await _userManager.FindByNameAsync(loginViewModel.UserName);
@@ -69,7 +65,7 @@ namespace WebUI.Controllers
             if (result.Succeeded)
             {
                 //var userToReturn = _mapper.Map<UserForDetailedDto>(user);
-                var userId = await _mediator.Send(new GetUserIdQuery { Id = user.Id});
+                var userId = await Mediator.Send(new GetUserIdQuery { Id = user.Id});
 
                 return Ok(new
                 {

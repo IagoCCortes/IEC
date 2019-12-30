@@ -1,11 +1,12 @@
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Users.Commands.CreateUserMovie
+namespace Application.UserMovies.Commands.CreateUserMovie
 {
     public class CreateUserMovieCommandHandler : IRequestHandler<CreateUserMovieCommand>
     {
@@ -19,6 +20,11 @@ namespace Application.Users.Commands.CreateUserMovie
         }
         public async Task<Unit> Handle(CreateUserMovieCommand request, CancellationToken cancellationToken)
         {
+            var movie = _context.Movies.Find(request.MovieId);
+
+            if(movie == null)
+                throw new NotFoundException(nameof(UserMovie), new { request.UserId, request.MovieId });
+
             var userMovie = _mapper.Map<UserMovie>(request);
 
             _context.UserMovies.Add(userMovie);

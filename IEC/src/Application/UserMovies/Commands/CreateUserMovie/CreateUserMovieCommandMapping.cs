@@ -1,7 +1,7 @@
 using AutoMapper;
 using Domain.Entities;
 
-namespace Application.Users.Commands.CreateUserMovie
+namespace Application.UserMovies.Commands.CreateUserMovie
 {
     public class CreateUserMovieCommandMapping : Profile
     {

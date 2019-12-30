@@ -14,9 +14,9 @@ namespace WebUI.Controllers
 {
     public class ArtistsController : BaseController
     {
-        // [AllowAnonymous]
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<ArtistListVM>> GetArtistsAsync()
+        public async Task<ActionResult<ArtistListVM>> ListArtistsAsync()
         {
             var artists = await Mediator.Send(new GetArtistListQuery());
             
@@ -47,8 +47,9 @@ namespace WebUI.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateArtistAsync([FromBody]UpdateArtistCommand command)
+        public async Task<IActionResult> UpdateArtistAsync(int id, [FromBody]UpdateArtistCommand command)
         {
+            command.Id = id;
             await Mediator.Send(command);
 
             return NoContent();

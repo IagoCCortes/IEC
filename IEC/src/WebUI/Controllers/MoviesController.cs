@@ -17,14 +17,16 @@ namespace WebUI.Controllers
     [AllowAnonymous]
     public class MoviesController : BaseController
     {
+        [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<MovieListVM>> GetMoviesAsync()
+        public async Task<ActionResult<MovieListVM>> ListMoviesAsync()
         {
             var movies = await Mediator.Send(new GetMovieListQuery());
 
             return Ok(movies);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}", Name = "GetMovie")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -48,8 +50,9 @@ namespace WebUI.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UpdateMovieAsync([FromBody]UpdateMovieCommand command)
+        public async Task<IActionResult> UpdateMovieAsync(int id, [FromBody]UpdateMovieCommand command)
         {
+            command.Id = id;
             await Mediator.Send(command);
 
             return NoContent();
@@ -65,31 +68,34 @@ namespace WebUI.Controllers
             return NoContent();
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{id}/genres")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> SetMovieGenresAsync([FromBody]CreateMovieGenreCommand command)
+        public async Task<IActionResult> SetMovieGenresAsync(int id, [FromBody]CreateMovieGenreCommand command)
         {
+            command.MovieId = id;
             await Mediator.Send(command);
 
             return NoContent();
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("{id}/artists")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> AddMovieArtistsAsync([FromBody]CreateMovieArtistCommand command)
+        public async Task<IActionResult> AddMovieArtistsAsync(int id, [FromBody]CreateMovieArtistCommand command)
         {
+            command.MovieId = id;
             await Mediator.Send(command);
 
             return NoContent();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}/artists")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteMovieArtistsAsync([FromBody]DeleteMovieArtistCommand command)
+        public async Task<IActionResult> DeleteMovieArtistsAsync(int id, [FromBody]DeleteMovieArtistCommand command)
         {
+            command.MovieId = id;
             await Mediator.Send(command);
 
             return NoContent();

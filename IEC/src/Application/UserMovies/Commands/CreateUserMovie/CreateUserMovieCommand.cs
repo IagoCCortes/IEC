@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Application.Users.Commands.CreateUserMovie
+namespace Application.UserMovies.Commands.CreateUserMovie
 {
     public class CreateUserMovieCommand : IRequest
     {

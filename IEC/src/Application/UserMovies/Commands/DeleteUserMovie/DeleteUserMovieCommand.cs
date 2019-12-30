@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Application.Users.Commands.DeleteUserMovie
+namespace Application.UserMovies.Commands.DeleteUserMovie
 {
     public class DeleteUserMovieCommand : IRequest
     {
