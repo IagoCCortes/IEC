@@ -17,7 +17,7 @@ namespace Application.Users.Commands.CreateUser
         }
         public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = new User { UserId = request.UserId };
+            var user = new User { UserId = request.UserId, UserName = request.UserName };
             _context.Users.Add(user);
 
             await _context.SaveChangesAsync(cancellationToken);

@@ -45,7 +45,7 @@ namespace WebUI.Controllers
 
             if (result.Succeeded)
             {
-                await Mediator.Send(new CreateUserCommand{ UserId = userToCreate.Id, Email = userToCreate.Email});
+                await Mediator.Send(new CreateUserCommand{ UserId = userToCreate.Id, UserName = userToCreate.UserName, Email = userToCreate.Email});
                 return Ok();
             }
 
