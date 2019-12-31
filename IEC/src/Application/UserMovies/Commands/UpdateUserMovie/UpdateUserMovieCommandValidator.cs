@@ -9,6 +9,8 @@ namespace Application.UserMovies.Commands.UpdateUserMovie
         {
             RuleFor(u => u.UserMovieStatusId).NotEmpty().WithMessage("Required Field.")
             .Must(u => (new[] {1, 2, 3, 4}).Contains(u)).WithMessage("Choose a valid status value");
+            RuleFor(u => u.UserMovieStatusId).Equal(3)
+            .When(u => u.Review != null || u.Rating != null).WithMessage("You can only rate or review the movie if you already watched it");
             RuleFor(u => u.Rating).InclusiveBetween(0, 100).WithMessage("Rating must be between 0 and 100");
         }
     }
