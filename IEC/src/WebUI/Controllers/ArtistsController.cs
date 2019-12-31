@@ -35,24 +35,24 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> AddArtistAsync([FromBody]CreateArtistCommand command)
         {
-            await Mediator.Send(command);
+            var artist = await Mediator.Send(command);
 
-            return NoContent();
+            return CreatedAtRoute("GetArtist", new {controller = "Artists", id = artist.Id}, artist);;
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateArtistAsync(int id, [FromBody]UpdateArtistCommand command)
         {
             command.Id = id;
             await Mediator.Send(command);
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]

@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Artists.Commands.CreateArtist
 {
-    public class CreateArtistCommandHandler : IRequestHandler<CreateArtistCommand>
+    public class CreateArtistCommandHandler : IRequestHandler<CreateArtistCommand, Artist>
     {
         private readonly IIECDbContext _context;
         private readonly IMediator _mediator;
@@ -20,7 +20,7 @@ namespace Application.Artists.Commands.CreateArtist
             _mediator = mediator;
         }
 
-        public async Task<Unit> Handle(CreateArtistCommand request, CancellationToken cancellationToken)
+        public async Task<Artist> Handle(CreateArtistCommand request, CancellationToken cancellationToken)
         {
             var artist = _mapper.Map<Artist>(request);
 
@@ -30,7 +30,7 @@ namespace Application.Artists.Commands.CreateArtist
 
             await _mediator.Publish(new ArtistCreated { Id = artist.Id }, cancellationToken);
 
-            return Unit.Value;
+            return artist;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Application.Movies.Commands.CreateMovie
         public CreateMovieCommandMappings()
         {
             CreateMap<CreateMovieCommand,Movie>();
+            CreateMap<Movie, CreateMovieReturnDto>();
         }
     }
 }

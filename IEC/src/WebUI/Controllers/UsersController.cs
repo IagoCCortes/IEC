@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Application.Users.Queries.GetUserDetail;
 using Application.Users.Queries.GetUserList;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
@@ -18,7 +19,7 @@ namespace WebUI.Controllers
         }        
 
         [AllowAnonymous]
-        [HttpGet("{id}", Name = "GetUserDetails")]
+        [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUserAsync(int id)
         {
             var user = await Mediator.Send(new GetUserDetailQuery { Id = id});

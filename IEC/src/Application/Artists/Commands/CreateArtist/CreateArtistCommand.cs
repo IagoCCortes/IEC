@@ -1,9 +1,10 @@
 using System;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Artists.Commands.CreateArtist
 {
-    public class CreateArtistCommand : IRequest
+    public class CreateArtistCommand : IRequest<Artist>
     {
         public string ArtistName { get; set; }
         public string RealName { get; set; }

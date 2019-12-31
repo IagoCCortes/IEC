@@ -1,21 +1,24 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
 namespace Application.Users.Commands.CreateUser
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand>
+    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreateUserReturnDto>
     {
         private readonly IIECDbContext _context;
         private readonly IMediator _mediator;
-        public CreateUserCommandHandler(IIECDbContext context, IMediator mediator)
+        private readonly IMapper _mapper;
+        public CreateUserCommandHandler(IIECDbContext context, IMediator mediator, IMapper mapper)
         {
+            _mapper = mapper;
             _mediator = mediator;
             _context = context;
         }
-        public async Task<Unit> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<CreateUserReturnDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
             var user = new User { UserId = request.UserId, UserName = request.UserName };
             _context.Users.Add(user);
@@ -24,7 +27,7 @@ namespace Application.Users.Commands.CreateUser
 
             await _mediator.Publish(new UserCreated { Id = user.UserId, Email = request.Email }, cancellationToken);
 
-            return Unit.Value;
+            return _mapper.Map<CreateUserReturnDto>(user);
         }
     }
 }

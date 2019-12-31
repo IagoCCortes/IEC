@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.Movies.Commands.CreateMovie;
 using Application.Movies.Commands.CreateMovieArtist;
@@ -38,24 +37,24 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> AddMovieAsync([FromBody]CreateMovieCommand command)
         {
-            await Mediator.Send(command);
+            var movie = await Mediator.Send(command);
 
-            return NoContent();
+            return CreatedAtRoute("GetMovie", new {controller = "Movies", id = movie.Id}, movie);
         }
 
         [HttpPut("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateMovieAsync(int id, [FromBody]UpdateMovieCommand command)
         {
             command.Id = id;
             await Mediator.Send(command);
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}")]
@@ -69,25 +68,25 @@ namespace WebUI.Controllers
         }
 
         [HttpPost("{id}/genres")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> SetMovieGenresAsync(int id, [FromBody]CreateMovieGenreCommand command)
         {
             command.MovieId = id;
             await Mediator.Send(command);
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpPost("{id}/artists")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> AddMovieArtistsAsync(int id, [FromBody]CreateMovieArtistCommand command)
         {
             command.MovieId = id;
             await Mediator.Send(command);
 
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{id}/artists")]

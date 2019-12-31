@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Movies.Commands.CreateMovie
 {
-    public class CreateMovieCommandHandler : IRequestHandler<CreateMovieCommand>
+    public class CreateMovieCommandHandler : IRequestHandler<CreateMovieCommand, CreateMovieReturnDto>
     {
         private readonly IIECDbContext _context;
         private readonly IMediator _mediator;
@@ -20,17 +20,17 @@ namespace Application.Movies.Commands.CreateMovie
             _mediator = mediator;
         }
 
-        public async Task<Unit> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
+        public async Task<CreateMovieReturnDto> Handle(CreateMovieCommand request, CancellationToken cancellationToken)
         {
-            var Movie = _mapper.Map<Movie>(request);
+            var movie = _mapper.Map<Movie>(request);
 
-            _context.Movies.Add(Movie);
+            _context.Movies.Add(movie);
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            await _mediator.Publish(new MovieCreated { Id = Movie.Id }, cancellationToken);
+            await _mediator.Publish(new MovieCreated { Id = movie.Id }, cancellationToken);
 
-            return Unit.Value;
+            return _mapper.Map<CreateMovieReturnDto>(movie);
         }
     }
 }
