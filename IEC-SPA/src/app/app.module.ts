@@ -23,6 +23,8 @@ import { ArtistCardComponent } from './regular-user/artists/artist-card/artist-c
 import { ArtistListResolver } from './_resolver/artist-list.resolver';
 import { ArtistDetailComponent } from './regular-user/artists/artist-detail/artist-detail.component';
 import { ArtistDetailResolver } from './_resolver/artist-detail.resolver';
+import { UserService } from './_services/user.service';
+import { UserMovieService } from './_services/userMovie.service';
 
 @NgModule({
    declarations: [
@@ -53,7 +55,9 @@ import { ArtistDetailResolver } from './_resolver/artist-detail.resolver';
       ErrorInterceptorProvider,
       MovieDetailResolver,
       MovieListResolver,
-      MovieService
+      MovieService,
+      UserMovieService,
+      UserService
    ],
    bootstrap: [
       AppComponent

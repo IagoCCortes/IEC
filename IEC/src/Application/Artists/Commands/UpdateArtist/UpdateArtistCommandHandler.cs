@@ -26,9 +26,7 @@ namespace Application.Artists.Commands.UpdateArtist
                 .FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken);
 
             if (artist == null)
-            {
                 throw new NotFoundException(nameof(Artist), request.Id);
-            }
 
             _mapper.Map(request, artist);
 

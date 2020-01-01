@@ -14,11 +14,11 @@ export class ArtistService {
   constructor(private http: HttpClient) { }
 
   getArtists(): Observable<ArtistList[]> {
-    return this.http.get<ArtistList[]>(this.baseUrl + 'artists/GetArtists');
+    return this.http.get<ArtistList[]>(this.baseUrl + 'artists');
   }
 
   getArtist(id: number): Observable<Artist> {
-    return this.http.get<Artist>(this.baseUrl + 'artists/GetArtist/' + id);
+    return this.http.get<Artist>(this.baseUrl + 'artists/' + id);
   }
 
 }
