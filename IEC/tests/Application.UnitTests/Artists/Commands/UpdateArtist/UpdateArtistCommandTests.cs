@@ -19,7 +19,7 @@ namespace Application.UnitTests.Artists.Commands.UpdateArtist
         }
 
         [Fact]
-        public async Task Handle_GivenValidRequest_ShouldUpdateArtistAsync()
+        public async Task Handle_GivenValidRequest_ShouldUpdateArtist()
         {
             // Arrange
             var command = new UpdateArtistCommand { Id = 1, ArtistName = "test" };

@@ -15,12 +15,12 @@ namespace Application.UnitTests.Common
         public CommandTestBase()
         {
             Context = IECContextFactory.Create();
+
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.AddProfile(new CreateArtistCommandMapping());
-                cfg.AddProfile(new UpdateArtistCommandMapping());
-                // cfg.AddProfile(new UpdateArtistCommandMapping());
+                cfg.AddProfile<MappingProfile>();
             });
+
             Mapper = config.CreateMapper();
         }
 

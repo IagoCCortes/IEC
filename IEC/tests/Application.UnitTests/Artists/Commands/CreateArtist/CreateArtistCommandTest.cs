@@ -22,7 +22,7 @@ namespace Application.UnitTests.Artists.Commands.CreateArtist
         }
 
         [Fact]
-        public async Task Handle_GivenValidRequest_ShouldCreateArtistAsync()
+        public async Task Handle_GivenValidRequest_ShouldCreateArtist()
         {
             // Arrange
             var command = new CreateArtistCommand { ArtistName = "test" };
