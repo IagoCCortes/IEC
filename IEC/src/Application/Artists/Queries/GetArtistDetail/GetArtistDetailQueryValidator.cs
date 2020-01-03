@@ -6,7 +6,7 @@ namespace Application.Artists.Queries.GetArtistDetail
     {
         public GetArtistDetailQueryValidator()
         {
-            RuleFor(a => a.Id).NotEmpty();
+            RuleFor(a => a.Id).GreaterThan(0).WithMessage("Provide a valid value for Id");
         }
     }
 }

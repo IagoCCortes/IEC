@@ -1,6 +1,6 @@
 namespace Domain.Enums
 {
-    public enum MovieGenreEnum : byte
+    public enum MovieGenreEnum : int
     {
         Action = 1,
         Adventure = 2,

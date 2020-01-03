@@ -1,9 +1,9 @@
 using System.Threading.Tasks;
+using Application.MovieArtists.Commands.CreateMovieArtist;
+using Application.MovieArtists.Commands.DeleteMovieArtist;
 using Application.Movies.Commands.CreateMovie;
-using Application.Movies.Commands.CreateMovieArtist;
 using Application.Movies.Commands.CreateMovieGenre;
 using Application.Movies.Commands.DeleteMovie;
-using Application.Movies.Commands.DeleteMovieArtist;
 using Application.Movies.Commands.UpdateMovie;
 using Application.Movies.Queries.GetMovieDetail;
 using Application.Movies.Queries.GetMovieList;

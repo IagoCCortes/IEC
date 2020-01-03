@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using MediatR;
 
-namespace Application.Movies.Commands.DeleteMovieArtist
+namespace Application.MovieArtists.Commands.DeleteMovieArtist
 {
     public class DeleteMovieArtistCommand : IRequest
     {

@@ -7,7 +7,7 @@ using Moq;
 using Shouldly;
 using Xunit;
 
-namespace Application.UnitTests.Artists.Commands.CreateArtist
+namespace Application.UnitTests.Artists.Commands
 {
     public class CreateArtistCommandTest : CommandTestBase
     {

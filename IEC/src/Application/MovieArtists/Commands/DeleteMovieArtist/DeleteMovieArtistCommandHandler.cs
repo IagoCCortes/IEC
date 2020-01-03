@@ -7,7 +7,7 @@ using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Movies.Commands.DeleteMovieArtist
+namespace Application.MovieArtists.Commands.DeleteMovieArtist
 {
     public class DeleteMovieArtistCommandHandler : IRequestHandler<DeleteMovieArtistCommand>
     {

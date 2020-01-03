@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
 using Application.Common.Interfaces;
-using AutoMapper;
 using Domain.Entities;
 using MediatR;
 
@@ -11,14 +10,11 @@ namespace Application.Movies.Commands.CreateMovieGenre
 {
     public class CreateMovieGenreCommandHandler : IRequestHandler<CreateMovieGenreCommand>
     {
-        private readonly IMediator _mediator;
         private readonly IIECDbContext _context;
 
-        public CreateMovieGenreCommandHandler(IIECDbContext context, IMediator mediator)
+        public CreateMovieGenreCommandHandler(IIECDbContext context)
         {
             _context = context;
-            _mediator = mediator;
-
         }
 
         public async Task<Unit> Handle(CreateMovieGenreCommand request, CancellationToken cancellationToken)

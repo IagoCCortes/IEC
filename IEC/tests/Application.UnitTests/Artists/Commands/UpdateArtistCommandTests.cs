@@ -6,7 +6,7 @@ using Application.UnitTests.Common;
 using Shouldly;
 using Xunit;
 
-namespace Application.UnitTests.Artists.Commands.UpdateArtist
+namespace Application.UnitTests.Artists.Commands
 {
     public class UpdateArtistCommandTests : CommandTestBase
     {

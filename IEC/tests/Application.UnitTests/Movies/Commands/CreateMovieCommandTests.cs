@@ -8,7 +8,7 @@ using Moq;
 using Shouldly;
 using Xunit;
 
-namespace Application.UnitTests.Movies.Commands.CreateMovie
+namespace Application.UnitTests.Movies.Commands
 {
     public class CreateMovieCommandTests : CommandTestBase
     {

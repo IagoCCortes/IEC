@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,15 +6,13 @@ using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
 
-namespace Application.Movies.Commands.CreateMovieArtist
+namespace Application.MovieArtists.Commands.CreateMovieArtist
 {
     public class CreateMovieArtistCommandHandler : IRequestHandler<CreateMovieArtistCommand>
     {
         private readonly IIECDbContext _context;
-        private readonly IMediator _mediator;
-        public CreateMovieArtistCommandHandler(IIECDbContext context, IMediator mediator)
+        public CreateMovieArtistCommandHandler(IIECDbContext context)
         {
-            _mediator = mediator;
             _context = context;
 
         }
@@ -38,6 +35,11 @@ namespace Application.Movies.Commands.CreateMovieArtist
         {
             for (int i = 0; i < artistIds.Count; i++)
             {
+                var artist = _context.Artists.Find(artistIds[i]);
+
+                if(artist == null)
+                    throw new NotFoundException(nameof(Artist), artistIds[i]);
+
                 yield return new MovieArtist { MovieId = movieId, ArtistId = artistIds[i], RoleId = roleIds[i] };
             }
         }
