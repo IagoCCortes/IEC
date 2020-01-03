@@ -7,7 +7,7 @@ namespace Application.Artists.Commands.UpdateArtist
     {
         public UpdateArtistCommandValidator()
         {
-            RuleFor(a => a.ArtistName).NotEmpty().WithMessage("Required Field.");
+            Include(new ArtistCommandValidator());
         }
     }
 }

@@ -1,5 +1,4 @@
 using FluentValidation;
-using MediatR;
 
 namespace Application.Movies.Commands.CreateMovie
 {
@@ -7,8 +6,7 @@ namespace Application.Movies.Commands.CreateMovie
     {
         public CreateMovieCommandsValidator()
         {
-            RuleFor(m => m.Title).NotEmpty().WithMessage("Required Field.");
-            RuleFor(m => m.ReleaseDate).NotEmpty().WithMessage("Required Field.");
+            Include(new MovieCommandValidator());
         }
     }
 }

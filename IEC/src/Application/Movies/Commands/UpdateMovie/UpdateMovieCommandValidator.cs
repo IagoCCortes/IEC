@@ -6,10 +6,7 @@ namespace Application.Movies.Commands.UpdateMovie
     {
         public UpdateMovieCommandValidator()
         {
-            RuleFor(m => m.Title).NotEmpty().WithMessage("Required Field.");
-            RuleFor(m => m.Plot).NotEmpty().WithMessage("Required Field.");
-            RuleFor(m => m.Runtime).NotEmpty().WithMessage("Required Field.");
-            RuleFor(m => m.ReleaseDate).NotEmpty().WithMessage("Required Field.");
+            Include(new MovieCommandValidator());
         }
     }
 }

@@ -2,13 +2,12 @@ using System;
 using Domain.Enums;
 using FluentValidation;
 
-namespace Application.MovieArtists.Commands.CreateMovieArtist
+namespace Application.MovieArtists.Commands
 {
-    public class CreateMovieArtistCommandValidator : AbstractValidator<CreateMovieArtistCommand>
+    public class MovieArtistCommandValidator : AbstractValidator<MovieArtistCommand>
     {
-        public CreateMovieArtistCommandValidator()
+        public MovieArtistCommandValidator()
         {
-            // RuleFor(ma => ma.MovieId).NotEmpty().WithMessage("Required Field.");
             RuleFor(ma => ma.ArtistIds).NotEmpty().WithMessage("Required Field.");
             RuleFor(ma => ma.RoleIds).NotEmpty().WithMessage("Required Field.")
             .Must((cma, m) => m.Count == cma.ArtistIds.Count).WithMessage("Every artist must have a role and vice versa.")

@@ -1,16 +1,16 @@
 using System;
-using Application.Artists.Commands.UpdateArtist;
+using Application.Artists.Commands;
 using FluentValidation.TestHelper;
 using Xunit;
 
 namespace Application.UnitTests.Artists.Commands
 {
-    public class UpdateArtistCommandValidatorTests
+    public class ArtistCommandValidatorTests
     {
-        private UpdateArtistCommandValidator validator;
+        private ArtistCommandValidator validator;
 
-        public UpdateArtistCommandValidatorTests() {
-            validator = new UpdateArtistCommandValidator();
+        public ArtistCommandValidatorTests() {
+            validator = new ArtistCommandValidator();
         }
 
         [Fact]

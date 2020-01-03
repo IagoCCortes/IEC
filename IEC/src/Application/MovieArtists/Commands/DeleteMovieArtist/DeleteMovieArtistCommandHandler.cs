@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.MovieArtists.Commands.DeleteMovieArtist
 {
-    public class DeleteMovieArtistCommandHandler : IRequestHandler<DeleteMovieArtistCommand>
+    public class DeleteMovieArtistCommandHandler : IRequestHandler<MovieArtistCommand>
     {
         private readonly IIECDbContext _context;
         public DeleteMovieArtistCommandHandler(IIECDbContext context)
@@ -17,7 +17,7 @@ namespace Application.MovieArtists.Commands.DeleteMovieArtist
             _context = context;
         }
 
-        public async Task<Unit> Handle(DeleteMovieArtistCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(MovieArtistCommand request, CancellationToken cancellationToken)
         {
             var movie = await _context.Movies.FindAsync(request.MovieId);
 

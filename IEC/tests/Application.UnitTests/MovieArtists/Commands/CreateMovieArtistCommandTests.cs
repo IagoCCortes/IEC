@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
+using Application.MovieArtists.Commands;
 using Application.MovieArtists.Commands.CreateMovieArtist;
 using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
@@ -24,7 +25,7 @@ namespace Application.UnitTests.MovieArtists.Commands
         public async Task Handle_GivenValidRequest_ShouldCreateMovieArtists()
         {
             // Arrange
-            var command = new CreateMovieArtistCommand { MovieId = 1, ArtistIds = new List<int> {1, 2}, RoleIds = new List<int> {1, 2} };
+            var command = new MovieArtistCommand { MovieId = 1, ArtistIds = new List<int> {1, 2}, RoleIds = new List<int> {1, 2} };
 
             // Act
             await _sut.Handle(command, CancellationToken.None);
@@ -39,7 +40,7 @@ namespace Application.UnitTests.MovieArtists.Commands
         public async Task Handle_GivenInvalidRequest_ThrowsNotFoundException(int movieId, List<int> artistIds, List<int> roleIds)
         {
             // Arrange
-            var command = new CreateMovieArtistCommand { MovieId = movieId, ArtistIds = artistIds, RoleIds = roleIds };
+            var command = new MovieArtistCommand { MovieId = movieId, ArtistIds = artistIds, RoleIds = roleIds };
 
             // Assert
             await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(command, CancellationToken.None));            

@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
-using Application.MovieArtists.Commands.CreateMovieArtist;
-using Application.MovieArtists.Commands.DeleteMovieArtist;
+using Application.MovieArtists.Commands;
 using Application.Movies.Commands.CreateMovie;
 using Application.Movies.Commands.CreateMovieGenre;
 using Application.Movies.Commands.DeleteMovie;
@@ -81,7 +80,7 @@ namespace WebUI.Controllers
         [HttpPost("{id}/artists")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
-        public async Task<IActionResult> AddMovieArtistsAsync(int id, [FromBody]CreateMovieArtistCommand command)
+        public async Task<IActionResult> AddMovieArtistsAsync(int id, [FromBody]MovieArtistCommand command)
         {
             command.MovieId = id;
             await Mediator.Send(command);
@@ -92,7 +91,7 @@ namespace WebUI.Controllers
         [HttpDelete("{id}/artists")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> DeleteMovieArtistsAsync(int id, [FromBody]DeleteMovieArtistCommand command)
+        public async Task<IActionResult> DeleteMovieArtistsAsync(int id, [FromBody]MovieArtistCommand command)
         {
             command.MovieId = id;
             await Mediator.Send(command);

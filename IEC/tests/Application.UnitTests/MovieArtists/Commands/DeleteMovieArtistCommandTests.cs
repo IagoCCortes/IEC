@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
+using Application.MovieArtists.Commands;
 using Application.MovieArtists.Commands.DeleteMovieArtist;
 using Application.UnitTests.Common;
 using Xunit;
@@ -25,7 +26,7 @@ namespace Application.UnitTests.MovieArtists.Commands
             var MovieValidId = 2;
             var ArtistValidId = new List<int> {1};
             var RoleValidId = new List<int> {1};
-            var command = new DeleteMovieArtistCommand { MovieId = MovieValidId, ArtistIds = ArtistValidId, RoleIds = RoleValidId};
+            var command = new MovieArtistCommand { MovieId = MovieValidId, ArtistIds = ArtistValidId, RoleIds = RoleValidId};
 
             // Act
             await _sut.Handle(command, CancellationToken.None);
@@ -40,7 +41,7 @@ namespace Application.UnitTests.MovieArtists.Commands
         public async Task Handle_GivenInvalidRequest_ThrowsNotFoundException(int movieId, List<int> artistIds, List<int> roleIds)
         {
             // Arrange
-            var command = new DeleteMovieArtistCommand { MovieId = movieId, ArtistIds = artistIds, RoleIds = roleIds };
+            var command = new MovieArtistCommand { MovieId = movieId, ArtistIds = artistIds, RoleIds = roleIds };
 
             // Assert
             await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(command, CancellationToken.None));            

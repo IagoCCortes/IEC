@@ -8,7 +8,7 @@ using MediatR;
 
 namespace Application.MovieArtists.Commands.CreateMovieArtist
 {
-    public class CreateMovieArtistCommandHandler : IRequestHandler<CreateMovieArtistCommand>
+    public class CreateMovieArtistCommandHandler : IRequestHandler<MovieArtistCommand>
     {
         private readonly IIECDbContext _context;
         public CreateMovieArtistCommandHandler(IIECDbContext context)
@@ -17,7 +17,7 @@ namespace Application.MovieArtists.Commands.CreateMovieArtist
 
         }
 
-        public async Task<Unit> Handle(CreateMovieArtistCommand request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(MovieArtistCommand request, CancellationToken cancellationToken)
         {
             var movie = await _context.Movies.FindAsync(request.MovieId);
 
