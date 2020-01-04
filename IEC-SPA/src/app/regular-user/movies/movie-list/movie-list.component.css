@@ -1,6 +1,6 @@
 .card-wrapper {
     padding: 0;
-    margin: 0 2px 0 2px;
+    margin: 0 2px;
 }
 
 @media (min-width: 650px) {
