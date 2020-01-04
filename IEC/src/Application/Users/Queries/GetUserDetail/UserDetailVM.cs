@@ -7,6 +7,7 @@ namespace Application.Users.Queries.GetUserDetail
     public class UserDetailVM : IMapFrom<User>
     {
         public int Id { get; set; }
+        public string UserName { get; set; }
 
         public void Mapping(Profile profile)
         {

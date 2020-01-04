@@ -20,12 +20,13 @@ namespace Application.Users.Commands.CreateUser
         }
         public async Task<CreateUserReturnDto> Handle(CreateUserCommand request, CancellationToken cancellationToken)
         {
-            var user = new User { UserId = request.UserId, UserName = request.UserName };
+            var user = _mapper.Map<User>(request);
+
             _context.Users.Add(user);
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            await _mediator.Publish(new UserCreated { Id = user.UserId, Email = request.Email }, cancellationToken);
+            await _mediator.Publish(new UserCreated { Id = user.Id, Email = request.Email }, cancellationToken);
 
             return _mapper.Map<CreateUserReturnDto>(user);
         }

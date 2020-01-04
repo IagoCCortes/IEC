@@ -37,7 +37,7 @@ namespace Application.UnitTests.Movies.Commands
         }
 
         [Fact]
-        public void Handle_GivenValidRequest_ShouldRaiseCustomerCreatedNotification()
+        public void Handle_GivenValidRequest_ShouldRaiseMovieCreatedNotification()
         {
             // Arrange
             var command = new CreateMovieCommand { Title = "test", ReleaseDate = DateTime.Now };

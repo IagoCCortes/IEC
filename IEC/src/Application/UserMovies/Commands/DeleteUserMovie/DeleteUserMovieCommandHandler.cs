@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
@@ -15,7 +14,6 @@ namespace Application.UserMovies.Commands.DeleteUserMovie
         public DeleteUserMovieCommandHandler(IIECDbContext context)
         {
             _context = context;
-
         }
         public async Task<Unit> Handle(DeleteUserMovieCommand request, CancellationToken cancellationToken)
         {

@@ -1,3 +1,5 @@
+using System.Linq;
+using Domain.Enums;
 using FluentValidation;
 
 namespace Application.UserMovies.Commands.CreateUserMovie
@@ -6,8 +8,10 @@ namespace Application.UserMovies.Commands.CreateUserMovie
     {
         public CreateUserMovieCommandValidator()
         {
-            RuleFor(um => um.MovieId).NotEmpty().WithMessage("Required Field.");
-            RuleFor(um => um.UserMovieStatusId).NotEmpty().WithMessage("Required Field.");
+            var validUserMovieStatusIds = new[] {(int)UserMovieStatusEnum.ToWatch, (int)UserMovieStatusEnum.Watching, 
+                                                 (int)UserMovieStatusEnum.Watched, (int)UserMovieStatusEnum.Dropped};
+            RuleFor(u => u.UserMovieStatusId).Must(u => validUserMovieStatusIds.Contains(u))
+                .WithMessage("Choose a valid status value");
         }
     }
 }

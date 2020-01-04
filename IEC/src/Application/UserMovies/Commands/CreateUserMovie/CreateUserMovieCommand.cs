@@ -1,11 +1,17 @@
+using Application.Common.Mappings;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.UserMovies.Commands.CreateUserMovie
 {
-    public class CreateUserMovieCommand : IRequest
+    public class CreateUserMovieCommand : UserMovieCommand, IRequest, IMapTo<UserMovie>
     {
-        public int UserId { get; set; }
-        public int MovieId { get; set; }
         public int UserMovieStatusId { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<CreateUserMovieCommand, UserMovie>();
+        }
     }
 }

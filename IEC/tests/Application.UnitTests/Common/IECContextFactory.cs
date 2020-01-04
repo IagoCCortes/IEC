@@ -68,6 +68,17 @@ namespace Application.UnitTests.Common
                 new MovieMovieGenre {MovieId = 3, MovieGenreId = 3}
             });
 
+            context.Users.AddRange( new[] {
+                new User {Id = 1, UserName = "test1", UserId = "test-1"},
+                new User {Id = 2, UserName = "test2"},
+                new User {Id = 3, UserName = "test3"}
+            });
+
+            context.UserMovies.AddRange( new[] {
+                new UserMovie {MovieId = 2, UserId = 2, UserMovieStatusId = 3},
+                new UserMovie {MovieId = 3, UserId = 2, UserMovieStatusId = 3}
+            });
+
             context.SaveChanges();
         }
     }

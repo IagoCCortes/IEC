@@ -8,7 +8,7 @@ namespace Application.Users.Commands.CreateUser
 {
     public class UserCreated : INotification
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Email { get; set; }
 
         public class UserCreatedHandler : INotificationHandler<UserCreated>

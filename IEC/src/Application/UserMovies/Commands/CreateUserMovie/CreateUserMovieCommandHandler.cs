@@ -20,10 +20,10 @@ namespace Application.UserMovies.Commands.CreateUserMovie
         }
         public async Task<Unit> Handle(CreateUserMovieCommand request, CancellationToken cancellationToken)
         {
-            var movie = _context.Movies.Find(request.MovieId);
-
-            if(movie == null)
+            if(await _context.Movies.FindAsync(request.MovieId) == null)
                 throw new NotFoundException(nameof(UserMovie), new { request.UserId, request.MovieId });
+
+            var user = _context.Users.Find(request.UserId);
 
             var userMovie = _mapper.Map<UserMovie>(request);
 
