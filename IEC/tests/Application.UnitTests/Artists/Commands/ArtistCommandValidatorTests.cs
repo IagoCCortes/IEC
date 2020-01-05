@@ -1,4 +1,3 @@
-using System;
 using Application.Artists.Commands;
 using FluentValidation.TestHelper;
 using Xunit;

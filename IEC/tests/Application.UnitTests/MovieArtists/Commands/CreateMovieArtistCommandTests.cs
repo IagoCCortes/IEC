@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Application.Common.Exceptions;
 using Application.MovieArtists.Commands;
 using Application.MovieArtists.Commands.CreateMovieArtist;
-using Application.UnitTests.Common;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 

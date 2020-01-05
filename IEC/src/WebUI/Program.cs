@@ -2,14 +2,13 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.System.Commands.SeedSampleData;
-using Infrastructure.Identity;
+using Infrastructure.Persistence;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Persistence;
 
 namespace WebUI
 {
@@ -28,11 +27,10 @@ namespace WebUI
                     var iecContext = services.GetRequiredService<IECDbContext>();
                     iecContext.Database.Migrate();
 
-                    var identityContext = services.GetRequiredService<ApplicationDbContext>();
-                    identityContext.Database.Migrate();
+                    await IECDbContextSeed.SeedAsync(iecContext);
 
-                    var mediator = services.GetRequiredService<IMediator>();
-                    await mediator.Send(new SeedSampleDataCommand(), CancellationToken.None);
+                    // var mediator = services.GetRequiredService<IMediator>();
+                    // await mediator.Send(new SeedSampleDataCommand(), CancellationToken.None);
                 }
                 catch (Exception ex)
                 {

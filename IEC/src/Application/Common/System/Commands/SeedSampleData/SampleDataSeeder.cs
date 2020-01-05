@@ -18,7 +18,7 @@ namespace Application.Common.System.Commands.SeedSampleData
         private readonly Dictionary<int, MovieRole> MovieRoles = new Dictionary<int, MovieRole>();
         private readonly Dictionary<int, MovieArtist> MovieArtists = new Dictionary<int, MovieArtist>();
         private readonly Dictionary<int, MovieMovieGenre> MovieMovieGenres = new Dictionary<int, MovieMovieGenre>();
-        private readonly Dictionary<int, UserMovieStatus> UserMovieStatus = new Dictionary<int, UserMovieStatus>();
+        private readonly Dictionary<int, UserProfileMovieStatus> UserProfileMovieStatus = new Dictionary<int, UserProfileMovieStatus>();
 
         public SampleDataSeeder(IIECDbContext context)
         {
@@ -42,20 +42,20 @@ namespace Application.Common.System.Commands.SeedSampleData
 
             await SeedMovieMovieGenresAsync(cancellationToken);
             
-            await SeedUserMovieStatusAsync(cancellationToken);
+            await SeedUserProfileMovieStatusAsync(cancellationToken);
         }
 
-        private async Task SeedUserMovieStatusAsync(CancellationToken cancellationToken)
+        private async Task SeedUserProfileMovieStatusAsync(CancellationToken cancellationToken)
         {
-            var userMovieStatuses = new[]
+            var userProfileMovieStatuses = new[]
             {
-                new UserMovieStatus {Id = 1, Status = "to watch"},
-                new UserMovieStatus {Id = 2, Status = "watching"},
-                new UserMovieStatus {Id = 3, Status = "watched"},
-                new UserMovieStatus {Id = 4, Status = "dropped"}
+                new UserProfileMovieStatus {Id = 1, Status = "to watch"},
+                new UserProfileMovieStatus {Id = 2, Status = "watching"},
+                new UserProfileMovieStatus {Id = 3, Status = "watched"},
+                new UserProfileMovieStatus {Id = 4, Status = "dropped"}
             };
             
-            _context.UserMovieStatuses.AddRange(userMovieStatuses);
+            _context.UserProfileMovieStatuses.AddRange(userProfileMovieStatuses);
             
             await _context.SaveChangesAsync(cancellationToken);
         }

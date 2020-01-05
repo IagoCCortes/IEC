@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Application.Common.Exceptions;
 using Application.MovieArtists.Commands;
 using Application.MovieArtists.Commands.DeleteMovieArtist;
-using Application.UnitTests.Common;
 using Xunit;
 
 namespace Application.UnitTests.MovieArtists.Commands

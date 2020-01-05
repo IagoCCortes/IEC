@@ -3,12 +3,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Application.Users.Commands.CreateUser;
-using Application.Users.Queries.GetUserId;
-using AutoMapper;
+using Application.UserProfiles.Commands.CreateUserProfile;
+using Application.UserProfiles.Queries.GetUserProfileId;
 using Infrastructure.Identity;
 using Infrastructure.Identity.ViewModels;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -45,7 +43,7 @@ namespace WebUI.Controllers
 
             if (result.Succeeded)
             {
-                var user = await Mediator.Send(new CreateUserCommand{ UserId = userToCreate.Id, UserName = userToCreate.UserName, Email = userToCreate.Email});
+                var user = await Mediator.Send(new CreateUserProfileCommand{ UserId = userToCreate.Id, UserName = userToCreate.UserName, Email = userToCreate.Email});
                 return CreatedAtRoute("GetUser", new {controller = "Users", id = user.Id}, user);
             }
 
@@ -65,7 +63,7 @@ namespace WebUI.Controllers
             if (result.Succeeded)
             {
                 //var userToReturn = _mapper.Map<UserForDetailedDto>(user);
-                var userId = await Mediator.Send(new GetUserIdQuery { Id = user.Id});
+                var userId = await Mediator.Send(new GetUserProfileIdQuery { Id = user.Id});
 
                 return Ok(new
                 {

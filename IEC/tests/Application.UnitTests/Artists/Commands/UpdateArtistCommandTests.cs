@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Artists.Commands.UpdateArtist;
 using Application.Common.Exceptions;
-using Application.UnitTests.Common;
 using Shouldly;
 using Xunit;
 

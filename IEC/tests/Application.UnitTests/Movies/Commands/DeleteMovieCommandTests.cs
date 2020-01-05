@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
 using Application.Movies.Commands.DeleteMovie;
-using Application.UnitTests.Common;
 using Xunit;
 
 namespace Application.UnitTests.Movies.Commands

@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Artists.Commands.DeleteArtist;
 using Application.Common.Exceptions;
-using Application.UnitTests.Common;
 using Xunit;
 
 namespace Application.UnitTests.Artists.Commands

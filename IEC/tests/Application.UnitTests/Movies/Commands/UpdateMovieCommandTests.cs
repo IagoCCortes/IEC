@@ -2,7 +2,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Exceptions;
 using Application.Movies.Commands.UpdateMovie;
-using Application.UnitTests.Common;
 using Shouldly;
 using Xunit;
 

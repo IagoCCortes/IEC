@@ -1,5 +1,3 @@
-using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using Application.Artists.Commands.CreateArtist;
 using Application.Artists.Commands.DeleteArtist;

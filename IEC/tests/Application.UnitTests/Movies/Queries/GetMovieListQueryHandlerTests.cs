@@ -1,9 +1,8 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Movies.Queries.GetMovieList;
-using Application.UnitTests.Common;
 using AutoMapper;
-using Persistence;
+using Infrastructure.Persistence;
 using Shouldly;
 using Xunit;
 

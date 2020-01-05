@@ -2,11 +2,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Application.Movies.Queries.GetMovieDetail;
 using Application.Common.Exceptions;
-using Application.UnitTests.Common;
 using AutoMapper;
-using Persistence;
 using Shouldly;
 using Xunit;
+using Infrastructure.Persistence;
 
 namespace Application.UnitTests.Movies.Queries
 {

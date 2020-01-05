@@ -1,0 +1,6 @@
+[
+    {"id": 1, "status": "to watch"},
+    {"id": 2, "status": "watching"},
+    {"id": 3, "status": "watched"},
+    {"id": 4, "status": "dropped"}
+]

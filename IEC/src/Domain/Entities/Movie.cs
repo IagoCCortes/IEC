@@ -10,7 +10,7 @@ namespace Domain.Entities
         {
             MovieMovieGenres = new HashSet<MovieMovieGenre>();
             MovieArtists = new HashSet<MovieArtist>();
-            UsersMovie = new HashSet<UserMovie>();
+            UserProfilesMovie = new HashSet<UserProfileMovie>();
         }
 
         public int Id { get; set; }
@@ -21,6 +21,6 @@ namespace Domain.Entities
         public string PosterUrl { get; set; }
         public ICollection<MovieMovieGenre> MovieMovieGenres { get; private set; }
         public ICollection<MovieArtist> MovieArtists { get; private set; }
-        public ICollection<UserMovie> UsersMovie { get; set; }
+        public ICollection<UserProfileMovie> UserProfilesMovie { get; set; }
     }
 }

@@ -13,9 +13,9 @@ namespace Application.Common.Interfaces
         DbSet<MovieMovieGenre> MovieMovieGenres { get; set; }
         DbSet<MovieRole> MovieRoles { get; set; }
         DbSet<Movie> Movies { get; set; }
-        DbSet<User> Users { get; set; }
-        DbSet<UserMovie> UserMovies { get; set; }
-        DbSet<UserMovieStatus> UserMovieStatuses { get; set; }
+        DbSet<UserProfile> UserProfiles { get; set; }
+        DbSet<UserProfileMovie> UserProfileMovies { get; set; }
+        DbSet<UserProfileMovieStatus> UserProfileMovieStatuses { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
