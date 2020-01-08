@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -63,11 +64,11 @@ namespace WebUI.Controllers
             if (result.Succeeded)
             {
                 //var userToReturn = _mapper.Map<UserForDetailedDto>(user);
-                var userId = await Mediator.Send(new GetUserProfileIdQuery { Id = user.Id});
+                var userProfile = await Mediator.Send(new GetUserProfileIdQuery { Id = user.Id });
 
                 return Ok(new
                 {
-                    token = GenerateJwtToken(user, userId.Id),
+                    token = GenerateJwtToken(user, userProfile.Id),
                     user
                 });
             }
@@ -75,12 +76,18 @@ namespace WebUI.Controllers
             return Unauthorized();
         }
 
-        private string GenerateJwtToken(ApplicationUser user, int userId)
+        private async Task<string> GenerateJwtToken(ApplicationUser user, int userProfileId)
         {
-            var claims = new[]{
-                new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
-                new Claim(ClaimTypes.Name, user.UserName)
+            var claims = new List<Claim>{
+                new Claim(ClaimTypes.NameIdentifier, user.Id),
+                new Claim(ClaimTypes.Name, user.UserName),
+                new Claim("UserProfileId", userProfileId.ToString())
             };
+
+            var roles = await _userManager.GetRolesAsync(user);
+
+            foreach (var role in roles)
+                claims.Add(new Claim(ClaimTypes.Role, role));
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
 

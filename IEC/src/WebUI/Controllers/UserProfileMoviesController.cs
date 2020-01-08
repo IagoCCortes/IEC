@@ -13,7 +13,7 @@ namespace WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateUserProfileMovieAsync(int userId, [FromBody]CreateUserProfileMovieCommand command)
         {
-            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if(userId != int.Parse(User.FindFirst("UserProfileId").Value))
                 return Unauthorized();
 
             command.UserProfileId = userId;
@@ -25,7 +25,7 @@ namespace WebUI.Controllers
         [HttpPut("{movieId}")]
         public async Task<IActionResult> UpdateUserProfileMovieAsync(int userId, int movieId, [FromBody]UpdateUserProfileMovieCommand command)
         {
-            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if(userId != int.Parse(User.FindFirst("UserProfileId").Value))
                 return Unauthorized();
  
             command.UserProfileId = userId;
@@ -38,7 +38,7 @@ namespace WebUI.Controllers
         [HttpDelete("{movieId}")]
         public async Task<IActionResult> DeleteUserProfileMovieAsync(int userId, int movieId)
         {
-            if(userId != int.Parse(User.FindFirst(ClaimTypes.NameIdentifier).Value))
+            if(userId != int.Parse(User.FindFirst("UserProfileId").Value))
                 return Unauthorized();
 
             await Mediator.Send(new DeleteUserProfileMovieCommand { UserProfileId = userId, MovieId = movieId });

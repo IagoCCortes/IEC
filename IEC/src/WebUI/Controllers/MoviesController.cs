@@ -12,10 +12,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    [AllowAnonymous]
     public class MoviesController : BaseController
     {
         [AllowAnonymous]
+        // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<MovieListVM>> ListMoviesAsync()
         {

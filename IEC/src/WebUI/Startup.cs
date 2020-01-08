@@ -29,7 +29,9 @@ namespace WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(Configuration);
-            // services.AddPersistence(Configuration);
+
+            services.AddScoped<ICurrentUserService, CurrentUserService>();
+
             services.AddApplication();
 
             services.AddCors();
@@ -37,9 +39,7 @@ namespace WebUI
             // services.AddHealthChecks()
             //     .AddDbContextCheck<IECDbContext>();
 
-            // services.AddScoped<ICurrentUserService, CurrentUserService>();
-
-            // services.AddHttpContextAccessor();
+            services.AddHttpContextAccessor();
 
             services
             .AddControllers(options => 

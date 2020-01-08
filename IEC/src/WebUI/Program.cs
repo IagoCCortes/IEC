@@ -1,10 +1,9 @@
 using System;
-using System.Threading;
 using System.Threading.Tasks;
-using Application.Common.System.Commands.SeedSampleData;
+using Infrastructure.Identity;
 using Infrastructure.Persistence;
-using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,10 +26,10 @@ namespace WebUI
                     var iecContext = services.GetRequiredService<IECDbContext>();
                     iecContext.Database.Migrate();
 
-                    await IECDbContextSeed.SeedAsync(iecContext);
+                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
 
-                    // var mediator = services.GetRequiredService<IMediator>();
-                    // await mediator.Send(new SeedSampleDataCommand(), CancellationToken.None);
+                    await IECDbContextSeed.SeedAsync(iecContext, userManager, roleManager);
                 }
                 catch (Exception ex)
                 {

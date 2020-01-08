@@ -1,20 +1,27 @@
+using System.Linq;
+using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Application.Common.Models;
 using Microsoft.AspNetCore.Identity;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Identity
 {
-    public class UserManagerService : IUserManager
+    public class IdentityService : IIdentityService
     {
         private readonly UserManager<ApplicationUser> _userManager;
- 
-        public UserManagerService(UserManager<ApplicationUser> userManager)
+
+        public IdentityService(UserManager<ApplicationUser> userManager)
         {
             _userManager = userManager;
         }
 
+        public async Task<string> GetUserNameAsync(string userId)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+
+            return user.UserName;
+        }
         public async Task<(Result Result, string UserId)> CreateUserAsync(string userName, string password)
         {
             var user = new ApplicationUser
@@ -39,7 +46,6 @@ namespace Infrastructure.Identity
 
             return Result.Success();
         }
-
 
         public async Task<Result> DeleteUserAsync(ApplicationUser user)
         {

@@ -9,25 +9,24 @@ namespace Application.Common.Behaviors
     public class RequestLogger<TRequest> : IRequestPreProcessor<TRequest>
     {
         private readonly ILogger _logger;
-        // private readonly ICurrentUserService _currentUserService;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IIdentityService _identityService;
 
-        public RequestLogger(ILogger<TRequest> logger)
+        public RequestLogger(ILogger<TRequest> logger, ICurrentUserService currentUserService, IIdentityService identityService)
         {
             _logger = logger;
-            // _currentUserService = currentUserService;
+            _currentUserService = currentUserService;
+            _identityService = identityService;
         }
 
-        public Task Process(TRequest request, CancellationToken cancellationToken)
+        public async Task Process(TRequest request, CancellationToken cancellationToken)
         {
-            var name = typeof(TRequest).Name;
+            var requestName = typeof(TRequest).Name;
+            var userId = _currentUserService.UserId;
+            var userName = userId == null ? "Visitor": await _identityService.GetUserNameAsync(userId);
 
-            // _logger.LogInformation("IEC Request: {Name} {@UserId} {@Request}", 
-            //     name, _currentUserService.UserId, request);
-
-            _logger.LogInformation("IEC Request: {Name} {@Request}",
-            name, request);
-
-            return Task.CompletedTask;
+            _logger.LogInformation("CleanArchitecture Request: {Name} {@UserId} {@UserName} {@Request}",
+                requestName, userId, userName , request);
         }
     }
 }

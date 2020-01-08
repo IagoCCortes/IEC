@@ -60,11 +60,18 @@ namespace Infrastructure
                 };
             });
 
+            services.AddAuthorization(options => {
+                options.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
+                options.AddPolicy("RequireModeratorRole", policy => policy.RequireRole("Admin", "Moderator"));
+                options.AddPolicy("RequireVIPRole", policy => policy.RequireRole("VIP"));
+            });
+
             services.AddTransient<IEmailSender, EmailSender>();
             services.Configure<AuthMessageSenderOptions>(options =>
                 configuration.GetSection("SendGridEmailSettings").Bind(options));
 
             services.AddTransient<INotificationService, NotificationService>();
+            services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<IDateTime, MachineDateTime>();
 
             return services;

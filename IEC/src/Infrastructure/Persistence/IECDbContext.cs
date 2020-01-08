@@ -4,21 +4,20 @@ using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Domain.Common;
 using Domain.Entities;
+using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence
 {
-    public class IECDbContext : IdentityDbContext, IIECDbContext//ApiAuthorizationDbContext<ApplicationUser>
+    public class IECDbContext : IdentityDbContext<ApplicationUser>, IIECDbContext//ApiAuthorizationDbContext<ApplicationUser>
     {
-        // private readonly ICurrentUserService _currentUserService;
+        private readonly ICurrentUserService _currentUserService;
         private readonly IDateTime _dateTime;
 
-        public IECDbContext(DbContextOptions options,//, IOptions<OperationalStoreOptions> operationalStoreOptions,
-            // ICurrentUserService currentUserService,
-            IDateTime dateTime) : base(options) 
+        public IECDbContext(DbContextOptions options, ICurrentUserService currentUserService, IDateTime dateTime) : base(options) 
         {
-            // _currentUserService = currentUserService;
+            _currentUserService = currentUserService;
             _dateTime = dateTime;
         }
 
@@ -39,11 +38,11 @@ namespace Infrastructure.Persistence
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        // entry.Entity.CreatedBy = _currentUserService.UserId;
+                        entry.Entity.CreatedBy = _currentUserService.UserId;
                         entry.Entity.Created = _dateTime.Now;
                         break;
                     case EntityState.Modified:
-                        // entry.Entity.LastModifiedBy = _currentUserService.UserId;
+                        entry.Entity.LastModifiedBy = _currentUserService.UserId;
                         entry.Entity.LastModified = _dateTime.Now;
                         break;
                 }

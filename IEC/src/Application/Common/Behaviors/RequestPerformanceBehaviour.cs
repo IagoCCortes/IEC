@@ -11,14 +11,19 @@ namespace Application.Common.Behaviors
     {
         private readonly Stopwatch _timer;
         private readonly ILogger<TRequest> _logger;
-        // private readonly ICurrentUserService _currentUserService;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IIdentityService _identityService;
 
-        public RequestPerformanceBehaviour(ILogger<TRequest> logger)//, ICurrentUserService currentUserService)
+        public RequestPerformanceBehaviour(
+            ILogger<TRequest> logger, 
+            ICurrentUserService currentUserService,
+            IIdentityService identityService)
         {
             _timer = new Stopwatch();
 
             _logger = logger;
-            // _currentUserService = currentUserService;
+            _currentUserService = currentUserService;
+            _identityService = identityService;
         }
 
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
@@ -29,15 +34,16 @@ namespace Application.Common.Behaviors
 
             _timer.Stop();
 
-            if (_timer.ElapsedMilliseconds > 500)
+            var elapsedMilliseconds = _timer.ElapsedMilliseconds;
+
+            if (elapsedMilliseconds > 500)
             {
-                var name = typeof(TRequest).Name;
+                var requestName = typeof(TRequest).Name;
+                var userId = _currentUserService.UserId;
+                var userName = userId == null ? "Visitor": await _identityService.GetUserNameAsync(userId);
 
-                // _logger.LogWarning("IEC Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@Request}",
-                //     name, _timer.ElapsedMilliseconds, _currentUserService.UserId, request);
-
-                _logger.LogWarning("IEC Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@Request}",
-                name, _timer.ElapsedMilliseconds, request);
+                _logger.LogWarning("CleanArchitecture Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
+                    requestName, elapsedMilliseconds, userId, userName, request);
             }
 
             return response;
