@@ -45,7 +45,7 @@ namespace WebUI.Controllers
             if (result.Succeeded)
             {
                 var user = await Mediator.Send(new CreateUserProfileCommand{ UserId = userToCreate.Id, UserName = userToCreate.UserName, Email = userToCreate.Email});
-                return CreatedAtRoute("GetUser", new {controller = "Users", id = user.Id}, user);
+                return CreatedAtRoute("GetUser", new {controller = "UserProfiles", userName = user.UserName}, user);
             }
 
             return BadRequest(result.Errors);

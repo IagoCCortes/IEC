@@ -25,6 +25,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                             }
                         }
                     }
+                    if (serverError && typeof serverError === 'object') {
+                        serverError.forEach(element => {
+                            modalStateErrors += element.description + '\n';
+                        });
+                    }
                     return throwError(modalStateErrors || serverError || 'Server Error');
                 }
             })

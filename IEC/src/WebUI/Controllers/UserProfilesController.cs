@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
 {
-    public class UsersController : BaseController
+    public class UserProfilesController : BaseController
     {
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> ListUserProfilesAsync(int id)
+        public async Task<IActionResult> ListUserProfilesAsync()
         {
             var user = await Mediator.Send(new GetUserProfileListQuery());
 
@@ -18,10 +18,10 @@ namespace WebUI.Controllers
         }        
 
         [AllowAnonymous]
-        [HttpGet("{id}", Name = "GetUser")]
-        public async Task<IActionResult> GetUserProfilesAsync(int id)
+        [HttpGet("{userName}", Name = "GetUser")]
+        public async Task<IActionResult> GetUserProfilesAsync(string userName)
         {
-            var user = await Mediator.Send(new GetUserProfileDetailQuery { Id = id});
+            var user = await Mediator.Send(new GetUserProfileDetailQuery { UserName = userName});
 
             return Ok(user);
         }

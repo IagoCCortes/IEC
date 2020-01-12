@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Application.UserProfileMovies.Commands.CreateUserProfileMovie;
 using Application.UserProfileMovies.Commands.DeleteUserProfileMovie;
 using Application.UserProfileMovies.Commands.UpdateUserProfileMovie;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers

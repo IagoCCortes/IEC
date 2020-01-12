@@ -8,8 +8,20 @@ import { ArtistListComponent } from './regular-user/artists/artist-list/artist-l
 import { ArtistListResolver } from './_resolver/artist-list.resolver';
 import { ArtistDetailResolver } from './_resolver/artist-detail.resolver';
 import { ArtistDetailComponent } from './regular-user/artists/artist-detail/artist-detail.component';
+import { AuthGuard } from './_guards/auth.guard';
 
 export const appRoutes: Routes = [
+    { path: '', component: MovieListComponent,
+        resolve: {movies: MovieListResolver}},
+    {
+        path: '',
+        runGuardsAndResolvers: 'always',
+        canActivate: [AuthGuard],
+        children: [
+            {path: 'admin/movies', component: MovieAdminListComponent},
+            {path: '**', redirectTo: 'movies', pathMatch: 'full'}
+        ]
+    },
     {path: 'movies', component: MovieListComponent,
         resolve: {movies: MovieListResolver}},
     {path: 'movies/:id', component: MovieDetailComponent,
@@ -18,6 +30,5 @@ export const appRoutes: Routes = [
         resolve: {artists: ArtistListResolver}},
     {path: 'artists/:id', component: ArtistDetailComponent,
         resolve: {artist: ArtistDetailResolver}},
-    {path: 'admin/movies', component: MovieAdminListComponent},
-    {path: '**', redirectTo: 'movies', pathMatch: 'full'}
+    { path: '**', redirectTo: '', pathMatch: 'full'},
 ];

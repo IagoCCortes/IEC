@@ -4,6 +4,6 @@ namespace Application.UserProfiles.Queries.GetUserProfileDetail
 {
     public class GetUserProfileDetailQuery : IRequest<UserProfileDetailVM>
     {
-        public int Id { get; set; }
+        public string UserName { get; set; }
     }
 }

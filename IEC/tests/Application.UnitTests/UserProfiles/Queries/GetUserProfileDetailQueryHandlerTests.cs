@@ -24,18 +24,18 @@ namespace Application.UnitTests.UserProfiles.Queries
         }
 
         [Fact]
-        public async Task GetUserDetail_ValidId_ReturnsUserDetails()
+        public async Task GetUserDetail_ValidUserName_ReturnsUserDetails()
         {
-            var result = await _sut.Handle(new GetUserProfileDetailQuery { Id = 1 }, CancellationToken.None);
+            var result = await _sut.Handle(new GetUserProfileDetailQuery { UserName = "test1" }, CancellationToken.None);
 
             result.ShouldBeOfType<UserProfileDetailVM>();
             result.UserName.ShouldBe("test1");
         }
 
         [Fact]
-        public async Task GetUserDetail_InvalidId_ThrowsNotFoundException()
+        public async Task GetUserDetail_InvalidUserName_ThrowsNotFoundException()
         {
-            await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(new GetUserProfileDetailQuery { Id = 99 }, CancellationToken.None));
+            await Assert.ThrowsAsync<NotFoundException>(() => _sut.Handle(new GetUserProfileDetailQuery { UserName = "invalidUsername" }, CancellationToken.None));
         }
     }
 }

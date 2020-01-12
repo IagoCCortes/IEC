@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {HttpClientModule} from '@angular/common/http';
-import { BsDropdownModule, CollapseModule, TabsModule } from 'ngx-bootstrap';
+import { BsDropdownModule, CollapseModule, TabsModule, ModalModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 
@@ -25,6 +25,10 @@ import { ArtistDetailComponent } from './regular-user/artists/artist-detail/arti
 import { ArtistDetailResolver } from './_resolver/artist-detail.resolver';
 import { UserService } from './_services/user.service';
 import { UserMovieService } from './_services/userMovie.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthGuard } from './_guards/auth.guard';
+import { AuthService } from './_services/auth.service';
+import { AlertifyService } from './_services/alertify.service';
 
 @NgModule({
    declarations: [
@@ -44,14 +48,20 @@ import { UserMovieService } from './_services/userMovie.service';
       BrowserModule,
       BsDropdownModule.forRoot(),
       CollapseModule.forRoot(),
+      FormsModule,
       HttpClientModule,
+      ModalModule.forRoot(),
+      ReactiveFormsModule,
       RouterModule.forRoot(appRoutes),
       TabsModule.forRoot()
    ],
    providers: [
+      AlertifyService,
       ArtistDetailResolver,
       ArtistListResolver,
       ArtistService,
+      AuthGuard,
+      AuthService,
       ErrorInterceptorProvider,
       MovieDetailResolver,
       MovieListResolver,

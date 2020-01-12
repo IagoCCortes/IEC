@@ -33,6 +33,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> AddArtistAsync([FromBody]CreateArtistCommand command)
@@ -43,6 +44,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateArtistAsync(int id, [FromBody]UpdateArtistCommand command)
@@ -54,6 +56,7 @@ namespace WebUI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteArtistAsync(int id)

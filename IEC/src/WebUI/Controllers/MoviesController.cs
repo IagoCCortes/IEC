@@ -15,7 +15,6 @@ namespace WebUI.Controllers
     public class MoviesController : BaseController
     {
         [AllowAnonymous]
-        // [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<ActionResult<MovieListVM>> ListMoviesAsync()
         {
@@ -36,6 +35,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> AddMovieAsync([FromBody]CreateMovieCommand command)
@@ -46,6 +46,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> UpdateMovieAsync(int id, [FromBody]UpdateMovieCommand command)
@@ -57,6 +58,7 @@ namespace WebUI.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteMovieAsync(int id)
@@ -67,6 +69,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost("{id}/genres")]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> SetMovieGenresAsync(int id, [FromBody]CreateMovieGenreCommand command)
@@ -78,6 +81,7 @@ namespace WebUI.Controllers
         }
 
         [HttpPost("{id}/artists")]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         public async Task<IActionResult> AddMovieArtistsAsync(int id, [FromBody]MovieArtistCommand command)
@@ -89,6 +93,7 @@ namespace WebUI.Controllers
         }
 
         [HttpDelete("{id}/artists")]
+        [Authorize(Policy = "RequireAdminRole")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> DeleteMovieArtistsAsync(int id, [FromBody]MovieArtistCommand command)
