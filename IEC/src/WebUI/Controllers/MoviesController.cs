@@ -9,6 +9,7 @@ using Application.Movies.Queries.GetMovieList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Helpers;
 
 namespace WebUI.Controllers
 {
@@ -16,11 +17,13 @@ namespace WebUI.Controllers
     {
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<MovieListVM>> ListMoviesAsync()
+        public async Task<ActionResult<MovieListVM>> ListMoviesAsync([FromQuery]GetMovieListQuery getMovieListQuery)
         {
-            var movies = await Mediator.Send(new GetMovieListQuery());
+            var movies = await Mediator.Send(getMovieListQuery);
 
-            return Ok(movies);
+            Response.AddPagination(movies.CurrentPage, movies.PageSize, movies.TotalCount, movies.TotalPages);
+
+            return Ok(movies.Movies);
         }
 
         [AllowAnonymous]
@@ -42,7 +45,7 @@ namespace WebUI.Controllers
         {
             var movie = await Mediator.Send(command);
 
-            return CreatedAtRoute("GetMovie", new {controller = "Movies", id = movie.Id}, movie);
+            return CreatedAtRoute("GetMovie", new { controller = "Movies", id = movie.Id }, movie);
         }
 
         [HttpPut("{id}")]

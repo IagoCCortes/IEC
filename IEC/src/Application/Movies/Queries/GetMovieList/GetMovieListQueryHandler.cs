@@ -1,7 +1,10 @@
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using Application.Common.Pagination;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,10 +23,33 @@ namespace Application.Movies.Queries.GetMovieList
 
         public async Task<MovieListVM> Handle(GetMovieListQuery request, CancellationToken cancellationToken)
         {
-            var movies = new MovieListVM { Movies = await _mapper.ProjectTo<MovieLookupDto>(_context.Movies)
-                                       .ToListAsync(cancellationToken)};
+            var moviesQueryable = _mapper.ProjectTo<MovieLookupDto>(_context.Movies);
 
-            return movies;
+            if(!string.IsNullOrEmpty(request.OrderBy))
+            {
+                switch(request.OrderBy)
+                {
+                    case "release":
+                        moviesQueryable = moviesQueryable.OrderByDescending(m => m.ReleaseDate);
+                        break;
+                    case "runtime":
+                        moviesQueryable = moviesQueryable.OrderByDescending(m => m.Runtime);
+                        break;
+                    default:
+                        moviesQueryable = moviesQueryable.OrderByDescending(m => m.Title);
+                        break;
+                }
+            }
+            
+            var movies = await PagedList<MovieLookupDto>.CreateAsync(moviesQueryable, request.PageNumber, request.PageSize);
+
+            return new MovieListVM { 
+                Movies = movies,
+                CurrentPage = movies.CurrentPage,
+                TotalCount = movies.TotalCount,
+                PageSize = movies.PageSize,
+                TotalPages = movies.TotalPages
+            };
         }
     }
 }

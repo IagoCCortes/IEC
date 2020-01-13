@@ -2,9 +2,9 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Common.Interfaces;
+using Application.Common.Pagination;
 using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Artists.Queries.GetArtistList
 {
@@ -21,10 +21,29 @@ namespace Application.Artists.Queries.GetArtistList
 
         public async Task<ArtistListVM> Handle(GetArtistListQuery request, CancellationToken cancellationToken)
         {
-            var artists = new ArtistListVM { Artists = await _mapper.ProjectTo<ArtistLookupDto>(_context.Artists)
-                                       .ToListAsync(cancellationToken)};
+            var artistsQueryable = _mapper.ProjectTo<ArtistLookupDto>(_context.Artists);
 
-            return artists;
+            if(!string.IsNullOrEmpty(request.OrderBy))
+            {
+                switch(request.OrderBy)
+                {
+                    case "birthdate":
+                        artistsQueryable = artistsQueryable.OrderByDescending(a => a.Birthdate);
+                        break;
+                    default:
+                        artistsQueryable = artistsQueryable.OrderByDescending(a => a.ArtistName);
+                        break;
+                }
+            }
+            var artists = await PagedList<ArtistLookupDto>.CreateAsync(artistsQueryable, request.PageNumber, request.PageSize);
+            
+            return new ArtistListVM { 
+                Artists = artists,
+                CurrentPage = artists.CurrentPage,
+                TotalCount = artists.TotalCount,
+                PageSize = artists.PageSize,
+                TotalPages = artists.TotalPages
+            };
         }
     }
 }

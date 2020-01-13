@@ -10,12 +10,12 @@
     margin-right: auto;
 }
 
-.card-img-top:hover {
+/* .card-img-top:hover {
     cursor: pointer;
-}
+} */
 
 .member-top {
-    top: 10%;
+    top: 30%;
     right: 10%;
 }
 

@@ -7,6 +7,7 @@ using Application.Artists.Queries.GetArtistList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Helpers;
 
 namespace WebUI.Controllers
 {
@@ -14,11 +15,13 @@ namespace WebUI.Controllers
     {
         [AllowAnonymous]
         [HttpGet]
-        public async Task<ActionResult<ArtistListVM>> ListArtistsAsync()
+        public async Task<ActionResult<ArtistListVM>> ListArtistsAsync([FromQuery]GetArtistListQuery getArtistListQuery)
         {
-            var artists = await Mediator.Send(new GetArtistListQuery());
+            var artists = await Mediator.Send(getArtistListQuery);
             
-            return Ok(artists);
+            Response.AddPagination(artists.CurrentPage, artists.PageSize, artists.TotalCount, artists.TotalPages);
+
+            return Ok(artists.Artists);
         }
 
         [AllowAnonymous]

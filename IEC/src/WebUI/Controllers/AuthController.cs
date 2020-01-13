@@ -68,7 +68,7 @@ namespace WebUI.Controllers
 
                 return Ok(new
                 {
-                    token = GenerateJwtToken(user, userProfile.Id),
+                    token = GenerateJwtToken(user, userProfile.Id).Result,
                     user
                 });
             }
