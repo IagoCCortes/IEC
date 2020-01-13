@@ -16,6 +16,9 @@ export class MovieListComponent implements OnInit {
   ngOnInit() {
     this.route.data.subscribe( data => {
       this.movies = data.movies.movies;
+      console.log(this.movies);
+    }, error => {
+      console.log(error);
     });
   }
 

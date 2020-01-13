@@ -9,6 +9,7 @@ import { ArtistListResolver } from './_resolver/artist-list.resolver';
 import { ArtistDetailResolver } from './_resolver/artist-detail.resolver';
 import { ArtistDetailComponent } from './regular-user/artists/artist-detail/artist-detail.component';
 import { AuthGuard } from './_guards/auth.guard';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 
 export const appRoutes: Routes = [
     { path: '', component: MovieListComponent,
@@ -18,8 +19,8 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            {path: 'admin/movies', component: MovieAdminListComponent},
-            {path: '**', redirectTo: 'movies', pathMatch: 'full'}
+            {path: 'admin', component: AdminPanelComponent, data: { roles: ['Admin']}},
+            {path: 'admin/movies', component: MovieAdminListComponent, data: { roles: ['Admin']}}
         ]
     },
     {path: 'movies', component: MovieListComponent,

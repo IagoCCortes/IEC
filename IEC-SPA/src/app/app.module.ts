@@ -29,13 +29,22 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { HasRoleDirective } from './_directives/hasRole.directive';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() {
+   return localStorage.getItem('token');
+}
 
 @NgModule({
    declarations: [
+      AdminPanelComponent,
       AppComponent,
       ArtistCardComponent,
       ArtistDetailComponent,
       ArtistListComponent,
+      HasRoleDirective,
       MovieAdminListComponent,
       MovieCardComponent,
       MovieDetailComponent,
@@ -50,6 +59,13 @@ import { AlertifyService } from './_services/alertify.service';
       CollapseModule.forRoot(),
       FormsModule,
       HttpClientModule,
+      JwtModule.forRoot({
+         config: {
+            tokenGetter,
+            whitelistedDomains: ['localhost:5000'],
+            blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+      }),
       ModalModule.forRoot(),
       ReactiveFormsModule,
       RouterModule.forRoot(appRoutes),
