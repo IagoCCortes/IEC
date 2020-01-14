@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Movie } from 'src/app/_models/movie';
 import { UserService } from 'src/app/_services/user.service';
 import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
+import { MovieList } from 'src/app/_models/movie-list';
 
 @Component({
   selector: 'app-movie-card',
@@ -10,7 +10,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
   styleUrls: ['./movie-card.component.css']
 })
 export class MovieCardComponent implements OnInit {
-  @Input() movie: Movie;
+  @Input() movie: MovieList;
 
   constructor(private userService: UserService, private authService: AuthService, private alertify: AlertifyService) { }
 
@@ -18,7 +18,7 @@ export class MovieCardComponent implements OnInit {
   }
 
   addToMovieList(movieId: number) {
-    const data = {movieId, userMovieStatusId: 1};
+    const data = {movieId, userProfileMovieStatusId: 1};
     this.userService.addToMovieList(this.authService.decodedToken.UserProfileId, data)
     .subscribe(() => {
       this.alertify.success('You have added: ' + this.movie.title);

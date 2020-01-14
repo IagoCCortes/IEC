@@ -19,6 +19,7 @@ namespace WebUI.Controllers
         [HttpGet]
         public async Task<ActionResult<MovieListVM>> ListMoviesAsync([FromQuery]GetMovieListQuery getMovieListQuery)
         {
+            getMovieListQuery.UserId = int.Parse(User.FindFirst("UserProfileId").Value);
             var movies = await Mediator.Send(getMovieListQuery);
 
             Response.AddPagination(movies.CurrentPage, movies.PageSize, movies.TotalCount, movies.TotalPages);

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'src/app/_services/movie.service';
-import { Movie } from 'src/app/_models/movie';
 import { ActivatedRoute } from '@angular/router';
+import { MovieList } from 'src/app/_models/movie-list';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,16 +9,13 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./movie-list.component.css']
 })
 export class MovieListComponent implements OnInit {
-  movies: Movie[];
+  movies: MovieList[];
 
   constructor(private movieService: MovieService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.data.subscribe( data => {
-      this.movies = data.movies.movies;
-      console.log(this.movies);
-    }, error => {
-      console.log(error);
+      this.movies = data.movies;
     });
   }
 

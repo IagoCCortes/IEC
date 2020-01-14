@@ -4,9 +4,7 @@ using System.Threading.Tasks;
 using Application.Common.Interfaces;
 using Application.Common.Pagination;
 using AutoMapper;
-using Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Movies.Queries.GetMovieList
 {
@@ -23,7 +21,18 @@ namespace Application.Movies.Queries.GetMovieList
 
         public async Task<MovieListVM> Handle(GetMovieListQuery request, CancellationToken cancellationToken)
         {
-            var moviesQueryable = _mapper.ProjectTo<MovieLookupDto>(_context.Movies);
+            var moviesQueryable = request.UserId != null ? 
+                _context.Movies.Select(m => new MovieLookupDto {
+                    Id = m.Id,
+                    PosterUrl = m.PosterUrl,
+                    ReleaseDate = m.ReleaseDate,
+                    Runtime = m.Runtime,
+                    Title = m.Title, 
+                    IsInMovieList = _context.UserProfileMovies
+                        .Any(up => up.UserProfileId == request.UserId
+                                && up.MovieId == m.Id)
+                }) 
+                : _mapper.ProjectTo<MovieLookupDto>(_context.Movies);
 
             if(!string.IsNullOrEmpty(request.OrderBy))
             {

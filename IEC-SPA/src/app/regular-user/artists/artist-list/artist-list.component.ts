@@ -14,9 +14,7 @@ export class ArtistListComponent implements OnInit {
 
   ngOnInit() {
     this.route.data.subscribe(data => {
-      this.artists = data.artists.artists;
-    }, error => {
-      console.log(error);
+      this.artists = data.artists;
     });
   }
 
