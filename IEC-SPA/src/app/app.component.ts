@@ -10,11 +10,6 @@ import { User } from './_models/user';
 })
 export class AppComponent implements OnInit {
   title = 'IEC-SPA';
-  // admin = false;
-
-  // onChangedToAdmin(admin: boolean) {
-  //   this.admin = admin;
-  // }
   jwtHelper = new JwtHelperService();
 
   constructor(private authService: AuthService) {}

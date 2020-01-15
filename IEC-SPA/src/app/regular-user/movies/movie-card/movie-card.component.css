@@ -57,4 +57,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-.bg-check { background-color: #02760b; }
+.bg-check { 
+    /* background-color: #02760b; */
+    background-color: #c4aa00; 
+}

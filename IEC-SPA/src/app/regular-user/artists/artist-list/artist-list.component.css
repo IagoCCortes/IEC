@@ -3,6 +3,12 @@
     margin: 0 2px 0 2px;
 }
 
+.stick-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 @media (min-width: 650px) {
     .col-sm-p {
         flex: 0 0 30%;

@@ -5,7 +5,7 @@
       <i class="fa fa-plus"></i>
     </button>
     <button title="remove from movie list" *ngIf="movie.isInMovieList" class="btn animate text-center movie-info member-top bg-check"
-      (click)="addToMovieList(movie.id)">
+      (click)="removeFromMovieList(movie.id)">
       <i class="fa fa-check"></i>
     </button>
     <div class="card-body p-1 animate text-center movie-info member-bottom">

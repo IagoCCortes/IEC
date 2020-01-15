@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+  <a class="navbar-brand mr-auto mr-lg-0" href="#"><img class="logo" src="assets/images/logo.png" alt="IEC Logo"></a>
+  <button class="navbar-toggler p-0 border-0" type="button" (click)="toggleCollapse()">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="navbar-collapse offcanvas-collapse d-flex" dropdown [collapse]="isCollapsed">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/movies']">Movies</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/artists']">Artists</a>
+      </li>
+      <li class="nav-item" *appHasRole="['Admin']">
+        <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" (click)="changeToAdmin(true)" [routerLink]="['/admin/movies']">Admin</a>
+      </li> -->
+      <!-- <li dropdown class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" dropdownToggle>Settings</a>
+        <div class="dropdown-menu" *dropdownMenu>
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li> -->
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="search" type="text" placeholder="Search">
+      <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+    </form>
+    <div class="ml-auto">
+      <div *ngIf="!loggedIn()">
+        <button type="button" class="btn btn-link btn-reg" (click)="openModal(template, 'Join us')">Join</button>
+        <button type="button" class="btn btn-link btn-log" (click)="openModal(template, 'Login')">Login</button>
+      </div>
+      <div dropdown *ngIf="loggedIn()" class="dropdown">
+        <!-- <span class="mr-1">
+          <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
+        </span> -->
+        <a class="dropdown-toggle user-nav" dropdownToggle (click)="false">
+          {{authService.decodedToken?.unique_name | titlecase}}
+        </a>
+      
+        <div class="dropdown-menu mt-3 dd-user-menu" *dropdownMenu>
+          <a class="dropdown-item" [routerLink]="['/user/edit']" ><i class="fa fa-user"></i> Edit Profile</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">{{choice}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex flex-column">
+    <img src="assets/images/logo.png" class="align-self-center logo-modal" alt="IEC logo">
+    <hr>
+    <!-- Register form -->
+    <app-register *ngIf="choice === 'Join us'" (user)="user" (closeModal)="closeModal()"></app-register>
+    <!-- Login form -->
+    <app-login *ngIf="choice === 'Login'" (user)="user" (closeModal)="closeModal()"></app-login>
+    <!-- <p>form value: {{registerForm.value | json}}</p>
+    <p>form status: {{registerForm.status | json}}</p>
+    <p>{{registerForm.get('username').errors | json}}</p>
+    <p>{{registerForm.get('email').errors | json}}</p>
+    <p>{{registerForm.get('password').errors | json}}</p>
+    <p>{{registerForm.get('confirmPassword').errors | json}}</p> -->
+  </div>
+
+</ng-template>

@@ -15,4 +15,12 @@ export class UserMovieService {
   getUserMovie(id: number): Observable<UserMovie> {
     return this.http.get<UserMovie>(this.baseUrl + 'users/' + id + '/movies');
   }
+
+  addToMovieList(userId: number, movie: object) {
+    return this.http.post(this.baseUrl + 'users/' + userId + '/movies', movie);
+  }
+
+  removeFromMovieList(userId: number, movieId: number) {
+    return this.http.delete(this.baseUrl + 'users/' + userId + '/movies/' + movieId);
+  }
 }

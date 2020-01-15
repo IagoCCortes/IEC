@@ -1,7 +1,26 @@
+<!-- <div class="filter-bar">
+  <ul class="sub-nav">
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/movies']">Movies</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [routerLink]="['/artists']">Artists</a>
+    </li>
+    <li class="nav-item" *appHasRole="['Admin']">
+      <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+    </li>
+  </ul>
+</div> -->
 <div class="text-center mt-3">
   <div class="row justify-content-center">
     <div *ngFor="let movie of movies" class="col-lg-p col-md-p col-sm-p card-wrapper">
       <app-movie-card [movie]="movie"></app-movie-card>
     </div>
   </div>
+</div>
+<div class="d-flex justify-content-center stick-bottom">
+  <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
+    firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">
+  </pagination>
 </div>

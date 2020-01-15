@@ -4,7 +4,7 @@ import { AuthService } from '../_services/auth.service';
 @Directive({
   selector: '[appHasRole]'
 })
-export class HasRoleDirective implements OnInit{
+export class HasRoleDirective implements OnInit {
   @Input() appHasRole: string[];
   isVisible = false;
 
@@ -13,19 +13,24 @@ export class HasRoleDirective implements OnInit{
               private authService: AuthService) { }
 
   ngOnInit() {
-    const userRoles = this.authService.decodedToken.role as Array<string>;
-    // if no roles clear viewContainerRef
-    if (!userRoles) {
+    if (!this.authService.loggedIn()) {
+      this.isVisible = false;
       this.viewContainerRef.clear();
-    }
-    // if user has needed role render the element
-    if (this.authService.roleMatch(this.appHasRole)) {
-      if (!this.isVisible) {
-        this.isVisible = true;
-        this.viewContainerRef.createEmbeddedView(this.templateRef);
-      } else {
-        this.isVisible = false;
+    } else {
+      const userRoles = this.authService.decodedToken.role as Array<string>;
+      // if no roles clear viewContainerRef
+      if (!userRoles) {
         this.viewContainerRef.clear();
+      }
+      // if user has needed role render the element
+      if (this.authService.roleMatch(this.appHasRole)) {
+        if (!this.isVisible) {
+          this.isVisible = true;
+          this.viewContainerRef.createEmbeddedView(this.templateRef);
+        } else {
+          this.isVisible = false;
+          this.viewContainerRef.clear();
+        }
       }
     }
   }

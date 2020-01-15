@@ -16,8 +16,4 @@ export class UserService {
     return this.http.get<User>(this.baseUrl + 'users/' + id);
   }
 
-  addToMovieList(userId: number, movie: object) {
-    return this.http.post(this.baseUrl + 'users/' + userId + '/movies', movie);
-  }
-
 }
