@@ -21,7 +21,18 @@ namespace Application.Artists.Queries.GetArtistList
 
         public async Task<ArtistListVM> Handle(GetArtistListQuery request, CancellationToken cancellationToken)
         {
-            var artistsQueryable = _mapper.ProjectTo<ArtistLookupDto>(_context.Artists);
+            var artistsQueryable = request.UserId != null ? 
+                _context.Artists.Select(a => new ArtistLookupDto {
+                    Id = a.Id,
+                    Birthplace = a.Birthplace,
+                    Birthdate = a.Birthdate,
+                    PictureUrl = a.PictureUrl,
+                    ArtistName = a.ArtistName, 
+                    IsInUserList = _context.UserProfileFollowArtists
+                        .Any(up => up.UserProfileId == request.UserId
+                                && up.ArtistId == a.Id)
+                }) 
+                : _mapper.ProjectTo<ArtistLookupDto>(_context.Artists);
 
             if(!string.IsNullOrEmpty(request.OrderBy))
             {

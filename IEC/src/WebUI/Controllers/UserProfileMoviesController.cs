@@ -9,13 +9,14 @@ namespace WebUI.Controllers
     [Route("api/users/{userId}/movies")]
     public class UserMoviesController : BaseController
     {
-        [HttpPost]
-        public async Task<IActionResult> CreateUserProfileMovieAsync(int userId, [FromBody]CreateUserProfileMovieCommand command)
+        [HttpPost("{movieId}")]
+        public async Task<IActionResult> CreateUserProfileMovieAsync(int userId, int movieId, [FromBody]CreateUserProfileMovieCommand command)
         {
             if(userId != int.Parse(User.FindFirst("UserProfileId").Value))
                 return Unauthorized();
 
             command.UserProfileId = userId;
+            command.MovieId = movieId;
             await Mediator.Send(command);
 
             return Ok();

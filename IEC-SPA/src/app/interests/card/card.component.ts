@@ -18,16 +18,36 @@ export class CardComponent implements OnInit {
               private alertify: AlertifyService, private openAuthModal: OpenAuthModalService) { }
 
   ngOnInit() {
+    this.entityTypeVerification();
+  }
+
+  entityTypeVerification() {
+    console.log(this.entity.title);
+    if (this.entityType === 'movies') {
+      this.entity.name = this.entity.title;
+      this.entity.image = this.entity.posterUrl;
+      this.entity.date = this.entity.releaseDate;
+    } else if (this.entityType === 'artists') {
+      this.entity.name = this.entity.artistName;
+      this.entity.image = this.entity.pictureUrl;
+      this.entity.date = this.entity.birthdate;
+    }
   }
 
   addToEntityList(entityId: number) {
     if (!this.authService.loggedIn()) {
       this.openAuthModal.openModal.emit();
     } else {
-      const data = {movieId: entityId, userProfileMovieStatusId: 1};
-      this.genericRestService.postEntity('users/' + this.authService.decodedToken.UserProfileId + '/' + this.entityType, data)
+      let data = {};
+      if (this.entityType === 'movies') {
+        data = {userProfileMovieStatusId: 1};
+      }
+      this.genericRestService
+      .postEntity('users/' + this.authService.decodedToken.UserProfileId + '/' + this.entityType + '/' + entityId, data)
       .subscribe(() => {
-        this.alertify.success('You have added: ' + this.entity.title);
+        (this.entityType === 'movies') ?
+        this.alertify.success('You have added: ' + this.entity.title)
+        : this.alertify.success('You have followed: ' + this.entity.artistName);
         this.entity.isInUserList = true;
         console.log(this.entity);
       }, error => {
@@ -37,9 +57,12 @@ export class CardComponent implements OnInit {
   }
 
   removeFromEntityList(entityId: number) {
-    this.genericRestService.deleteEntity('users/' + this.authService.decodedToken.UserProfileId + '/movies/' + entityId)
+    this.genericRestService
+    .deleteEntity('users/' + this.authService.decodedToken.UserProfileId + '/' + this.entityType + '/' + entityId)
     .subscribe(() => {
-      this.alertify.success('You have removed: ' + this.entity.title);
+      (this.entityType === 'movies') ?
+      this.alertify.success('You have removed: ' + this.entity.title)
+      : this.alertify.success('You have unfollowed: ' + this.entity.artistName);
       this.entity.isInUserList = false;
     }, error => {
       this.alertify.error(error);

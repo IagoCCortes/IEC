@@ -17,6 +17,9 @@ namespace WebUI.Controllers
         [HttpGet]
         public async Task<ActionResult<ArtistListVM>> ListArtistsAsync([FromQuery]GetArtistListQuery getArtistListQuery)
         {
+            if(Request.Headers["Authorization"] != default(string))
+                getArtistListQuery.UserId = int.Parse(User.FindFirst("UserProfileId").Value);
+
             var artists = await Mediator.Send(getArtistListQuery);
             
             Response.AddPagination(artists.CurrentPage, artists.PageSize, artists.TotalCount, artists.TotalPages);

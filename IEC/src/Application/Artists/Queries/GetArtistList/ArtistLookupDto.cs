@@ -12,6 +12,7 @@ namespace Application.Artists.Queries.GetArtistList
         public DateTime? Birthdate { get; set; }
         public string Birthplace { get; set; }
         public string PictureUrl { get; set; }
+        public bool IsInUserList { get; set; }
 
         public void Mapping(Profile profile)
         {

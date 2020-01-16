@@ -4,6 +4,7 @@ namespace Application.Artists.Queries.GetArtistList
 {
     public class GetArtistListQuery : IRequest<ArtistListVM>
     {
+        public int? UserId { get; set; }
         private const int MaxPageSize = 50;
         public int PageNumber { get; set; } = 1;
         private int pageSize = 20;
