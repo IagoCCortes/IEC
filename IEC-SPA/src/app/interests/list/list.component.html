@@ -1,7 +1,8 @@
 <div class="text-center mt-3">
   <div class="row justify-content-center">
-    <div *ngFor="let artist of artists" class="col-lg-p col-md-p col-sm-p card-wrapper">
-      <app-artist-card [artist]="artist"></app-artist-card>
+    <div *ngFor="let entity of entities" class="col-lg-p col-md-p col-sm-p card-wrapper">
+      <app-movie-card *ngIf="entityType === 'movies'" [movie]="entity"></app-movie-card>
+      <app-artist-card *ngIf="entityType === 'artists'" [artist]="entity"></app-artist-card>
     </div>
   </div>
 </div>

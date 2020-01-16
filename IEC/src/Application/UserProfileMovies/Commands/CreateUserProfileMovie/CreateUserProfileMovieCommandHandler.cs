@@ -16,7 +16,6 @@ namespace Application.UserProfileMovies.Commands.CreateUserProfileMovie
         {
             _mapper = mapper;
             _context = context;
-
         }
         public async Task<Unit> Handle(CreateUserProfileMovieCommand request, CancellationToken cancellationToken)
         {

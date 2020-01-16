@@ -14,6 +14,7 @@ namespace Application.Common.Interfaces
         DbSet<MovieRole> MovieRoles { get; set; }
         DbSet<Movie> Movies { get; set; }
         DbSet<UserProfile> UserProfiles { get; set; }
+        DbSet<UserProfileFollowArtist> UserProfileFollowArtists { get; set; }
         DbSet<UserProfileMovie> UserProfileMovies { get; set; }
         DbSet<UserProfileMovieStatus> UserProfileMovieStatuses { get; set; }
 

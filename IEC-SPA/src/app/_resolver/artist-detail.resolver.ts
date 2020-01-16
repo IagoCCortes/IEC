@@ -10,7 +10,7 @@ export class ArtistDetailResolver implements Resolve<Artist> {
     constructor(private artistService: ArtistService, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Artist> {
-        return this.artistService.getArtist(route.params.id).pipe(
+        return this.artistService.getEntity(route.params.id, 'artists').pipe(
             catchError(error => {
                 this.router.navigate(['/artists']);
                 return of(null);

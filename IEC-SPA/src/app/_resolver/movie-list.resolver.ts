@@ -14,10 +14,10 @@ export class MovieListResolver implements Resolve<MovieList[]> {
     constructor(private movieService: MovieService, private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<MovieList[]> {
-        return this.movieService.getMovies(this.pageNumber, this.pageSize).pipe(
+        return this.movieService.getEntities('movies', this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
-                this.router.navigate(['/movies']);
+                // this.router.navigate(['/movies']);
                 return of(null);
             })
         );

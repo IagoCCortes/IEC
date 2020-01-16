@@ -14,10 +14,10 @@ export class ArtistListResolver implements Resolve<ArtistList[]> {
     constructor(private artistService: ArtistService, private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ArtistList[]> {
-        return this.artistService.getArtists(this.pageNumber, this.pageSize).pipe(
+        return this.artistService.getEntities('artists', this.pageNumber, this.pageSize).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
-                this.router.navigate(['/artists']);
+                // this.router.navigate(['/artists']);
                 return of(null);
             })
         );

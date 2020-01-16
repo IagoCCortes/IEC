@@ -28,6 +28,7 @@ namespace Infrastructure.Persistence
         public DbSet<MovieRole> MovieRoles { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserProfileFollowArtist> UserProfileFollowArtists { get; set; }
         public DbSet<UserProfileMovie> UserProfileMovies { get; set; }
         public DbSet<UserProfileMovieStatus> UserProfileMovieStatuses { get; set; }
 
