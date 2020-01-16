@@ -4,5 +4,5 @@ export class MovieList {
     runtime: number;
     releaseDate: Date;
     posterUrl: string;
-    isInMovieList: boolean;
+    isInUserList: boolean;
 }

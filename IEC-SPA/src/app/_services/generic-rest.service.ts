@@ -3,8 +3,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { PaginatedResult } from '../_models/pagination';
 import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
-export abstract class AbstractRestService<T> {
+@Injectable({
+  providedIn: 'root'
+})
+export class GenericRestService<T> {
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
@@ -41,5 +45,13 @@ export abstract class AbstractRestService<T> {
 
   getEntity(id: number, entity: string): Observable<T> {
     return this.http.get<T>(this.baseUrl + entity + '/' + id);
+  }
+
+  postEntity(url: string, entity: object) {
+    return this.http.post(this.baseUrl + url, entity);
+  }
+
+  deleteEntity(url: string) {
+    return this.http.delete(this.baseUrl + url);
   }
 }

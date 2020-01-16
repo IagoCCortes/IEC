@@ -28,7 +28,7 @@ namespace Application.Movies.Queries.GetMovieList
                     ReleaseDate = m.ReleaseDate,
                     Runtime = m.Runtime,
                     Title = m.Title, 
-                    IsInMovieList = _context.UserProfileMovies
+                    IsInUserList = _context.UserProfileMovies
                         .Any(up => up.UserProfileId == request.UserId
                                 && up.MovieId == m.Id)
                 }) 

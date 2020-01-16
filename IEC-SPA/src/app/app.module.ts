@@ -8,20 +8,14 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav/nav.component';
-import { MovieService } from './_services/movie.service';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
-import { MovieCardComponent } from './interests/movies/movie-card/movie-card.component';
 import { MovieDetailComponent } from './interests/movies/movie-detail/movie-detail.component';
 import { appRoutes } from './routes';
 import { MovieDetailResolver } from './_resolver/movie-detail.resolver';
 import { MovieListResolver } from './_resolver/movie-list.resolver';
-import { ArtistService } from './_services/artist.service';
-import { ArtistCardComponent } from './interests/artists/artist-card/artist-card.component';
 import { ArtistListResolver } from './_resolver/artist-list.resolver';
 import { ArtistDetailComponent } from './interests/artists/artist-detail/artist-detail.component';
 import { ArtistDetailResolver } from './_resolver/artist-detail.resolver';
-import { UserService } from './_services/user.service';
-import { UserMovieService } from './_services/userMovie.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './_guards/auth.guard';
 import { AuthService } from './_services/auth.service';
@@ -32,6 +26,8 @@ import { LoginComponent } from './nav/login/login.component';
 import { RegisterComponent } from './nav/register/register.component';
 import { OpenAuthModalService } from './_services/openAuthModal.service';
 import { ListComponent } from './interests/list/list.component';
+import { CardComponent } from './interests/card/card.component';
+import { GenericRestService } from './_services/generic-rest.service';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -41,12 +37,11 @@ export function tokenGetter() {
    declarations: [
       AdminPanelComponent,
       AppComponent,
-      ArtistCardComponent,
       ArtistDetailComponent,
+      CardComponent,
       HasRoleDirective,
       ListComponent,
       LoginComponent,
-      MovieCardComponent,
       MovieDetailComponent,
       NavComponent,
       RegisterComponent
@@ -75,16 +70,13 @@ export function tokenGetter() {
       AlertifyService,
       ArtistDetailResolver,
       ArtistListResolver,
-      ArtistService,
       AuthGuard,
       AuthService,
       ErrorInterceptorProvider,
+      GenericRestService,
       MovieDetailResolver,
       MovieListResolver,
-      MovieService,
-      OpenAuthModalService,
-      UserMovieService,
-      UserService
+      OpenAuthModalService
    ],
    bootstrap: [
       AppComponent

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { ArtistService } from 'src/app/_services/artist.service';
 import { Artist } from 'src/app/_models/artist';
 import { MovieArtist } from 'src/app/_models/movieArtist';
 
@@ -14,8 +13,7 @@ export class ArtistDetailComponent implements OnInit {
   roles = {star: [], director: []};
 
   constructor(
-    private route: ActivatedRoute,
-    private artistService: ArtistService
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {

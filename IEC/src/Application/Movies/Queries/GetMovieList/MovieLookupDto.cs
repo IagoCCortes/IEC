@@ -13,7 +13,7 @@ namespace Application.Movies.Queries.GetMovieList
         public int? Runtime { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string PosterUrl { get; set; }
-        public bool IsInMovieList { get; set; } = false;
+        public bool IsInUserList { get; set; } = false;
 
         public void Mapping(Profile profile)
         {

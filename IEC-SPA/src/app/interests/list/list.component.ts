@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Pagination, PaginatedResult } from 'src/app/_models/pagination';
-import { MovieService } from 'src/app/_services/movie.service';
 import { ActivatedRoute } from '@angular/router';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { MovieList } from 'src/app/_models/movie-list';
-import { ArtistService } from 'src/app/_services/artist.service';
 import { ArtistList } from 'src/app/_models/artist-list';
+import { GenericRestService } from 'src/app/_services/generic-rest.service';
 
 @Component({
   selector: 'app-list',
@@ -19,7 +18,8 @@ export class ListComponent implements OnInit {
   pagination: Pagination;
   maxSize = 5;
 
-  constructor(private artistService: ArtistService, private movieService: MovieService,
+  constructor(private moviesRestService: GenericRestService<MovieList>,
+              private artistsRestService: GenericRestService<ArtistList>,
               private route: ActivatedRoute, private alertify: AlertifyService) { }
 
   ngOnInit() {
@@ -37,7 +37,7 @@ export class ListComponent implements OnInit {
 
   loadEntities() {
     if (this.entityType === 'artists') {
-      this.artistService.getEntities('artists', this.pagination.currentPage, this.pagination.itemsPerPage, this.entityParams).
+      this.artistsRestService.getEntities('artists', this.pagination.currentPage, this.pagination.itemsPerPage, this.entityParams).
       subscribe((res: PaginatedResult<ArtistList[]>) => {
         this.entities = res.result;
         this.pagination = res.pagination;
@@ -45,7 +45,7 @@ export class ListComponent implements OnInit {
         this.alertify.error(error);
       });
     } else if (this.entityType === 'movies') {
-      this.movieService.getEntities('movies', this.pagination.currentPage, this.pagination.itemsPerPage, this.entityParams).
+      this.moviesRestService.getEntities('movies', this.pagination.currentPage, this.pagination.itemsPerPage, this.entityParams).
       subscribe((res: PaginatedResult<MovieList[]>) => {
         this.entities = res.result;
         this.pagination = res.pagination;
