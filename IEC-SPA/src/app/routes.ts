@@ -8,6 +8,7 @@ import { ArtistDetailComponent } from './interests/artists/artist-detail/artist-
 import { AuthGuard } from './_guards/auth.guard';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { ListComponent } from './interests/list/list.component';
+import { ProfileComponent } from './user/profile/profile.component';
 
 export const appRoutes: Routes = [
     { path: '', component: ListComponent,
@@ -28,5 +29,6 @@ export const appRoutes: Routes = [
         resolve: {entities: ArtistListResolver}},
     {path: 'artists/:id', component: ArtistDetailComponent,
         resolve: {artist: ArtistDetailResolver}},
+    {path: 'users/:id', component: ProfileComponent},
     { path: '**', redirectTo: '', pathMatch: 'full'},
 ];

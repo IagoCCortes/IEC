@@ -19,6 +19,7 @@ namespace Domain.Entities
         public int? Runtime { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string PosterUrl { get; set; }
+        // public string PosterPublicId { get; set; }
         public ICollection<MovieMovieGenre> MovieMovieGenres { get; private set; }
         public ICollection<MovieArtist> MovieArtists { get; private set; }
         public ICollection<UserProfileMovie> UserProfilesMovie { get; set; }

@@ -20,6 +20,7 @@ namespace Domain.Entities
         public int? Height { get; set; }
         public string Bio { get; set; }
         public string PictureUrl { get; set; }
+        // public string PicturePublicId { get; set; }
         public ICollection<MovieArtist> MoviesArtist { get; private set; }
         public ICollection<UserProfileFollowArtist> UserProfilesFollowArtist { get; set; }
 

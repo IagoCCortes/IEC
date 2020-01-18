@@ -22,7 +22,6 @@ export class CardComponent implements OnInit {
   }
 
   entityTypeVerification() {
-    console.log(this.entity.title);
     if (this.entityType === 'movies') {
       this.entity.name = this.entity.title;
       this.entity.image = this.entity.posterUrl;
@@ -49,7 +48,6 @@ export class CardComponent implements OnInit {
         this.alertify.success('You have added: ' + this.entity.title)
         : this.alertify.success('You have followed: ' + this.entity.artistName);
         this.entity.isInUserList = true;
-        console.log(this.entity);
       }, error => {
         this.alertify.error(error);
       });

@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using Application.Common.Interfaces;
+// using Infrastructure.CloudiNary;
 using Infrastructure.Identity;
 using Infrastructure.Persistence;
 using Infrastructure.SendGrid;
@@ -73,6 +74,8 @@ namespace Infrastructure
             services.AddTransient<INotificationService, NotificationService>();
             services.AddTransient<IIdentityService, IdentityService>();
             services.AddTransient<IDateTime, MachineDateTime>();
+
+            // services.Configure<CloudinarySettings>(configuration.GetSection("CloudinarySettings"));
 
             return services;
         }

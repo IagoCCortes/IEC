@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 namespace Application.Movies.Commands
 {
@@ -9,5 +10,6 @@ namespace Application.Movies.Commands
         public int Runtime { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string PosterUrl { get; set; }
+        // public string PosterPublicId { get; set; }
     }
 }

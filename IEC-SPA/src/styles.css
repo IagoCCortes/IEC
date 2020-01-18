@@ -6,7 +6,6 @@
 @import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
 
 body {  
-    padding-top: 60px;
     overflow-x: hidden;
 }
 
@@ -24,4 +23,4 @@ body {
     margin-left: 160px; /* Same as the width of the sidenav */
     font-size: 28px; /* Increased text to enable scrolling */
     padding: 0px 10px;
-  }
+}

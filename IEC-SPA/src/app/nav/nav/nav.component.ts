@@ -25,7 +25,7 @@ export class NavComponent implements OnInit {
 
   choice = 'Login';
 
-  constructor(private modalService: BsModalService, private authService: AuthService,
+  constructor(private modalService: BsModalService, public authService: AuthService,
               private alertify: AlertifyService, private router: Router,
               private openAuthModal: OpenAuthModalService) { }
 

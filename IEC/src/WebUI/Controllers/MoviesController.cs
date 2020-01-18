@@ -6,22 +6,30 @@ using Application.Movies.Commands.DeleteMovie;
 using Application.Movies.Commands.UpdateMovie;
 using Application.Movies.Queries.GetMovieDetail;
 using Application.Movies.Queries.GetMovieList;
+// using Infrastructure.CloudiNary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+// using WebUI.Dtos;
 using WebUI.Helpers;
 
 namespace WebUI.Controllers
 {
     public class MoviesController : BaseController
     {
+        // private readonly CloudinaryService _cloudinaryService;
+        // public MoviesController(CloudinaryService cloudinaryService)
+        // {
+        //     _cloudinaryService = cloudinaryService;
+        // }
+
         [AllowAnonymous]
         [HttpGet]
         public async Task<ActionResult<MovieListVM>> ListMoviesAsync([FromQuery]GetMovieListQuery getMovieListQuery)
         {
-            if(Request.Headers["Authorization"] != default(string))
+            if (Request.Headers["Authorization"] != default(string))
                 getMovieListQuery.UserId = int.Parse(User.FindFirst("UserProfileId").Value);
-            
+
             var movies = await Mediator.Send(getMovieListQuery);
 
             Response.AddPagination(movies.CurrentPage, movies.PageSize, movies.TotalCount, movies.TotalPages);
@@ -46,6 +54,13 @@ namespace WebUI.Controllers
         [ProducesDefaultResponseType]
         public async Task<IActionResult> AddMovieAsync([FromBody]CreateMovieCommand command)
         {
+            // var posterUrls = _cloudinaryService.UploadImage(createMovieDto.File);
+            // if(posterUrls != null)
+            // {
+            //     createMovieDto.CreateMovieCommand.PosterUrl = posterUrls[0];
+            //     createMovieDto.CreateMovieCommand.PosterPublicId = posterUrls[1];
+            // }
+
             var movie = await Mediator.Send(command);
 
             return CreatedAtRoute("GetMovie", new { controller = "Movies", id = movie.Id }, movie);

@@ -45,7 +45,7 @@
         </a>
       
         <div class="dropdown-menu mt-3 dd-user-menu" *dropdownMenu>
-          <a class="dropdown-item" [routerLink]="['/user/edit']" ><i class="fa fa-user"></i> Edit Profile</a>
+          <a class="dropdown-item" [routerLink]="['/users/' + authService.decodedToken.UserProfileId]" ><i class="fa fa-user"></i> My Profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
         </div>

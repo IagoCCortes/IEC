@@ -28,6 +28,9 @@ import { OpenAuthModalService } from './_services/openAuthModal.service';
 import { ListComponent } from './interests/list/list.component';
 import { CardComponent } from './interests/card/card.component';
 import { GenericRestService } from './_services/generic-rest.service';
+import { ProfileComponent } from './user/profile/profile.component';
+import { UserManagementComponent } from './admin/user-management/user-management.component';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -44,7 +47,10 @@ export function tokenGetter() {
       LoginComponent,
       MovieDetailComponent,
       NavComponent,
-      RegisterComponent
+      ProfileComponent,
+      RegisterComponent,
+      RolesModalComponent,
+      UserManagementComponent
    ],
    imports: [
       BrowserAnimationsModule,
@@ -77,6 +83,9 @@ export function tokenGetter() {
       MovieDetailResolver,
       MovieListResolver,
       OpenAuthModalService
+   ],
+   entryComponents: [
+      RolesModalComponent
    ],
    bootstrap: [
       AppComponent
