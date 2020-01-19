@@ -22,7 +22,7 @@ import { AuthService } from './_services/auth.service';
 import { AlertifyService } from './_services/alertify.service';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
-import { LoginComponent } from './nav/login/login.component';
+import { LogRegModalComponent } from './nav/logReg-modal/logReg-modal.component';
 import { OpenAuthModalService } from './_services/openAuthModal.service';
 import { ListComponent } from './interests/list/list.component';
 import { CardComponent } from './interests/card/card.component';
@@ -45,7 +45,7 @@ export function tokenGetter() {
       HasRoleDirective,
       HomeComponent,
       ListComponent,
-      LoginComponent,
+      LogRegModalComponent,
       MovieDetailComponent,
       NavComponent,
       ProfileComponent,
@@ -86,7 +86,7 @@ export function tokenGetter() {
       OpenAuthModalService
    ],
    entryComponents: [
-      LoginComponent,
+      LogRegModalComponent,
       RolesModalComponent
    ],
    bootstrap: [

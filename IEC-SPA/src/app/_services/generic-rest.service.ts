@@ -24,7 +24,15 @@ export class GenericRestService<T> {
     }
 
     if (entityParams != null) {
-      params = params.append('oderBy', entityParams.orderBy);
+      for (const entityParam of entityParams) {
+        if (Array.isArray(entityParam.values)) {
+          entityParam.values.forEach(element => {
+            params = params.append(entityParam.param, element);
+          });
+        } else {
+          params = params.append(entityParam.param, entityParam.values);
+        }
+      }
     }
 
     return this.http

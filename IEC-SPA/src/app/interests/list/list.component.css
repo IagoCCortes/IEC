@@ -60,12 +60,12 @@
     top: 52px;
     display: flex;
     height:30px;
-    background-color: rgba(255,0,0,0.3);
-    /* opacity: 0.8; */
+    background-color: var(--filter-bar);
 }
 
 .filter-bar > ul {
     margin: auto 0 auto 50px;
+    text-transform: capitalize;
 }
 
 .filter-li {
@@ -77,11 +77,11 @@
     list-style: none;
 }
 
-.filter-li  span {
+.filter-li > span {
     padding: 0;
 }
 
-.filter-li  span:after {
+.filter-li > span:after {
     vertical-align: 0;
 }
 
@@ -90,11 +90,59 @@
     border-radius: 0%;
 }
 
-.filter-li a {
+.filter-li a,
+.filter-li div span {
     color: #000;
 }
 
-.filter-li a:hover {
-    background-image: linear-gradient(to right, rgba(255, 50, 50, 0.3), rgba(156, 156, 156, 0.3));
+.selected,
+.filter-li a:hover,
+.filter-li div span:hover {
+    background-image: var(--filter-li);
     background-color: transparent;
+}
+
+.dropdown-menu:not(.ignore) {
+    height: 360px;
+    overflow-x: hidden;
+}
+
+/*************************
+********Alt colors********
+*************************/
+.movies-color {
+    --filter-bar: rgba(255,0,0,0.3);
+    --filter-li: linear-gradient(to right, rgba(255, 50, 50, 0.3), rgba(156, 156, 156, 0.3));
+    --thumb: linear-gradient(to bottom, rgba(255, 50, 50), rgba(156, 156, 156));
+    --thumb-hover: linear-gradient(to bottom, rgb(255, 0, 0), rgb(0, 0, 0));
+}
+
+.artists-color {
+    --filter-bar: rgba(0,0,255,0.3);
+    --filter-li: linear-gradient(to right, rgba(50, 50, 255, 0.3), rgba(156, 156, 156, 0.3));
+    --thumb: linear-gradient(to bottom, rgba(50, 50, 255), rgba(156, 156, 156));
+    --thumb-hover: linear-gradient(to bottom, rgb(0, 0, 255), rgb(0, 0, 0));
+}
+
+/**************************
+*********Scrollbar*********
+**************************/
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background-image: var(--thumb); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background-image: var(--thumb-hover); 
 }

@@ -7,10 +7,10 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './logReg-modal.component.html',
+  styleUrls: ['./logReg-modal.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LogRegModalComponent implements OnInit {
   @Output() logged = new EventEmitter();
   registerForm: FormGroup;
   loginForm: FormGroup;

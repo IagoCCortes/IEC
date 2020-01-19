@@ -41,7 +41,7 @@ namespace Application.Artists.Queries.GetArtistList
                     case "birthdate":
                         artistsQueryable = artistsQueryable.OrderByDescending(a => a.Birthdate);
                         break;
-                    default:
+                    case "name":
                         artistsQueryable = artistsQueryable.OrderByDescending(a => a.ArtistName);
                         break;
                 }

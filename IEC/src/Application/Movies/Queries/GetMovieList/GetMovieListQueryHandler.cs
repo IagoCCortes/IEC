@@ -42,7 +42,6 @@ namespace Application.Movies.Queries.GetMovieList
                 moviesQueryable = moviesQueryable.Where(m => 
                     m.Genres.Any(x => request.GenreIds.Any(y => y == x)
                 ));
-                System.Console.WriteLine("xwsa");
             }
 
             if(!string.IsNullOrEmpty(request.OrderBy))
@@ -55,7 +54,7 @@ namespace Application.Movies.Queries.GetMovieList
                     case "runtime":
                         moviesQueryable = moviesQueryable.OrderByDescending(m => m.Runtime);
                         break;
-                    default:
+                    case "title":
                         moviesQueryable = moviesQueryable.OrderByDescending(m => m.Title);
                         break;
                 }

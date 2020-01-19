@@ -18,21 +18,46 @@ export class ListComponent implements OnInit {
   entityParams: any = {};
   pagination: Pagination;
   maxSize = 5;
-  genres = MovieGenres;
-  genreKeys = Object.keys(MovieGenres).filter(key => isNaN(Number(MovieGenres[key])));
-  // selectedGenres = 
+  genres: any;
+  genreKeys: any;
 
   constructor(private moviesRestService: GenericRestService<MovieList>,
               private artistsRestService: GenericRestService<ArtistList>,
               private route: ActivatedRoute, private alertify: AlertifyService) { }
 
   ngOnInit() {
-    console.log(this.genreKeys);
     this.route.data.subscribe( data => {
       this.entities = data.entities.result;
       this.pagination = data.entities.pagination;
       this.entityType = data.entities.entityType;
     });
+
+    if (this.entityType === 'movies') {
+      this.genres = MovieGenres;
+      this.genreKeys = Object.keys(MovieGenres).filter(key => isNaN(Number(MovieGenres[key])));
+      // index 0 - Genres
+      this.entityParams = [{param: 'orderBy', values: ''},
+                           {param: 'genreIds', values: []}];
+    } else if (this.entityType === 'artists') {
+      this.entityParams = [{param: 'orderBy', values: ''}];
+    }
+  }
+
+  orderByChanged(orderBy: string) {
+    this.entityParams[0].values = orderBy;
+    this.loadEntities();
+  }
+
+  genresChanged(genreId: number): void {
+    if (!this.entityParams[1].values.includes(genreId)) {
+      this.entityParams[1].values.push(genreId);
+    } else {
+      const index = this.entityParams[1].values.indexOf(genreId);
+      if (index > -1) {
+        this.entityParams[1].values.splice(index, 1);
+      }
+    }
+    this.loadEntities();
   }
 
   pageChanged(event: any): void {
