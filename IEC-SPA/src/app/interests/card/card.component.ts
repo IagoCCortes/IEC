@@ -33,25 +33,32 @@ export class CardComponent implements OnInit {
     }
   }
 
-  addToEntityList(entityId: number) {
+  checkBeforeAddingToList(entityId: number) {
     if (!this.authService.loggedIn()) {
-      this.openAuthModal.openModal.emit();
-    } else {
-      let data = {};
-      if (this.entityType === 'movies') {
-        data = {userProfileMovieStatusId: 1};
-      }
-      this.genericRestService
-      .postEntity('users/' + this.authService.decodedToken.UserProfileId + '/' + this.entityType + '/' + entityId, data)
-      .subscribe(() => {
-        (this.entityType === 'movies') ?
-        this.alertify.success('You have added: ' + this.entity.title)
-        : this.alertify.success('You have followed: ' + this.entity.artistName);
-        this.entity.isInUserList = true;
-      }, error => {
-        this.alertify.error(error);
+      this.openAuthModal.openModal();
+      this.openAuthModal.logged.subscribe(() => {
+        this.addToEntityList(entityId);
       });
+    } else {
+      this.addToEntityList(entityId);
     }
+  }
+
+  addToEntityList(entityId: number) {
+    let data = {};
+    if (this.entityType === 'movies') {
+      data = {userProfileMovieStatusId: 1};
+    }
+    this.genericRestService
+    .postEntity('users/' + this.authService.decodedToken.UserProfileId + '/' + this.entityType + '/' + entityId, data)
+    .subscribe(() => {
+      (this.entityType === 'movies') ?
+      this.alertify.success('You have added: ' + this.entity.title)
+      : this.alertify.success('You have followed: ' + this.entity.artistName);
+      this.entity.isInUserList = true;
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 
   removeFromEntityList(entityId: number) {

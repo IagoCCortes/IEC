@@ -5,6 +5,7 @@ import { AlertifyService } from 'src/app/_services/alertify.service';
 import { MovieList } from 'src/app/_models/movie-list';
 import { ArtistList } from 'src/app/_models/artist-list';
 import { GenericRestService } from 'src/app/_services/generic-rest.service';
+import { MovieGenres } from 'src/app/_enums/movie-genres.enum';
 
 @Component({
   selector: 'app-list',
@@ -17,12 +18,16 @@ export class ListComponent implements OnInit {
   entityParams: any = {};
   pagination: Pagination;
   maxSize = 5;
+  genres = MovieGenres;
+  genreKeys = Object.keys(MovieGenres).filter(key => isNaN(Number(MovieGenres[key])));
+  // selectedGenres = 
 
   constructor(private moviesRestService: GenericRestService<MovieList>,
               private artistsRestService: GenericRestService<ArtistList>,
               private route: ActivatedRoute, private alertify: AlertifyService) { }
 
   ngOnInit() {
+    console.log(this.genreKeys);
     this.route.data.subscribe( data => {
       this.entities = data.entities.result;
       this.pagination = data.entities.pagination;

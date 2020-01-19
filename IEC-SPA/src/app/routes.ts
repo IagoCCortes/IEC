@@ -9,10 +9,10 @@ import { AuthGuard } from './_guards/auth.guard';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { ListComponent } from './interests/list/list.component';
 import { ProfileComponent } from './user/profile/profile.component';
+import { HomeComponent } from './home/home.component';
 
 export const appRoutes: Routes = [
-    { path: '', component: ListComponent,
-        resolve: {entities: MovieListResolver}},
+    { path: '', component: HomeComponent},
     {
         path: '',
         runGuardsAndResolvers: 'always',

@@ -13,6 +13,7 @@ namespace Application.Movies.Queries.GetMovieList
             get { return pageSize; }
             set { pageSize = (value > MaxPageSize) ? MaxPageSize : value; }
         }
+        public int[] GenreIds{ get; set; }
         public string OrderBy { get; set; }
     }
 }

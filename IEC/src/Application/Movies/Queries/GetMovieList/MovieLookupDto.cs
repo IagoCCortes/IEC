@@ -1,5 +1,5 @@
 using System;
-using System.Linq;
+using System.Collections.Generic;
 using Application.Common.Mappings;
 using AutoMapper;
 using Domain.Entities;
@@ -14,6 +14,7 @@ namespace Application.Movies.Queries.GetMovieList
         public DateTime ReleaseDate { get; set; }
         public string PosterUrl { get; set; }
         public bool IsInUserList { get; set; } = false;
+        public IEnumerable<int> Genres { get; set; }
 
         public void Mapping(Profile profile)
         {

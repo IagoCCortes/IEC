@@ -1,29 +1,128 @@
-<form [formGroup]="loginForm" (ngSubmit)="login()">
+<div class="modal-header">
+  <h4 class="modal-title pull-left">{{choice}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="choice-container">
+  <p *ngIf="choice === 'Login'">Not a part of our community? 
+    <span class="choice" (click)="changeChoice('Join us')">Join</span>
+  </p>
+  <p *ngIf="choice === 'Join us'">Already a member of our community? 
+    <span class="choice" (click)="changeChoice('Login')">Login</span>
+  </p>
+</div>
+<div class="modal-body d-flex flex-column">
+  <img src="assets/images/logo.png" class="align-self-center logo-modal" alt="IEC logo">
+  <hr>
+  <!-- Register form -->
+  <form *ngIf="choice === 'Join us'" [formGroup]="registerForm" (ngSubmit)="register()">
 
-  <div class="form-group">
-    <input type="text"
-      [ngClass]="{'is-invalid': loginForm.get('username').errors && loginForm.get('username').touched}"
-      class="form-control" formControlName="username" placeholder="Username">
-    <div class="invalid-feedback">
-      <span *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">
-        Username is required
-      </span>
+    <div class="form-group">
+      <input type="text"
+        [ngClass]="{'is-invalid': registerForm.get('username').errors && registerForm.get('username').touched}"
+        class="form-control" formControlName="username" placeholder="Username">
+      <div class="invalid-feedback">
+        <span *ngIf="registerForm.get('username').hasError('required') && registerForm.get('username').touched">
+          Username is required
+        </span>
+        <span *ngIf="registerForm.get('username').hasError('minlength') && registerForm.get('username').touched">
+          Username must be at least 6 characters
+        </span>
+        <span *ngIf="registerForm.get('username').hasError('maxlength') && registerForm.get('username').touched">
+          Username cannot exceed 15 characters
+        </span>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group">
-    <input type="password"
-      [ngClass]="{'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched}"
-      class="form-control" formControlName="password" placeholder="Password">
-    <div class="invalid-feedback">
-      <span *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
-        Password is required
-      </span>
+    <div class="form-group">
+      <input type="text"
+        [ngClass]="{'is-invalid': registerForm.get('email').errors && registerForm.get('email').touched}"
+        class="form-control" formControlName="email" placeholder="E-mail">
+      <div class="invalid-feedback">
+        <span *ngIf="registerForm.get('email').hasError('required') && registerForm.get('email').touched">
+          E-mail is required
+        </span>
+        <span *ngIf="registerForm.get('email').hasError('email') && registerForm.get('email').touched">
+          Provide a valid e-mail
+        </span>
+      </div>
     </div>
-  </div>
 
-  <div class="form-group text-center">
-    <button class="btn btn-success" [disabled]="!loginForm.valid" type="submit">Login</button>
-  </div>
+    <div class="form-group">
+      <input type="password"
+        [ngClass]="{'is-invalid': registerForm.get('password').errors && registerForm.get('password').touched}"
+        class="form-control" formControlName="password" placeholder="Password">
+      <div class="invalid-feedback">
+        <span *ngIf="registerForm.get('password').hasError('required') && registerForm.get('password').touched">
+          Password is required
+        </span>
+        <span *ngIf="registerForm.get('password').hasError('minlength') && registerForm.get('password').touched">
+          Password must be at least 4 characters
+        </span>
+        <span *ngIf="registerForm.get('password').hasError('maxlength') && registerForm.get('password').touched">
+          Password cannot exceed 16 characters
+        </span>
+      </div>
+    </div>
 
-</form>
+    <div class="form-group">
+      <input type="password" [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors 
+          && registerForm.get('confirmPassword').touched
+          || registerForm.get('confirmPassword').touched 
+          && registerForm.hasError('mismatch')}" class="form-control" formControlName="confirmPassword"
+        placeholder="Confirm Password">
+      <div class="invalid-feedback">
+        <span
+          *ngIf="registerForm.get('confirmPassword').hasError('required') && registerForm.get('confirmPassword').touched">
+          Confirm password is required
+        </span>
+        <span *ngIf="registerForm.hasError('mismatch') && registerForm.get('confirmPassword').touched">
+          Passwords must match
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <button class="btn btn-success" [disabled]="!registerForm.valid" type="submit">Join</button>
+    </div>
+
+  </form>
+  <!-- Login form -->
+  <form *ngIf="choice === 'Login'" [formGroup]="loginForm" (ngSubmit)="login()">
+
+    <div class="form-group">
+      <input type="text"
+        [ngClass]="{'is-invalid': loginForm.get('username').errors && loginForm.get('username').touched}"
+        class="form-control" formControlName="username" placeholder="Username">
+      <div class="invalid-feedback">
+        <span *ngIf="loginForm.get('username').hasError('required') && loginForm.get('username').touched">
+          Username is required
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <input type="password"
+        [ngClass]="{'is-invalid': loginForm.get('password').errors && loginForm.get('password').touched}"
+        class="form-control" formControlName="password" placeholder="Password">
+      <div class="invalid-feedback">
+        <span *ngIf="loginForm.get('password').hasError('required') && loginForm.get('password').touched">
+          Password is required
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group text-center">
+      <button class="btn btn-success" [disabled]="!loginForm.valid" type="submit">Login</button>
+    </div>
+
+  </form>
+</div>
+
+<!-- <p>form value: {{registerForm.value | json}}</p>
+    <p>form status: {{registerForm.status | json}}</p>
+    <p>{{registerForm.get('username').errors | json}}</p>
+    <p>{{registerForm.get('email').errors | json}}</p>
+    <p>{{registerForm.get('password').errors | json}}</p>
+    <p>{{registerForm.get('confirmPassword').errors | json}}</p> -->

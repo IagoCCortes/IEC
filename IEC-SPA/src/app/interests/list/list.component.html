@@ -1,4 +1,22 @@
-<div class="text-center mt-3 pt-5">
+<div class="filter-bar">
+  <ul>
+    <li class="nav-item dropdown filter-li" dropdown>
+      <span class="nav-link dropdown-toggle" dropdownToggle>Movies</span>
+      <div class="dropdown-menu" *dropdownMenu>
+        <a class="dropdown-item" href="#" [routerLink]="['/movies']">Movies</a>
+        <a class="dropdown-item" href="#" [routerLink]="['/artists']">Artists</a>
+        <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+      </div>
+    </li>
+    <li class="nav-item dropdown filter-li" *ngIf="entityType === 'movies'" dropdown>
+      <span class="nav-link dropdown-toggle" dropdownToggle>Genres</span>
+      <div class="dropdown-menu" *dropdownMenu>
+        <a class="dropdown-item" href="#" *ngFor="let genre of genreKeys"><input type="checkbox">{{genres[genre]}}</a>
+      </div>
+    </li>
+  </ul>
+</div>
+<div class="text-center">
   <div class="row justify-content-center">
     <div *ngFor="let entity of entities" class="col-lg-p col-md-p col-sm-p card-wrapper">
       <app-card [entityType]="entityType" [entity]="entity"></app-card>

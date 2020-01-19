@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -5,6 +6,7 @@ using Application.Common.Interfaces;
 using Application.Common.Pagination;
 using AutoMapper;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Movies.Queries.GetMovieList
 {
@@ -27,12 +29,21 @@ namespace Application.Movies.Queries.GetMovieList
                     PosterUrl = m.PosterUrl,
                     ReleaseDate = m.ReleaseDate,
                     Runtime = m.Runtime,
-                    Title = m.Title, 
-                    IsInUserList = _context.UserProfileMovies
+                    Title = m.Title,
+                    Genres = m.MovieMovieGenres.Where(mg => mg.MovieId == m.Id).Select(mg => mg.MovieGenreId),
+                    IsInUserList = m.UserProfilesMovie
                         .Any(up => up.UserProfileId == request.UserId
-                                && up.MovieId == m.Id)
+                                   && up.MovieId == m.Id)
                 }) 
                 : _mapper.ProjectTo<MovieLookupDto>(_context.Movies);
+
+            if(request.GenreIds != null)
+            {
+                moviesQueryable = moviesQueryable.Where(m => 
+                    m.Genres.Any(x => request.GenreIds.Any(y => y == x)
+                ));
+                System.Console.WriteLine("xwsa");
+            }
 
             if(!string.IsNullOrEmpty(request.OrderBy))
             {

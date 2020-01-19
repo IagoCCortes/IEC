@@ -41,7 +41,7 @@ export class UserManagementComponent implements OnInit {
       const rolesToUpdate = {
         roleNames: [...values.filter(el => el.checked === true).map(el => el.name)]
       };
-      if(rolesToUpdate) {
+      if (rolesToUpdate) {
         this.genericRestService.postEntity('admin/editRoles/' + user.userName, {roleNames: rolesToUpdate.roleNames})
         .subscribe(() => {
           user.roles = [...rolesToUpdate.roleNames];
@@ -60,17 +60,17 @@ export class UserManagementComponent implements OnInit {
       {name: 'Member', value: 'Member'},
     ];
 
-    for(let i = 0; i < availableRoles.length; i++) {
+    for (let i = 0; i < availableRoles.length; i++) {
       let isMatch = false;
-      for(let j = 0; j < userRoles.length; j++) {
-        if(availableRoles[i].name === userRoles[j]) {
+      for (let j = 0; j < userRoles.length; j++) {
+        if (availableRoles[i].name === userRoles[j]) {
           isMatch = true;
           availableRoles[i].checked = true;
           roles.push(availableRoles[i]);
           break;
         }
       }
-      if(!isMatch) {
+      if (!isMatch) {
         availableRoles[i].checked = false;
         roles.push(availableRoles[i]);
       }

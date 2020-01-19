@@ -1,7 +1,7 @@
 <div class="card mb-4 card-img-top">
   <div class="card-img-wrapper">
     <button title="add to {{entityType}} list" *ngIf="!entity.isInUserList" class="btn animate text-center entity-info member-top"
-      (click)="addToEntityList(entity.id)">
+      (click)="checkBeforeAddingToList(entity.id)">
       <i class="fa fa-plus"></i>
     </button>
     <button title="remove from {{entityType}} list" *ngIf="entity.isInUserList" class="btn animate text-center entity-info member-top bg-check"

@@ -7,25 +7,14 @@
   <div class="navbar-collapse offcanvas-collapse d-flex" dropdown [collapse]="isCollapsed">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/movies']">Movies</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/artists']">Artists</a>
-      </li>
-      <li class="nav-item" *appHasRole="['Admin']">
-        <a class="nav-link" [routerLink]="['/admin']">Admin</a>
+        <a class="nav-link" [routerLink]="['/movies']">Browse</a>
       </li>
       <!-- <li class="nav-item">
-        <a class="nav-link" (click)="changeToAdmin(true)" [routerLink]="['/admin/movies']">Admin</a>
+        <a class="nav-link" [routerLink]="['/artists']">Artists</a>
       </li> -->
-      <!-- <li dropdown class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" dropdownToggle>Settings</a>
-        <div class="dropdown-menu" *dropdownMenu>
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
-      </li> -->
+      <li class="nav-item" *ngIf="loggedIn()">
+        <a class="nav-link" [routerLink]="['/admin']" *appHasRole="['Admin']">Admin</a>
+      </li>
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="search" type="text" placeholder="Search">
@@ -33,8 +22,8 @@
     </form>
     <div class="ml-auto">
       <div *ngIf="!loggedIn()">
-        <button type="button" class="btn btn-link btn-reg" (click)="openModal(template, 'Join us')">Join</button>
-        <button type="button" class="btn btn-link btn-log" (click)="openModal(template, 'Login')">Login</button>
+        <button type="button" class="btn btn-link btn-reg" (click)="openModal('Join us')">Join</button>
+        <button type="button" class="btn btn-link btn-log" (click)="openModal('Login')">Login</button>
       </div>
       <div dropdown *ngIf="loggedIn()" class="dropdown">
         <!-- <span class="mr-1">
@@ -53,27 +42,3 @@
     </div>
   </div>
 </nav>
-
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">{{choice}}</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body d-flex flex-column">
-    <img src="assets/images/logo.png" class="align-self-center logo-modal" alt="IEC logo">
-    <hr>
-    <!-- Register form -->
-    <app-register *ngIf="choice === 'Join us'" (user)="user" (closeModal)="closeModal()"></app-register>
-    <!-- Login form -->
-    <app-login *ngIf="choice === 'Login'" (user)="user" (closeModal)="closeModal()"></app-login>
-    <!-- <p>form value: {{registerForm.value | json}}</p>
-    <p>form status: {{registerForm.status | json}}</p>
-    <p>{{registerForm.get('username').errors | json}}</p>
-    <p>{{registerForm.get('email').errors | json}}</p>
-    <p>{{registerForm.get('password').errors | json}}</p>
-    <p>{{registerForm.get('confirmPassword').errors | json}}</p> -->
-  </div>
-
-</ng-template>

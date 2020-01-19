@@ -23,7 +23,6 @@ import { AlertifyService } from './_services/alertify.service';
 import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRoleDirective } from './_directives/hasRole.directive';
 import { LoginComponent } from './nav/login/login.component';
-import { RegisterComponent } from './nav/register/register.component';
 import { OpenAuthModalService } from './_services/openAuthModal.service';
 import { ListComponent } from './interests/list/list.component';
 import { CardComponent } from './interests/card/card.component';
@@ -31,6 +30,7 @@ import { GenericRestService } from './_services/generic-rest.service';
 import { ProfileComponent } from './user/profile/profile.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
+import { HomeComponent } from './home/home.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -43,14 +43,15 @@ export function tokenGetter() {
       ArtistDetailComponent,
       CardComponent,
       HasRoleDirective,
+      HomeComponent,
       ListComponent,
       LoginComponent,
       MovieDetailComponent,
       NavComponent,
       ProfileComponent,
-      RegisterComponent,
       RolesModalComponent,
-      UserManagementComponent
+      UserManagementComponent,
+      HomeComponent
    ],
    imports: [
       BrowserAnimationsModule,
@@ -85,6 +86,7 @@ export function tokenGetter() {
       OpenAuthModalService
    ],
    entryComponents: [
+      LoginComponent,
       RolesModalComponent
    ],
    bootstrap: [

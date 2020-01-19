@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/_services/auth.service';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Router } from '@angular/router';
 import { OpenAuthModalService } from 'src/app/_services/openAuthModal.service';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-nav',
@@ -12,7 +13,6 @@ import { OpenAuthModalService } from 'src/app/_services/openAuthModal.service';
   styleUrls: ['./nav.component.css']
 })
 export class NavComponent implements OnInit {
-  @ViewChild('template', {static: false}) template: any;
   isCollapsed = true;
   modalRef: BsModalRef;
   config = {
@@ -26,21 +26,15 @@ export class NavComponent implements OnInit {
   choice = 'Login';
 
   constructor(private modalService: BsModalService, public authService: AuthService,
-              private alertify: AlertifyService, private router: Router,
-              private openAuthModal: OpenAuthModalService) { }
+              private alertify: AlertifyService, private router: Router) { }
 
   ngOnInit() {
-    this.openAuthModal.openModal
-    .subscribe(() => this.openModal(this.template, 'Login'));
   }
 
-  openModal(template: TemplateRef<any>, choice: string) {
+  openModal(choice: string) {
+    const initialState = { choice };
     this.choice = choice;
-    this.modalRef = this.modalService.show(template, this.config);
-  }
-
-  closeModal() {
-    this.modalRef.hide();
+    this.modalRef = this.modalService.show(LoginComponent, {initialState});
   }
 
   loggedIn() {
@@ -53,7 +47,7 @@ export class NavComponent implements OnInit {
     this.authService.decodedToken = null;
     this.authService.currentUser = null;
     this.alertify.message('Logged out');
-    this.router.navigate(['/movies']);
+    this.router.navigate(['']);
   }
 
   toggleCollapse() {

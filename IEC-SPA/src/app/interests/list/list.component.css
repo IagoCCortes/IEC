@@ -49,3 +49,52 @@
 .sub-nav li {
     list-style: none;
 }
+
+.text-center {
+    margin-top: 100px;
+}
+
+.filter-bar {
+    position: fixed;
+    z-index: 999;
+    top: 52px;
+    display: flex;
+    height:30px;
+    background-color: rgba(255,0,0,0.3);
+    /* opacity: 0.8; */
+}
+
+.filter-bar > ul {
+    margin: auto 0 auto 50px;
+}
+
+.filter-li {
+    display: inline-block;
+    margin: 0 15px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    color: #fff;
+    list-style: none;
+}
+
+.filter-li  span {
+    padding: 0;
+}
+
+.filter-li  span:after {
+    vertical-align: 0;
+}
+
+.filter-li div {
+    background-color: rgb(233, 233, 233);
+    border-radius: 0%;
+}
+
+.filter-li a {
+    color: #000;
+}
+
+.filter-li a:hover {
+    background-image: linear-gradient(to right, rgba(255, 50, 50, 0.3), rgba(156, 156, 156, 0.3));
+    background-color: transparent;
+}
