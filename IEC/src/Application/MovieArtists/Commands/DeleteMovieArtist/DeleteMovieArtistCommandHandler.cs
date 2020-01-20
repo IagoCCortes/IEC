@@ -5,7 +5,6 @@ using Application.Common.Exceptions;
 using Application.Common.Interfaces;
 using Domain.Entities;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.MovieArtists.Commands.DeleteMovieArtist
 {
@@ -19,19 +18,15 @@ namespace Application.MovieArtists.Commands.DeleteMovieArtist
 
         public async Task<Unit> Handle(MovieArtistCommand request, CancellationToken cancellationToken)
         {
-            var movie = await _context.Movies.FindAsync(request.MovieId);
-
-            if (movie == null)
-                throw new NotFoundException(nameof(Movie), request.MovieId);
+            var movie = await _context.Movies.FindAsync(request.MovieId)
+                ?? throw new NotFoundException(nameof(Movie), request.MovieId);
 
             for (var i = 0; i < request.ArtistIds.Count; i++)
             {
                 var movieArtist = _context.MovieArtists.FirstOrDefault(m => request.MovieId == m.MovieId 
-                                                    && request.ArtistIds[i] == m.ArtistId 
-                                                    && request.RoleIds[i] == m.RoleId);
-
-                if(movieArtist == null)
-                    throw new NotFoundException(nameof(MovieArtist), request.ArtistIds[i]);
+                    && request.ArtistIds[i] == m.ArtistId 
+                    && request.RoleIds[i] == m.RoleId)
+                    ?? throw new NotFoundException(nameof(MovieArtist), request.ArtistIds[i]);
 
                 _context.MovieArtists.Remove(movieArtist);
             }

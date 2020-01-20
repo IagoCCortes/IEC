@@ -22,10 +22,8 @@ namespace Application.Movies.Commands.UpdateMovie
         public async Task<Unit> Handle(UpdateMovieCommand request, CancellationToken cancellationToken)
         {
             var movie = await _context.Movies
-                        .FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken);
-
-            if (movie == null)
-                throw new NotFoundException(nameof(Movie), request.Id);
+                .FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken)
+                ?? throw new NotFoundException(nameof(Movie), request.Id);
 
             _mapper.Map(request, movie);
 

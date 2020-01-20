@@ -24,10 +24,8 @@ namespace Application.Artists.Queries.GetArtistDetail
         public async Task<ArtistDetailVM> Handle(GetArtistDetailQuery request, CancellationToken cancellationToken)
         {
             var artist = await _mapper.ProjectTo<ArtistDetailVM>(_context.Artists)
-                                      .FirstOrDefaultAsync(a => a.Id == request.Id);
-
-            if (artist == null)
-                throw new NotFoundException(nameof(Artist), request.Id);
+                .FirstOrDefaultAsync(a => a.Id == request.Id)
+                ?? throw new NotFoundException(nameof(Artist), request.Id);
 
             return artist;
         }

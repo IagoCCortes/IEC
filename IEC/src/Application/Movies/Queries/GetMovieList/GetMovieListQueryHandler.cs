@@ -40,8 +40,7 @@ namespace Application.Movies.Queries.GetMovieList
             if(request.GenreIds != null)
             {
                 moviesQueryable = moviesQueryable.Where(m => 
-                    m.Genres.Any(x => request.GenreIds.Any(y => y == x)
-                ));
+                    m.Genres.Any(x => request.GenreIds.Any(y => y == x)));
             }
 
             if(!string.IsNullOrEmpty(request.OrderBy))

@@ -17,10 +17,9 @@ namespace Application.UserProfileArtists.Commands.DeleteUserProfileFollowArtists
         }
         public async Task<Unit> Handle(DeleteUserProfileFollowArtistCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.UserProfileFollowArtists.FirstOrDefaultAsync(us => us.ArtistId == request.ArtistId && us.UserProfileId == request.UserProfileId);
-
-            if(entity == null)
-                throw new NotFoundException(nameof(UserProfileFollowArtist), new { request.UserProfileId, request.ArtistId });
+            var entity = await _context.UserProfileFollowArtists
+                .FirstOrDefaultAsync(us => us.ArtistId == request.ArtistId && us.UserProfileId == request.UserProfileId)
+                ?? throw new NotFoundException(nameof(UserProfileFollowArtist), new { request.UserProfileId, request.ArtistId });
 
             _context.UserProfileFollowArtists.Remove(entity);
 

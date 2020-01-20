@@ -21,10 +21,9 @@ namespace Application.UserProfileMovies.Commands.UpdateUserProfileMovie
         }
         public async Task<Unit> Handle(UpdateUserProfileMovieCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.UserProfileMovies.FirstOrDefaultAsync(u => u.MovieId == request.MovieId && u.UserProfileId == request.UserProfileId);
-
-            if (entity == null)
-                throw new NotFoundException(nameof(UserProfileMovie), new { request.UserProfileId, request.MovieId });
+            var entity = await _context.UserProfileMovies
+                .FirstOrDefaultAsync(u => u.MovieId == request.MovieId && u.UserProfileId == request.UserProfileId) 
+                ?? throw new NotFoundException(nameof(UserProfileMovie), new { request.UserProfileId, request.MovieId });
 
             _mapper.Map(request, entity);
 

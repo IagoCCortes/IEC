@@ -23,10 +23,8 @@ namespace Application.Artists.Commands.UpdateArtist
         public async Task<Unit> Handle(UpdateArtistCommand request, CancellationToken cancellationToken)
         {
             var artist = await _context.Artists
-                .FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken);
-
-            if (artist == null)
-                throw new NotFoundException(nameof(Artist), request.Id);
+                .FirstOrDefaultAsync(a => a.Id == request.Id, cancellationToken)
+                ?? throw new NotFoundException(nameof(Artist), request.Id);
 
             _mapper.Map(request, artist);
 

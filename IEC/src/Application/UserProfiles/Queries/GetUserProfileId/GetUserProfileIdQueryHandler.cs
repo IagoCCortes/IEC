@@ -21,10 +21,8 @@ namespace Application.UserProfiles.Queries.GetUserProfileId
         }
         public async Task<UserProfileIdVM> Handle(GetUserProfileIdQuery request, CancellationToken cancellationToken)
         {
-            var userProfileId = await _context.UserProfiles.FirstOrDefaultAsync(u => u.UserId == request.Id);
-
-            if (userProfileId == null)
-                throw new NotFoundException(nameof(UserProfile), request.Id);
+            var userProfileId = await _context.UserProfiles.FirstOrDefaultAsync(u => u.UserId == request.Id)
+                ?? throw new NotFoundException(nameof(UserProfile), request.Id);
 
             var userProfileVm = new UserProfileIdVM { Id = userProfileId.Id };
 

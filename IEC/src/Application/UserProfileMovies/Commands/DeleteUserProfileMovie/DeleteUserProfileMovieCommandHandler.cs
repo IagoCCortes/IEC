@@ -17,10 +17,9 @@ namespace Application.UserProfileMovies.Commands.DeleteUserProfileMovie
         }
         public async Task<Unit> Handle(DeleteUserProfileMovieCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _context.UserProfileMovies.FirstOrDefaultAsync(us => us.MovieId == request.MovieId && us.UserProfileId == request.UserProfileId);
-
-            if(entity == null)
-                throw new NotFoundException(nameof(UserProfileMovie), new { request.UserProfileId, request.MovieId });
+            var entity = await _context.UserProfileMovies
+                .FirstOrDefaultAsync(us => us.MovieId == request.MovieId && us.UserProfileId == request.UserProfileId)
+                ?? throw new NotFoundException(nameof(UserProfileMovie), new { request.UserProfileId, request.MovieId });
 
             _context.UserProfileMovies.Remove(entity);
 

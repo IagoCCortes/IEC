@@ -18,12 +18,8 @@ namespace Application.Artists.Commands.DeleteArtist
         }
         public async Task<Unit> Handle(DeleteArtistCommand request, CancellationToken cancellationToken)
         {
-            var artist = await _context.Artists.FindAsync(request.Id);
-
-            if (artist == null)
-            {
-                throw new NotFoundException(nameof(Artist), request.Id);
-            }
+            var artist = await _context.Artists.FindAsync(request.Id) 
+                ?? throw new NotFoundException(nameof(Artist), request.Id);
 
             var hasConnections = _context.MovieArtists.Any(a => a.ArtistId == artist.Id);
             if (hasConnections)

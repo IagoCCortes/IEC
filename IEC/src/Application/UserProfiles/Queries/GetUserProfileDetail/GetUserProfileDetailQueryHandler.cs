@@ -20,10 +20,9 @@ namespace Application.UserProfiles.Queries.GetUserProfileDetail
         }
         public async Task<UserProfileDetailVM> Handle(GetUserProfileDetailQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _context.UserProfiles.FirstOrDefaultAsync(u => u.UserName == request.UserName);
-
-            if (entity == null)
-                throw new NotFoundException(nameof(UserProfile), request.UserName);
+            var entity = await _context.UserProfiles
+                .FirstOrDefaultAsync(u => u.UserName == request.UserName) 
+                ?? throw new NotFoundException(nameof(UserProfile), request.UserName);
 
             var userProfileDetail = _mapper.Map<UserProfileDetailVM>(entity);
 

@@ -19,10 +19,8 @@ namespace Application.Movies.Commands.DeleteMovie
         
         public async Task<Unit> Handle(DeleteMovieCommand request, CancellationToken cancellationToken)
         {
-            var movie = await _context.Movies.FindAsync(request.Id);
-
-            if (movie == null)
-                throw new NotFoundException(nameof(Movie), request.Id);
+            var movie = await _context.Movies.FindAsync(request.Id)
+                ?? throw new NotFoundException(nameof(Movie), request.Id);
 
             var hasArtists = _context.MovieArtists.Any(m => m.MovieId == movie.Id);
             if (hasArtists)

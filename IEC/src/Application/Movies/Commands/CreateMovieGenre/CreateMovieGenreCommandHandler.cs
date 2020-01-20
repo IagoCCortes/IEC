@@ -19,10 +19,8 @@ namespace Application.Movies.Commands.CreateMovieGenre
 
         public async Task<Unit> Handle(CreateMovieGenreCommand request, CancellationToken cancellationToken)
         {
-            var movie = await _context.Movies.FindAsync(request.MovieId);
-
-            if (movie == null)
-                throw new NotFoundException(nameof(Movie), request.MovieId);
+            var movie = await _context.Movies.FindAsync(request.MovieId)
+                ?? throw new NotFoundException(nameof(Movie), request.MovieId);
 
             _context.MovieMovieGenres.RemoveRange(_context.MovieMovieGenres.Where(m => m.MovieId == request.MovieId));
 
