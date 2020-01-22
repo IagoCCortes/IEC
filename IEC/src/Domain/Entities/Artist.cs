@@ -4,7 +4,7 @@ using Domain.Common;
 
 namespace Domain.Entities
 {
-    public class Artist : AuditableEntity
+    public class Artist : AuditableEntity, ISearchableEntity
     {
         public Artist()
         {
@@ -23,6 +23,6 @@ namespace Domain.Entities
         // public string PicturePublicId { get; set; }
         public ICollection<MovieArtist> MoviesArtist { get; private set; }
         public ICollection<UserProfileFollowArtist> UserProfilesFollowArtist { get; set; }
-
+        public string StringIdentifier { get {return ArtistName;} set { } }
     }
 }

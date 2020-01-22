@@ -6,6 +6,7 @@ using Application.Movies.Commands.DeleteMovie;
 using Application.Movies.Commands.UpdateMovie;
 using Application.Movies.Queries.GetMovieDetail;
 using Application.Movies.Queries.GetMovieList;
+using Application.SearchAll;
 // using Infrastructure.CloudiNary;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

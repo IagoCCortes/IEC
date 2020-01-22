@@ -3,9 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Movies.Commands.CreateMovieGenre;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Moq;
 using Xunit;
 
 namespace Application.UnitTests.Movies.Commands
@@ -31,7 +29,7 @@ namespace Application.UnitTests.Movies.Commands
             await _sut.Handle(command, CancellationToken.None);
             var result = await Context.MovieMovieGenres.Where(g => g.MovieId == movieId).ToListAsync();
 
-            // // Assert
+            // Assert
             Assert.Equal(expected, result.Count);
         }
 

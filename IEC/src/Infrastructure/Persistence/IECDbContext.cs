@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,9 +56,22 @@ namespace Infrastructure.Persistence
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+            builder.ApplyConfigurationsFromAssembly(typeof(IECDbContext).Assembly);
+            // builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
             base.OnModelCreating(builder);
+        }
+
+        public IQueryable<T> GetQuery<T>(Type EntityType)
+        {
+            var pq = from p in this.GetType().GetProperties()
+                    where p.PropertyType.IsGenericType
+                        && p.PropertyType.GetGenericTypeDefinition() == typeof(DbSet<>)
+                        && p.PropertyType.GenericTypeArguments[0] ==  EntityType
+                    select p;
+            var prop = pq.Single();
+
+            return (IQueryable<T>)prop.GetValue(this);
         }
     }
 }

@@ -9,7 +9,10 @@ namespace Application.Common.Mappings
     {
         public MappingProfile()
         {
-            ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+            // Faster
+            ApplyMappingsFromAssembly(typeof(MappingProfile).Assembly);
+            // Slower
+            // ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

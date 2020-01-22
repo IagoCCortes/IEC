@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain.Entities;
@@ -19,5 +21,6 @@ namespace Application.Common.Interfaces
         DbSet<UserProfileMovieStatus> UserProfileMovieStatuses { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        public IQueryable<T> GetQuery<T>(Type EntityType);
     }
 }

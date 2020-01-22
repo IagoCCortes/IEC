@@ -4,7 +4,7 @@ using Domain.Common;
 
 namespace Domain.Entities
 {
-    public class Movie : AuditableEntity
+    public class Movie : AuditableEntity, ISearchableEntity
     {
         public Movie()
         {
@@ -19,6 +19,7 @@ namespace Domain.Entities
         public int? Runtime { get; set; }
         public DateTime ReleaseDate { get; set; }
         public string PosterUrl { get; set; }
+        public string StringIdentifier { get {return Title;} set { } }
         // public string PosterPublicId { get; set; }
         public ICollection<MovieMovieGenre> MovieMovieGenres { get; private set; }
         public ICollection<MovieArtist> MovieArtists { get; private set; }

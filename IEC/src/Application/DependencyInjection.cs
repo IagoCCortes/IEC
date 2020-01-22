@@ -10,8 +10,10 @@ namespace Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-            services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            services.AddMediatR(Assembly.GetExecutingAssembly());
+            // services.AddAutoMapper(Assembly.GetExecutingAssembly());
+            // services.AddMediatR(Assembly.GetExecutingAssembly());
+            services.AddAutoMapper(typeof(DependencyInjection).Assembly);
+            services.AddMediatR(typeof(DependencyInjection).Assembly);
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPerformanceBehaviour<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
