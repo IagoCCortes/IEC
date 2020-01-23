@@ -28,7 +28,7 @@ namespace Application.UnitTests.Movies.Commands
             var movie = await Context.Movies.FindAsync(command.Id);
 
             // Assert
-            movie.Title.ShouldBe(command.Title);
+            movie.Name.ShouldBe(command.Title);
         }
 
         [Fact]

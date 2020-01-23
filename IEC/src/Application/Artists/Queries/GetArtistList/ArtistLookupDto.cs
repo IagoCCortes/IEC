@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Application.Common.Mappings;
 using AutoMapper;
 using Domain.Entities;
@@ -16,7 +17,14 @@ namespace Application.Artists.Queries.GetArtistList
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Artist, ArtistLookupDto>();
+            int userId = 0;
+            profile.CreateMap<Artist, ArtistLookupDto>()
+                .ForMember(a => a.ArtistName, opt => opt.MapFrom(a => a.Name))
+                .ForMember(a => a.PictureUrl, opt => opt.MapFrom(a => a.ImageUrl))
+                .ForMember(a => a.IsInUserList, opt => opt.MapFrom(a => 
+                    a.UserProfilesFollowArtist
+                        .Any(up => up.UserProfileId == userId && up.ArtistId == a.Id)
+                ));
         }
     }
 }

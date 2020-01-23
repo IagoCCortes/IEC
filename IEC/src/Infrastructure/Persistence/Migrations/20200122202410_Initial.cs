@@ -310,6 +310,30 @@ namespace Infrastructure.Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserProfileFollowArtists",
+                columns: table => new
+                {
+                    UserProfileId = table.Column<int>(nullable: false),
+                    ArtistId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserProfileFollowArtists", x => new { x.UserProfileId, x.ArtistId });
+                    table.ForeignKey(
+                        name: "FK_UserProfileFollowArtists_Artists_ArtistId",
+                        column: x => x.ArtistId,
+                        principalTable: "Artists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_UserProfileFollowArtists_UserProfiles_UserProfileId",
+                        column: x => x.UserProfileId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserProfileMovies",
                 columns: table => new
                 {
@@ -396,6 +420,11 @@ namespace Infrastructure.Persistence.Migrations
                 column: "MovieGenreId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_UserProfileFollowArtists_ArtistId",
+                table: "UserProfileFollowArtists",
+                column: "ArtistId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserProfileMovies_MovieId",
                 table: "UserProfileMovies",
                 column: "MovieId");
@@ -430,6 +459,9 @@ namespace Infrastructure.Persistence.Migrations
                 name: "MovieMovieGenres");
 
             migrationBuilder.DropTable(
+                name: "UserProfileFollowArtists");
+
+            migrationBuilder.DropTable(
                 name: "UserProfileMovies");
 
             migrationBuilder.DropTable(
@@ -439,13 +471,13 @@ namespace Infrastructure.Persistence.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Artists");
-
-            migrationBuilder.DropTable(
                 name: "MovieRoles");
 
             migrationBuilder.DropTable(
                 name: "MovieGenres");
+
+            migrationBuilder.DropTable(
+                name: "Artists");
 
             migrationBuilder.DropTable(
                 name: "Movies");

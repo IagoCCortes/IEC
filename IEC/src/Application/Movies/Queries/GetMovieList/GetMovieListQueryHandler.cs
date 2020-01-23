@@ -23,19 +23,7 @@ namespace Application.Movies.Queries.GetMovieList
 
         public async Task<MovieListVM> Handle(GetMovieListQuery request, CancellationToken cancellationToken)
         {
-            var moviesQueryable = request.UserId != null ? 
-                _context.Movies.Select(m => new MovieLookupDto {
-                    Id = m.Id,
-                    PosterUrl = m.PosterUrl,
-                    ReleaseDate = m.ReleaseDate,
-                    Runtime = m.Runtime,
-                    Title = m.Title,
-                    Genres = m.MovieMovieGenres.Where(mg => mg.MovieId == m.Id).Select(mg => mg.MovieGenreId),
-                    IsInUserList = m.UserProfilesMovie
-                        .Any(up => up.UserProfileId == request.UserId
-                                   && up.MovieId == m.Id)
-                }) 
-                : _mapper.ProjectTo<MovieLookupDto>(_context.Movies);
+            var moviesQueryable =  _mapper.ProjectTo<MovieLookupDto>(_context.Movies, new { userId = request.UserId ?? 0});
 
             if(request.GenreIds != null)
             {

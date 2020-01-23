@@ -28,11 +28,11 @@ namespace Application.Movies.Queries.GetMovieDetail
             .ForMember(m => m.Stars,
                        opt => opt.MapFrom(ps => ps.MovieArtists
                                  .Where(ma => ma.RoleId == (int) MovieRoleEnum.Star)
-                                 .Select(ma => ma.Artist.ArtistName)))
+                                 .Select(ma => ma.Artist.Name)))
             .ForMember(m => m.Directors,
                        opt => opt.MapFrom(ps => ps.MovieArtists
                                  .Where(ma => ma.RoleId == (int) MovieRoleEnum.Director)
-                                 .Select(ma => ma.Artist.ArtistName)));
+                                 .Select(ma => ma.Artist.Name)));
         }
     } 
 }

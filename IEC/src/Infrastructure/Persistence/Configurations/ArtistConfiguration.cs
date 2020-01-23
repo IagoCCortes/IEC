@@ -8,9 +8,8 @@ namespace Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Artist> builder)
         {
-            builder.Property(a => a.ArtistName).IsRequired();
-            builder.Property(a => a.StringIdentifier).HasColumnName("ArtistName");
-            // builder.Ignore(a => a.StringIdentifier);
+            builder.Property(a => a.Name).HasColumnName("ArtistName").IsRequired();
+            builder.Property(a => a.ImageUrl).HasColumnName("PictureUrl");
         }
     }
 }

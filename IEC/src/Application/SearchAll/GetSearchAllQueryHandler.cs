@@ -28,13 +28,14 @@ namespace Application.SearchAll
             {
                 
                 var dtoResult = await _context.GetQuery<ISearchableEntity>(typeUsingISearchableEntity)
-                .Where(x => x.StringIdentifier.ToLower().Contains(request.ValueToSearch.ToLower()))
+                .Where(x => x.Name.ToLower().Contains(request.ValueToSearch.ToLower()))
                 .Select(x => new SearchAllLookupDto {
                     Id = x.Id, 
-                    MatchedValue = x.StringIdentifier
+                    MatchedValue = x.Name,
+                    ImageUrl = x.ImageUrl
                 }).ToListAsync();
 
-                dict[typeUsingISearchableEntity.ToString()] = dtoResult;
+                dict[typeUsingISearchableEntity.ToString().Split('.').Last()] = dtoResult;
             }
 
             return new SearchAllVM{

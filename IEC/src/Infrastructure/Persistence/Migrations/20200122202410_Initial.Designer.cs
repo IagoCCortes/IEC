@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(IECDbContext))]
-    [Migration("20200115230026_AddedUserProfileFollowArtistEntity")]
-    partial class AddedUserProfileFollowArtistEntity
+    [Migration("20200122202410_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,10 +23,6 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("ArtistName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Bio")
                         .HasColumnType("TEXT");
@@ -49,13 +45,19 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<int?>("Height")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnName("PictureUrl")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PictureUrl")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("ArtistName")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("RealName")
@@ -78,16 +80,22 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("ImageUrl")
+                        .HasColumnName("PosterUrl")
+                        .HasColumnType("TEXT");
+
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LastModifiedBy")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Plot")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnName("Title")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PosterUrl")
+                    b.Property<string>("Plot")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ReleaseDate")
@@ -95,10 +103,6 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.Property<int?>("Runtime")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 

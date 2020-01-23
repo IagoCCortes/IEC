@@ -8,9 +8,8 @@ namespace Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Movie> builder)
         {
-            builder.Property(m => m.Title).IsRequired();
-            builder.Property(m => m.StringIdentifier).HasColumnName("Title");
-            // builder.Ignore(m => m.StringIdentifier);
+            builder.Property(m => m.Name).HasColumnName("Title").IsRequired();
+            builder.Property(m => m.ImageUrl).HasColumnName("PosterUrl");
         }
     }
 }

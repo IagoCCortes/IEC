@@ -28,7 +28,7 @@ namespace Application.UnitTests.Artists.Commands
             var artist = await Context.Artists.FindAsync(command.Id);
 
             // Assert
-            artist.ArtistName.ShouldBe(command.ArtistName);
+            artist.Name.ShouldBe(command.ArtistName);
         }
 
         [Fact]

@@ -30,8 +30,8 @@ namespace Application.UnitTests.Artists.Commands
             var artist = await _sut.Handle(command, CancellationToken.None);
             var result = await Context.Artists.FindAsync(artist.Id);
 
-            // // Assert
-            result.ArtistName.ShouldBe(command.ArtistName);
+            // Assert
+            result.Name.ShouldBe(command.ArtistName);
         }
 
         [Fact]

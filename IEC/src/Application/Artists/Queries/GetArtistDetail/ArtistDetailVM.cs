@@ -25,7 +25,7 @@ namespace Application.Artists.Queries.GetArtistDetail
             .ForMember(a => a.Movies, conf => conf
             .MapFrom(a => new ArtistMovieRole{ 
                 MovieIds = a.MoviesArtist.Select(ma => ma.MovieId),
-                MovieTitles = a.MoviesArtist.Select(ma => ma.Movie.Title),
+                MovieTitles = a.MoviesArtist.Select(ma => ma.Movie.Name),
                 RoleIds = a.MoviesArtist.Select(ma => ma.RoleId)
             }));
         }

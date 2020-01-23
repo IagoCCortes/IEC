@@ -31,8 +31,8 @@ namespace Application.UnitTests.Movies.Commands
             var movie = await _sut.Handle(command, CancellationToken.None);
             var result = await Context.Movies.FindAsync(movie.Id);
 
-            // // Assert
-            result.Title.ShouldBe(command.Title);
+            // Assert
+            result.Name.ShouldBe(command.Title);
         }
 
         [Fact]
