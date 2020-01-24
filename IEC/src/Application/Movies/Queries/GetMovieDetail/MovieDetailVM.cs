@@ -23,16 +23,19 @@ namespace Application.Movies.Queries.GetMovieDetail
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Movie, MovieDetailVM>()
+            .ForMember(m => m.PosterUrl, opt => opt.MapFrom(m => m.ImageUrl))
+            .ForMember(m => m.Title, opt => opt.MapFrom(m => m.Name))
             .ForMember(m => m.Genres, 
-                       opt => opt.MapFrom(ps => ps.MovieMovieGenres.Select(mg => mg.MovieGenreId.ToString())))
+                opt => opt.MapFrom(ps => ps.MovieMovieGenres
+                    .Select(mg => mg.MovieGenreId.ToString())))
             .ForMember(m => m.Stars,
-                       opt => opt.MapFrom(ps => ps.MovieArtists
-                                 .Where(ma => ma.RoleId == (int) MovieRoleEnum.Star)
-                                 .Select(ma => ma.Artist.Name)))
+                opt => opt.MapFrom(ps => ps.MovieArtists
+                    .Where(ma => ma.RoleId == (int) MovieRoleEnum.Star)
+                    .Select(ma => ma.Artist.Name)))
             .ForMember(m => m.Directors,
-                       opt => opt.MapFrom(ps => ps.MovieArtists
-                                 .Where(ma => ma.RoleId == (int) MovieRoleEnum.Director)
-                                 .Select(ma => ma.Artist.Name)));
+                opt => opt.MapFrom(ps => ps.MovieArtists
+                    .Where(ma => ma.RoleId == (int) MovieRoleEnum.Director)
+                    .Select(ma => ma.Artist.Name)));
         }
     } 
 }

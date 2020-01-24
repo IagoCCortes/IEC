@@ -3,6 +3,9 @@
     margin: 0 2px;
 }
 
+/*************************
+********Pagination********
+*************************/
 .stick-bottom {
     position: fixed;
     bottom: 0;
@@ -14,6 +17,9 @@
     opacity: 1;
 }
 
+/*************************
+********Responsive********
+*************************/
 @media (min-width: 650px) {
     .col-sm-p {
         flex: 0 0 30%;
@@ -35,6 +41,9 @@
     }
 }
 
+/*************************
+********Filter-bar********
+*************************/
 .filter-bar {
     width: 100%;
     display: flex;
@@ -71,8 +80,6 @@
 .filter-li {
     display: inline-block;
     margin: 0 15px;
-    padding-top: 3px;
-    padding-bottom: 3px;
     color: #fff;
     list-style: none;
 }
@@ -88,6 +95,7 @@
 .filter-li div {
     background-color: rgb(233, 233, 233);
     border-radius: 0%;
+    /* margin-top: 0; */
 }
 
 .filter-li a,
@@ -102,9 +110,33 @@
     background-color: transparent;
 }
 
+.dropdown-menu {
+    animation: dropdownInTop 0.5s ease-out;
+    backface-visibility: hidden;
+    /* animation-duration: 0.5s;
+    animation-timing-function: ease-out; */
+}
+
 .dropdown-menu:not(.ignore) {
     height: 360px;
     overflow-x: hidden;
+}
+
+/*Animation*/
+@keyframes dropdownInTop {
+    0% {
+        opacity: 0;
+        transform: translateX(-1000px);
+    }
+
+    80% {
+        transform: translate(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(0);
+    }
 }
 
 /*************************

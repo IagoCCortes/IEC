@@ -1,26 +1,31 @@
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-  <a class="navbar-brand mr-auto mr-lg-0" href="#"><img class="logo" src="assets/images/logo.png" alt="IEC Logo"></a>
+<nav class="fixed-navbar">
+  <a class="nav-brand" href="#"><img class="logo" src="assets/images/logo.png" alt="IEC Logo"></a>
   <button class="navbar-toggler p-0 border-0" type="button" (click)="toggleCollapse()">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="navbar-collapse offcanvas-collapse d-flex" dropdown [collapse]="isCollapsed">
-    <ul class="navbar-nav">
+  <div class="nav-collapse" dropdown>
+     <!-- [collapse]="isCollapsed"> -->
+    <ul class="nav-items">
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/movies']">Browse</a>
+        <a class="nav-item-a" [routerLink]="['/movies']">Browse</a>
       </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/artists']">Artists</a>
-      </li> -->
-      <li class="nav-item" *ngIf="loggedIn()">
-        <a class="nav-link" [routerLink]="['/admin']" *appHasRole="['Admin']">Admin</a>
+      <li class="nav-item" *appHasRole="['Admin']">
+        <a class="nav-item-a" [routerLink]="['/admin']">Admin</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="search" type="text" placeholder="Search">
-      <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+    <form class="nav-search" [ngClass]="{'nav-search-focus': isFocused}">
+      <div class="categories">
+        <label class="categories-current">All</label>
+      </div>
+      <div class="search-container">
+        <input class="search" type="text" placeholder="Search" (focus)="isFocused=true" (blur)="isFocused=false">
+      </div>
+      <div class="search-button">
+        <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+      </div>
     </form>
-    <div class="ml-auto">
+    <div class="nav-user">
       <div *ngIf="!loggedIn()">
         <button type="button" class="btn btn-link btn-reg" (click)="openModal('Join us')">Join</button>
         <button type="button" class="btn btn-link btn-log" (click)="openModal('Login')">Login</button>
@@ -33,7 +38,7 @@
           {{authService.decodedToken?.unique_name | titlecase}}
         </a>
       
-        <div class="dropdown-menu mt-3 dd-user-menu" *dropdownMenu>
+        <div class="dropdown-menu dd-user-menu" *dropdownMenu>
           <a class="dropdown-item" [routerLink]="['/users/' + authService.decodedToken.UserProfileId]" ><i class="fa fa-user"></i> My Profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>

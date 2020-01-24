@@ -19,7 +19,6 @@ export class NavComponent implements OnInit {
     ignoreBackdropClick: false
   };
 
-
   user: User;
 
   choice = 'Login';

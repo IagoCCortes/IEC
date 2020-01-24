@@ -22,12 +22,14 @@ namespace Application.Artists.Queries.GetArtistDetail
         public void Mapping(Profile profile)
         {
             profile.CreateMap<Artist, ArtistDetailVM>()
-            .ForMember(a => a.Movies, conf => conf
-            .MapFrom(a => new ArtistMovieRole{ 
-                MovieIds = a.MoviesArtist.Select(ma => ma.MovieId),
-                MovieTitles = a.MoviesArtist.Select(ma => ma.Movie.Name),
-                RoleIds = a.MoviesArtist.Select(ma => ma.RoleId)
-            }));
+                .ForMember(a => a.PictureUrl, opt => opt.MapFrom(a => a.ImageUrl))
+                .ForMember(a => a.ArtistName, opt => opt.MapFrom(a => a.Name))
+                .ForMember(a => a.Movies, conf => conf
+                .MapFrom(a => new ArtistMovieRole{ 
+                    MovieIds = a.MoviesArtist.Select(ma => ma.MovieId),
+                    MovieTitles = a.MoviesArtist.Select(ma => ma.Movie.Name),
+                    RoleIds = a.MoviesArtist.Select(ma => ma.RoleId)
+                }));
         }
     }
 
