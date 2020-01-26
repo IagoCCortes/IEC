@@ -1,6 +1,10 @@
+.list {
+    font-size: 1.5rem;
+}
+
 .card-wrapper {
     padding: 0;
-    margin: 0 2px;
+    margin: 0 .2rem;
 }
 
 /*************************
@@ -20,21 +24,21 @@
 /*************************
 ********Responsive********
 *************************/
-@media (min-width: 650px) {
+@media (min-width: 65rem) {
     .col-sm-p {
         flex: 0 0 30%;
         max-width: 30%;
     }
 }
 
-@media (min-width: 990px) {
+@media (min-width: 99rem) {
     .col-md-p {
         flex: 0 0 20%;
         max-width: 20%;
     }
 }
 
-@media (min-width: 1350px) {
+@media (min-width: 135rem) {
     .col-lg-p {
         flex: 0 0 15%;
         max-width: 15%;
@@ -47,7 +51,7 @@
 .filter-bar {
     width: 100%;
     display: flex;
-    height: 30px;
+    height: 3rem;
     background-color: #1a1a1b;
 }
 
@@ -60,28 +64,35 @@
 }
 
 .text-center {
-    margin-top: 100px;
+    margin-top: 10rem;
 }
 
 .filter-bar {
     position: fixed;
     z-index: 999;
-    top: 52px;
+    top: 4.8rem;
     display: flex;
-    height:30px;
+    height:3rem;
     background-color: var(--filter-bar);
 }
 
 .filter-bar > ul {
-    margin: auto 0 auto 50px;
+    margin: auto 0 auto 5rem;
     text-transform: capitalize;
 }
 
 .filter-li {
     display: inline-block;
-    margin: 0 15px;
+    margin: 0 1.5rem;
     color: #fff;
     list-style: none;
+}
+
+.dd-item {
+    font-size: 1.5rem;
+    display: block;
+    width: 100%;
+    padding: 0.25rem 1.5rem;
 }
 
 .filter-li > span {
@@ -103,6 +114,10 @@
     color: #000;
 }
 
+.filter-li:hover {
+    cursor: pointer;
+}
+
 .selected,
 .filter-li a:hover,
 .filter-li div span:hover {
@@ -118,7 +133,7 @@
 }
 
 .dropdown-menu:not(.ignore) {
-    height: 360px;
+    height: 36rem;
     overflow-x: hidden;
 }
 
@@ -126,11 +141,11 @@
 @keyframes dropdownInTop {
     0% {
         opacity: 0;
-        transform: translateX(-1000px);
+        transform: translateX(-100rem);
     }
 
     80% {
-        transform: translate(10px);
+        transform: translate(1rem);
     }
 
     100% {
@@ -161,7 +176,7 @@
 **************************/
 /* width */
 ::-webkit-scrollbar {
-  width: 5px;
+  width: .5rem;
 }
 
 /* Track */

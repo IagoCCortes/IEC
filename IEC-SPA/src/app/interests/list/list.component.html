@@ -1,38 +1,38 @@
-<div [ngClass]="{'movies':'movies-color','artists':'artists-color'}[entityType]">
+<div class="list" [ngClass]="{'movies':'movies-color','artists':'artists-color'}[entityType]">
   <div class="filter-bar">
     <ul>
-      <li class="nav-item dropdown filter-li" dropdown>
-      <span class="nav-link dropdown-toggle" dropdownToggle>{{entityType}}</span>
+      <li class="dropdown filter-li" dropdown>
+      <span class="dropdown-toggle" dropdownToggle>{{entityType}}</span>
         <div class="dropdown-menu ignore" *dropdownMenu>
-          <a class="dropdown-item" href="#" [routerLink]="['/movies']">Movies</a>
-          <a class="dropdown-item" href="#" [routerLink]="['/artists']">Artists</a>
-          <!-- <a class="dropdown-item" href="#">Something else here</a> -->
+          <a class="dd-item" href="#" [routerLink]="['/movies']">Movies</a>
+          <a class="dd-item" href="#" [routerLink]="['/artists']">Artists</a>
+          <!-- <a class="dd-item" href="#">Something else here</a> -->
         </div>
       </li>
-      <li class="nav-item dropdown filter-li" *ngIf="entityType === 'movies'" dropdown>
-        <span class="nav-link dropdown-toggle" dropdownToggle>Genres</span>
+      <li class="dropdown filter-li" *ngIf="entityType === 'movies'" dropdown>
+        <span class="dropdown-toggle" dropdownToggle>Genres</span>
         <div class="dropdown-menu" *dropdownMenu>
-          <span class="dropdown-item" *ngFor="let genre of genreKeys" (click)="genresChanged(genre)" 
+          <span class="dd-item" *ngFor="let genre of genreKeys" (click)="genresChanged(genre)" 
           [ngClass]="entityParams[1].values.includes(genre) ? 'selected' : ''">{{genres[genre]}}</span>
         </div>
       </li>
-      <li class="nav-item dropdown filter-li" dropdown>
-        <span class="nav-link dropdown-toggle" dropdownToggle>Order by</span>
+      <li class="dropdown filter-li" dropdown>
+        <span class="dropdown-toggle" dropdownToggle>Order by</span>
         <div *ngIf="entityType === 'movies'">
           <div class="dropdown-menu ignore" *dropdownMenu>
-            <span class="dropdown-item" (click)="orderByChanged('title')" 
+            <span class="dd-item" (click)="orderByChanged('title')" 
             [ngClass]="entityParams[0].values === 'title' ? 'selected' : ''">Title</span>
-            <span class="dropdown-item" (click)="orderByChanged('runtime')" 
+            <span class="dd-item" (click)="orderByChanged('runtime')" 
             [ngClass]="entityParams[0].values === 'runtime' ? 'selected' : ''">Runtime</span>
-            <span class="dropdown-item" (click)="orderByChanged('release')" 
+            <span class="dd-item" (click)="orderByChanged('release')" 
             [ngClass]="entityParams[0].values === 'release' ? 'selected' : ''">Release date</span>
           </div>
         </div>
         <div *ngIf="entityType === 'artists'">
           <div class="dropdown-menu ignore" *dropdownMenu>
-            <span class="dropdown-item" (click)="orderByChanged('name')" 
+            <span class="dd-item" (click)="orderByChanged('name')" 
             [ngClass]="entityParams[0].values === 'name' ? 'selected' : ''">Name</span>
-            <span class="dropdown-item" (click)="orderByChanged('birthdate')" 
+            <span class="dd-item" (click)="orderByChanged('birthdate')" 
             [ngClass]="entityParams[0].values === 'birthdate' ? 'selected' : ''">Birthdate</span>
           </div>
         </div>

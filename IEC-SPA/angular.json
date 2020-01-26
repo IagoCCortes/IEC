@@ -24,8 +24,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/main.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -89,8 +94,13 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles/main.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles"
+              ]
+            },
             "scripts": []
           }
         },
@@ -120,6 +130,12 @@
           }
         }
       }
-    }},
-  "defaultProject": "IEC-SPA"
+    }
+  },
+  "defaultProject": "IEC-SPA",
+  "schematics": {
+    "@schematics/angular:component": {
+      "styleext": "scss"
+    }
+  }
 }

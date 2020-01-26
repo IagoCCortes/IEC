@@ -1,31 +1,33 @@
-<nav class="fixed-navbar">
-  <a class="nav-brand" href="#"><img class="logo" src="assets/images/logo.png" alt="IEC Logo"></a>
-  <button class="navbar-toggler p-0 border-0" type="button" (click)="toggleCollapse()">
+<nav class="navBar">
+  <a class="navBar__brand" href="#">
+    <img class="navBar__logo" src="assets/images/logo.png" alt="IEC Logo">
+  </a>
+  <!-- <button class="navbar-toggler p-0 border-0" type="button" (click)="toggleCollapse()">
     <span class="navbar-toggler-icon"></span>
-  </button>
+  </button> -->
 
-  <div class="nav-collapse" dropdown>
+  <div class="navBar__collapse" dropdown>
      <!-- [collapse]="isCollapsed"> -->
-    <ul class="nav-items">
-      <li class="nav-item">
-        <a class="nav-item-a" [routerLink]="['/movies']">Browse</a>
+    <ul class="navBar__items">
+      <li class="navBar__items__item">
+        <a [routerLink]="['/movies']">Browse</a>
       </li>
-      <li class="nav-item" *appHasRole="['Admin']">
-        <a class="nav-item-a" [routerLink]="['/admin']">Admin</a>
+      <li class="navBar__items__item" *appHasRole="['Admin']">
+        <a [routerLink]="['/admin']">Admin</a>
       </li>
     </ul>
-    <form class="nav-search" [ngClass]="{'nav-search-focus': isFocused}">
-      <div class="categories">
-        <label class="categories-current">All</label>
+    <form class="navBar__search" [ngClass]="{'navBar__search--focus': isFocused}">
+      <div class="search__categories">
+        <label class="categories__current">All</label>
       </div>
-      <div class="search-container">
-        <input class="search" type="text" placeholder="Search" (focus)="isFocused=true" (blur)="isFocused=false">
+      <div class="search__container" [ngClass]="{'navBar__search--focus': isFocused}">
+        <input class="search__input" type="text" placeholder="Search" (focus)="isFocused=true" (blur)="isFocused=false">
       </div>
-      <div class="search-button">
-        <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+      <div class="search__button">
+        <button class="btn--search" type="submit"><i class="fa fa-search"></i></button>
       </div>
     </form>
-    <div class="nav-user">
+    <div class="navBar__user">
       <div *ngIf="!loggedIn()">
         <button type="button" class="btn btn-link btn-reg" (click)="openModal('Join us')">Join</button>
         <button type="button" class="btn btn-link btn-log" (click)="openModal('Login')">Login</button>

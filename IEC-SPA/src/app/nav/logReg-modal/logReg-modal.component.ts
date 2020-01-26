@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './logReg-modal.component.html',
-  styleUrls: ['./logReg-modal.component.css']
+  styleUrls: ['./logReg-modal.component.scss']
 })
 export class LogRegModalComponent implements OnInit {
   @Output() logged = new EventEmitter();

@@ -1,11 +1,15 @@
+.cards {
+    font-size: 1.4rem;
+}
+
 .card-img-wrapper {
     overflow: hidden;
     position: relative;
 }
 
 .card-img-top {
-    height: 300px;
-    width: 200px;
+    height: 30rem;
+    width: 20rem;
     margin-left: auto;
     margin-right: auto;
 }
@@ -15,10 +19,11 @@
 } */
 
 .member-top {
+    font-size: 1.6rem;
     top: 30%;
     right: 10%;
     background-color: #222;
-    border: solid 1px #fff;
+    border: solid .1rem #fff;
     color: #fff;
 }
 
