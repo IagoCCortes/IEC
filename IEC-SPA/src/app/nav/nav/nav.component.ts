@@ -20,6 +20,8 @@ export class NavComponent implements OnInit {
   };
 
   user: User;
+  searchIn = 'All';
+  searchStr = '';
 
   choice = 'Login';
 
@@ -50,5 +52,10 @@ export class NavComponent implements OnInit {
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;
+  }
+
+  searchEntities() {
+    console.log('oi');
+    this.router.navigate(['/search/' + this.searchStr]);
   }
 }

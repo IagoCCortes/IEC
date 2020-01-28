@@ -3,7 +3,7 @@ namespace Application.SearchAll
     public class SearchAllLookupDto
     {
         public int Id { get; set; }
-        public string MatchedValue { get; set; }
+        public string Name { get; set; }
         public string ImageUrl { get; set; }
     }
 }

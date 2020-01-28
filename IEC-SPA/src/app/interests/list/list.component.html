@@ -1,5 +1,5 @@
 <div class="list" [ngClass]="{'movies':'movies-color','artists':'artists-color'}[entityType]">
-  <div class="filter-bar">
+  <div class="filter-bar u-flex">
     <ul>
       <li class="dropdown filter-li" dropdown>
       <span class="dropdown-toggle" dropdownToggle>{{entityType}}</span>
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <div class="d-flex justify-content-center stick-bottom">
+  <div class="u-flex justify-content-center stick-bottom">
     <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
       [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
       firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">

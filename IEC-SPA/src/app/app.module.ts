@@ -31,6 +31,8 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResolver } from './_resolver/search.resolver';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -51,7 +53,8 @@ export function tokenGetter() {
       ProfileComponent,
       RolesModalComponent,
       UserManagementComponent,
-      HomeComponent
+      HomeComponent,
+      SearchComponent
    ],
    imports: [
       BrowserAnimationsModule,
@@ -83,7 +86,8 @@ export function tokenGetter() {
       GenericRestService,
       MovieDetailResolver,
       MovieListResolver,
-      OpenAuthModalService
+      OpenAuthModalService,
+      SearchResolver
    ],
    entryComponents: [
       LogRegModalComponent,

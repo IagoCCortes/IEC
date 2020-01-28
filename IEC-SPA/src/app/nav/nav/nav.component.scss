@@ -1,4 +1,5 @@
 @import 'abstracts/variables';
+@import 'base/utilities';
 
 /*************************
 **********Mixins**********
@@ -11,7 +12,10 @@
 ********Variables*********
 *************************/
 $color-header: #1a1a1b;
-$color-border: #b4b4b4;
+$color-light-grey: #dbdbdb;
+$color-medium-grey: #b4b4b4;
+$color-dark-grey: #5c5c5c;
+$padding-searchBar: .4rem .6rem;
 
 /*************************
 **********NavBar**********
@@ -19,8 +23,7 @@ $color-border: #b4b4b4;
 .navBar {
     background-color: $color-header;
     border-bottom: 1px solid #111;
-    display: flex;
-    font-size: 1.6rem;
+    font-size: $default-font-size;
     left: 0;
     position: fixed;
     right: 0;
@@ -34,7 +37,7 @@ $color-border: #b4b4b4;
 
     /********Logo********/
     &__logo {
-        border-right: solid .1rem $color-border;
+        border-right: solid .1rem $color-medium-grey;
         display: block;
         height: 4rem;
         padding: 0 2rem;
@@ -43,13 +46,11 @@ $color-border: #b4b4b4;
     /***Navbar Items***/
     &__collapse {
         align-items: center;
-        display: flex;
         justify-content: center;
         width: 100%;
     }
 
-    &__items {
-        display: flex;
+    &__list {
         margin: 0;
 
         &__item {
@@ -57,21 +58,7 @@ $color-border: #b4b4b4;
             padding: .65rem 2rem;
 
             &:last-of-type {
-                border-right: .1rem solid $color-border;
-            }
-    
-            a {
-                color: $color-border;
-    
-                &:hover,
-                &:active {
-                    color: $color-white;
-                }
-    
-                &:link,
-                &:visited {
-                    text-decoration: none;
-                }
+                border-right: .1rem solid $color-medium-grey;
             }
         }
     }
@@ -81,49 +68,49 @@ $color-border: #b4b4b4;
         align-items: center;
         border: .2rem solid var(--search-border-color);
         color: $color-black;
-        display: flex;
-        left: 50%;
         margin: 0 1.5rem;
-        right: 50%;
         width: 30%;
-        --search-border-color: #1a1a1b;
+        --search-border-color: transparent;
 
         &--focus {
             --search-border-color: #c4aa00;
         }
 
-        .search__button {
+        &__button {
             background-color: $color-white;
             border-left: 0;
-
-            .btn--search {
-                background-color: transparent;
-                border: none;
-                padding: .4rem .6rem;
-            }
         }
 
-        .search__categories {
+        &__categories {
             background-color: $color-white;
-            border-right: .1rem solid $color-border;
+            border-right: .1rem solid $color-medium-grey;
+
+            &:hover {
+                background-color: $color-light-grey;
+            }
 
             .categories__current {
                 margin: 0;
-                padding: .4rem .6rem;
+                padding: $padding-searchBar;
+            }
+
+            .categories__list {
+                color: $color-light-grey;
+                font-size: 1.5rem;
             }
         }
 
-        .search__container {
+        &__container {
             border-left: 0;
             border-right: 0;
             flex: 1;
             width: 50%;
 
             .search__input {
-                font-size: 1.6rem;
+                font-size: $default-font-size;
                 outline: none;
                 border: 0;
-                padding: .4rem .6rem;
+                padding: $padding-searchBar;
                 width: 100%;
             }
         }
@@ -132,36 +119,51 @@ $color-border: #b4b4b4;
 
 /******User******/
 .navBar__user {
+    border-left: solid .1rem $color-medium-grey;
     margin-left: auto;
+    padding: .65rem 1.5rem;
 }
 
-.btn-reg,
-.btn-log {
-    text-decoration: none;
-    color: #ADAFAE;
+.btn--search {
+    background-color: transparent;
+    border: 0;
+    padding: $padding-searchBar;
 }
 
-.btn-reg { 
-    padding-left: 1.5rem; 
-    border-left: solid .1rem $color-border;
+.btn--text {
+    color: $color-medium-grey;
+    cursor: pointer;
+    font-size: $default-font-size;
+    &:hover,
+    &:active {
+        color: $color-white;
+    }
+    &:link,
+    &:visited {
+        text-decoration: none;
+    }
+
+    & + & {
+        padding-left: 2rem;
+    }
 }
 
-.btn-log,
-.user-nav { margin-right: 1.5rem; }
+.user {
+    cursor: pointer;
+}
 
 .dd-user-menu {
     font-size: 1.5rem;
-    left: -3.5rem !important; 
+    left: -3.4rem !important; 
     margin-top: .9rem;
 }
 
-.btn-reg:hover, 
-.btn-reg:active, 
-.btn-log:hover, 
-.btn-log:active {
-    color: $color-white;
-}
+.dropdown-item {
+    color: $color-light-grey;
+    cursor: pointer;
 
-.form-group span {
-    display: block;
+    &:hover {
+        color: $color-white;
+        background-color: $color-dark-grey;
+    }
 }

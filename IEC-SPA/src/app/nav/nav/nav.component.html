@@ -1,4 +1,4 @@
-<nav class="navBar">
+<nav class="navBar u-flex">
   <a class="navBar__brand" href="#">
     <img class="navBar__logo" src="assets/images/logo.png" alt="IEC Logo">
   </a>
@@ -6,37 +6,42 @@
     <span class="navbar-toggler-icon"></span>
   </button> -->
 
-  <div class="navBar__collapse" dropdown>
+  <div class="navBar__collapse u-flex" dropdown>
      <!-- [collapse]="isCollapsed"> -->
-    <ul class="navBar__items">
-      <li class="navBar__items__item">
-        <a [routerLink]="['/movies']">Browse</a>
+    <ul class="navBar__list u-flex">
+      <li class="navBar__list__item">
+        <a class="btn--text" [routerLink]="['/movies']">Browse</a>
       </li>
-      <li class="navBar__items__item" *appHasRole="['Admin']">
-        <a [routerLink]="['/admin']">Admin</a>
+      <li class="navBar__list__item" *appHasRole="['Admin']">
+        <a class="btn--text" [routerLink]="['/admin']">Admin</a>
       </li>
     </ul>
-    <form class="navBar__search" [ngClass]="{'navBar__search--focus': isFocused}">
-      <div class="search__categories">
-        <label class="categories__current">All</label>
+    <form class="navBar__search u-flex" [ngClass]="{'navBar__search--focus': isFocused}" (ngSubmit)="searchEntities()">
+      <div class="navBar__search__categories dropdown" ng-init="category = 'All'" dropdown>
+      <label class="categories__current dropdown-toggle" dropdownToggle>{{searchIn}}</label>
+        <ul class="categories__list dropdown-menu" *dropdownMenu>
+          <li class="dropdown-item" (click)="searchIn = 'All'">All</li>
+          <li class="dropdown-item" (click)="searchIn = 'Artists'">Artists</li>
+          <li class="dropdown-item" (click)="searchIn = 'Movies'">Movies</li>
+        </ul>
       </div>
-      <div class="search__container" [ngClass]="{'navBar__search--focus': isFocused}">
-        <input class="search__input" type="text" placeholder="Search" (focus)="isFocused=true" (blur)="isFocused=false">
+      <div class="navBar__search__container" [ngClass]="{'navBar__search--focus': isFocused}">
+        <input name="search" [(ngModel)]="searchStr" class="search__input" type="text" placeholder="Search" (focus)="isFocused=true" (blur)="isFocused=false">
       </div>
-      <div class="search__button">
-        <button class="btn--search" type="submit"><i class="fa fa-search"></i></button>
+      <div class="navBar__search__button">
+        <button class="btn--search"  type="submit"><i class="fa fa-search"></i></button>
       </div>
     </form>
     <div class="navBar__user">
       <div *ngIf="!loggedIn()">
-        <button type="button" class="btn btn-link btn-reg" (click)="openModal('Join us')">Join</button>
-        <button type="button" class="btn btn-link btn-log" (click)="openModal('Login')">Login</button>
+        <a class="btn--text" (click)="openModal('Join us')">Join</a>
+        <a class="btn--text" (click)="openModal('Login')">Login</a>
       </div>
       <div dropdown *ngIf="loggedIn()" class="dropdown">
         <!-- <span class="mr-1">
           <img src="{{photoUrl || '../../assets/user.png'}}" alt="">
         </span> -->
-        <a class="dropdown-toggle user-nav" dropdownToggle (click)="false">
+        <a class="dropdown-toggle user" dropdownToggle (click)="false">
           {{authService.decodedToken?.unique_name | titlecase}}
         </a>
       

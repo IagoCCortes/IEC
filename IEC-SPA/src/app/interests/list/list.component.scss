@@ -1,20 +1,22 @@
+@import 'base/utilities';
+
 .list {
     font-size: 1.5rem;
 }
 
 .card-wrapper {
-    padding: 0;
     margin: 0 .2rem;
+    padding: 0;
 }
 
 /*************************
 ********Pagination********
 *************************/
 .stick-bottom {
-    position: fixed;
     bottom: 0;
-    width: 100%;
     opacity: 70%;
+    position: fixed;
+    width: 100%;
 }
 
 .stick-bottom:hover {
@@ -49,31 +51,16 @@
 ********Filter-bar********
 *************************/
 .filter-bar {
-    width: 100%;
-    display: flex;
+    background-color: var(--filter-bar);
     height: 3rem;
-    background-color: #1a1a1b;
-}
-
-.sub-nav {
-    display: flex;
-}
-
-.sub-nav li {
-    list-style: none;
+    position: fixed;
+    top: 4.8rem;
+    width: 100%;
+    z-index: 999;
 }
 
 .text-center {
     margin-top: 10rem;
-}
-
-.filter-bar {
-    position: fixed;
-    z-index: 999;
-    top: 4.8rem;
-    display: flex;
-    height:3rem;
-    background-color: var(--filter-bar);
 }
 
 .filter-bar > ul {

@@ -10,6 +10,8 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { ListComponent } from './interests/list/list.component';
 import { ProfileComponent } from './user/profile/profile.component';
 import { HomeComponent } from './home/home.component';
+import { SearchComponent } from './search/search.component';
+import { SearchResolver } from './_resolver/search.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent},
@@ -23,6 +25,8 @@ export const appRoutes: Routes = [
     },
     {path: 'movies', component: ListComponent,
         resolve: {entities: MovieListResolver}},
+    {path: 'search/:searchStr', component: SearchComponent,
+        resolve: {results: SearchResolver}},
     {path: 'movies/:id', component: MovieDetailComponent,
         resolve: {movie: MovieDetailResolver}},
     {path: 'artists', component: ListComponent,

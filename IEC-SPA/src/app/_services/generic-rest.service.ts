@@ -35,10 +35,8 @@ export class GenericRestService<T> {
       }
     }
 
-    return this.http
-      .get<T[]>(this.baseUrl + entity, { observe: 'response', params })
-      .pipe(
-        map(response => {
+    return this.http.get<T[]>(this.baseUrl + entity, { observe: 'response', params })
+      .pipe(map(response => {
           paginatedResult.result = response.body;
           if (response.headers.get('Pagination') != null) {
             paginatedResult.pagination = JSON.parse(
@@ -53,6 +51,10 @@ export class GenericRestService<T> {
 
   getEntity(id: number, entity: string): Observable<T> {
     return this.http.get<T>(this.baseUrl + entity + '/' + id);
+  }
+
+  getEntitiesStr(str: string, entity: string): Observable<T[]> {
+    return this.http.get<T[]>(this.baseUrl + entity + '/' + str);
   }
 
   postEntity(url: string, entity: object) {

@@ -31,7 +31,7 @@ namespace Application.SearchAll
                 .Where(x => x.Name.ToLower().Contains(request.ValueToSearch.ToLower()))
                 .Select(x => new SearchAllLookupDto {
                     Id = x.Id, 
-                    MatchedValue = x.Name,
+                    Name = x.Name,
                     ImageUrl = x.ImageUrl
                 }).ToListAsync();
 
