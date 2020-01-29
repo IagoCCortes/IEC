@@ -2,6 +2,8 @@ using System.Threading.Tasks;
 using Application.UserProfileMovies.Commands.CreateUserProfileMovie;
 using Application.UserProfileMovies.Commands.DeleteUserProfileMovie;
 using Application.UserProfileMovies.Commands.UpdateUserProfileMovie;
+using Application.UserProfileMovies.Queries;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebUI.Controllers
@@ -9,6 +11,13 @@ namespace WebUI.Controllers
     [Route("api/users/{userId}/movies")]
     public class UserMoviesController : BaseController
     {
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> GetUserProfileMovieAsync(int userId)
+        {
+            var movies = await Mediator.Send(new UserProfileMovieQuery { UserProfileId = userId });
+            return Ok(movies);
+        }
         [HttpPost("{movieId}")]
         public async Task<IActionResult> CreateUserProfileMovieAsync(int userId, int movieId, [FromBody]CreateUserProfileMovieCommand command)
         {

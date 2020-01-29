@@ -20,7 +20,7 @@ export class NavComponent implements OnInit {
   };
 
   user: User;
-  searchIn = 'All';
+  searchIn = {returnVal: 'All', displayVal: 'All'};
   searchStr = '';
 
   choice = 'Login';
@@ -55,7 +55,7 @@ export class NavComponent implements OnInit {
   }
 
   searchEntities() {
-    console.log('oi');
-    this.router.navigate(['/search/' + this.searchStr]);
+    console.log(this.searchIn);
+    this.router.navigate(['/search/' + this.searchIn.returnVal + '/' + this.searchStr]);
   }
 }

@@ -7,6 +7,7 @@ using Application.Common.Interfaces;
 using Domain.Common;
 using Domain.Entities;
 using Infrastructure.Identity;
+using Infrastructure.Persistence.Extensions;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -72,6 +73,11 @@ namespace Infrastructure.Persistence
             var prop = pq.Single();
 
             return (IQueryable<T>)prop.GetValue(this);
+        }
+
+        public IQueryable<ISearchableEntity> SetDbSet(Type type)
+        {
+            return (IQueryable<ISearchableEntity>)this.Set(type);
         }
     }
 }

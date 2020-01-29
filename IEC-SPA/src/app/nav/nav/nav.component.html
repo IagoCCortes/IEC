@@ -18,11 +18,11 @@
     </ul>
     <form class="navBar__search u-flex" [ngClass]="{'navBar__search--focus': isFocused}" (ngSubmit)="searchEntities()">
       <div class="navBar__search__categories dropdown" ng-init="category = 'All'" dropdown>
-      <label class="categories__current dropdown-toggle" dropdownToggle>{{searchIn}}</label>
+      <label class="categories__current dropdown-toggle" dropdownToggle>{{searchIn.displayVal}}</label>
         <ul class="categories__list dropdown-menu" *dropdownMenu>
-          <li class="dropdown-item" (click)="searchIn = 'All'">All</li>
-          <li class="dropdown-item" (click)="searchIn = 'Artists'">Artists</li>
-          <li class="dropdown-item" (click)="searchIn = 'Movies'">Movies</li>
+          <li class="dropdown-item" (click)="searchIn = {returnVal: 'All', displayVal: 'All'}">All</li>
+          <li class="dropdown-item" (click)="searchIn = {returnVal: 'Artist', displayVal: 'Artists'}">Artists</li>
+          <li class="dropdown-item" (click)="searchIn = {returnVal: 'Movie', displayVal: 'Movies'}">Movies</li>
         </ul>
       </div>
       <div class="navBar__search__container" [ngClass]="{'navBar__search--focus': isFocused}">

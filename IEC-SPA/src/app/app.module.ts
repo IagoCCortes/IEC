@@ -33,6 +33,7 @@ import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { SearchResolver } from './_resolver/search.resolver';
+import { ProfileAddedComponent } from './user/profile-added/profile-added.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -50,6 +51,7 @@ export function tokenGetter() {
       LogRegModalComponent,
       MovieDetailComponent,
       NavComponent,
+      ProfileAddedComponent,
       ProfileComponent,
       RolesModalComponent,
       UserManagementComponent,

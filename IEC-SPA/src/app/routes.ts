@@ -25,7 +25,7 @@ export const appRoutes: Routes = [
     },
     {path: 'movies', component: ListComponent,
         resolve: {entities: MovieListResolver}},
-    {path: 'search/:searchStr', component: SearchComponent,
+    {path: 'search/:searchIn/:searchStr', component: SearchComponent,
         resolve: {results: SearchResolver}},
     {path: 'movies/:id', component: MovieDetailComponent,
         resolve: {movie: MovieDetailResolver}},

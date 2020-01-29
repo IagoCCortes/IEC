@@ -24,6 +24,28 @@ namespace Application.SearchAll
             var result = new SearchAllVM();
             var dict = new Dictionary<string, List<SearchAllLookupDto>>();
 
+            if(request.SearchIn.ToLower() != "all")
+            {
+                Type type = typeof(ISearchableEntity).Assembly.GetTypes()
+                    .FirstOrDefault(t => t.Name.ToLower() == request.SearchIn.ToLower());
+
+                if(type != null)
+                {
+                    var results = await _context.SetDbSet(type)
+                        .Where(x => x.Name.ToLower().Contains(request.ValueToSearch.ToLower()))
+                        .Select(x => new SearchAllLookupDto {
+                            Id = x.Id, 
+                            Name = x.Name,
+                            ImageUrl = x.ImageUrl
+                        }).ToListAsync();
+
+                    dict[type.ToString().Split('.').Last()] = results;
+                    return new SearchAllVM{
+                        Results = dict
+                    };
+                }
+            }
+
             foreach (Type typeUsingISearchableEntity in GetTypesWithISearchableEntity())
             {
                 

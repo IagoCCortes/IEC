@@ -14,7 +14,7 @@
       </span>
       <p class="card-text text-muted text-center">{{entity.date | date: 'mediumDate'}}</p>
     </div>
-    <a [routerLink]="['/' + entityType + '/', entity.id]"><img src="{{entity.image}}" alt="{{entity.name}}"
+    <a [routerLink]="['/' + entityType + '/', entity.id]"><img src="{{entity.image || '../../assets/images/user.png'}}" alt="{{entity.name}}"
         class="card-img-top"></a>
   </div>
 </div>
