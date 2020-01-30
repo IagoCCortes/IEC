@@ -9,10 +9,11 @@ import { SearchResult } from '../_models/searchResult';
 @Injectable()
 export class SearchResolver implements Resolve<SearchResult[]> {
 
-    constructor(private genericRestService: GenericRestService<SearchResult>, private router: Router, private alertify: AlertifyService) {}
+    constructor(private genericRestService: GenericRestService<SearchResult[]>,
+                private router: Router, private alertify: AlertifyService) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<SearchResult[]> {
-        return this.genericRestService.getEntitiesStr(route.params.searchIn + '/' + route.params.searchStr, 'search').pipe(
+        return this.genericRestService.getEntity('search/' + route.params.searchIn + '/' + route.params.searchStr).pipe(
             catchError(error => {
                 this.alertify.error('Problem retrieving data');
                 // this.router.navigate(['/movies']);

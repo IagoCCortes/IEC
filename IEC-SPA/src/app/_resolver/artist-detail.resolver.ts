@@ -10,7 +10,7 @@ export class ArtistDetailResolver implements Resolve<Artist> {
     constructor(private genericRestService: GenericRestService<Artist>, private router: Router) {}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Artist> {
-        return this.genericRestService.getEntity(route.params.id, 'artists').pipe(
+        return this.genericRestService.getEntity('artists/' + route.params.id).pipe(
             catchError(error => {
                 this.router.navigate(['/artists']);
                 return of(null);

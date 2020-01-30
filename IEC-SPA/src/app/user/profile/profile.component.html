@@ -1,9 +1,11 @@
 <div class="profile-cover">
   <div class="hero-text-box">
-    <h1>{{authService.currentUser.userName}}</h1>
-    <a class="btn btn-full js--scroll-to-plans" href="#">Movies</a>
-    <a class="btn btn-ghost js--scroll-to-start" href="#">Artists</a>
-    <a class="btn btn-ghost js--scroll-to-start" href="#">Songs</a>
+    <h1 class="hero-text-box__user-name">{{authService.currentUser.userName}}</h1>
+    <ul>
+      <li class="interest-container"><a class="hero-text-box__interests" href="#">Movies</a></li>
+      <li class="interest-container"><a class="hero-text-box__interests" href="#">Artists</a></li>
+      <li class="interest-container"><a class="hero-text-box__interests" href="#">Songs</a></li>
+    </ul>
   </div>
 </div>
-<app-profile-added></app-profile-added>
+<app-profile-added [userId]="authService.decodedToken.UserProfileId"></app-profile-added>

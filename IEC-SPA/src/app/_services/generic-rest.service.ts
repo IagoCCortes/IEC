@@ -49,12 +49,8 @@ export class GenericRestService<T> {
       );
   }
 
-  getEntity(id: number, entity: string): Observable<T> {
-    return this.http.get<T>(this.baseUrl + entity + '/' + id);
-  }
-
-  getEntitiesStr(str: string, entity: string): Observable<T[]> {
-    return this.http.get<T[]>(this.baseUrl + entity + '/' + str);
+  getEntity(path: string): Observable<T> {
+    return this.http.get<T>(this.baseUrl + path);
   }
 
   postEntity(url: string, entity: object) {

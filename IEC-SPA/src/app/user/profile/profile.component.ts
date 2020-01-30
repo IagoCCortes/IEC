@@ -13,4 +13,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
 }

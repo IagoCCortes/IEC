@@ -1,8 +1,10 @@
 export interface UserMovie {
     userProfileId: number;
-    MovieId: number;
+    id: number;
+    title: string;
     review: string;
     rating?: number;
     favorited: boolean;
-    userProfileMovieStatusId: number;
+    posterUrl: string;
+    status: number;
 }
