@@ -2,4 +2,4 @@ bin
 obj
 .vscode
 dataapp.db**
-appsettings.json
+# appsettings.json
