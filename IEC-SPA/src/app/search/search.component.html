@@ -1,14 +1,16 @@
 <div class="search-results">
-  <div class="grid-item" *ngFor="let result of results.artists">
-    <a [routerLink]="['/artists/', result.id]">
+  <div class="list__cards">
+    <app-card class="list__cards--center" *ngFor="let entity of results.artists" [entity]="entity"></app-card>
+    <!-- <a [routerLink]="['/artists/', result.id]">
       <img src="{{result.imageUrl || '../../assets/images/user.png'}}" alt="image">
       <p>{{result.name}}</p>
-    </a>
+    </a> -->
   </div>
-  <div class="grid-item" *ngFor="let result of results.movies">
-    <a [routerLink]="['/movies/', result.id]">
+  <div class="list__cards">
+    <app-card class="list__cards--center" *ngFor="let entity of results.movies" [entity]="entity"></app-card>
+    <!-- <a [routerLink]="['/movies/', result.id]">
       <img src="{{result.imageUrl || '../../assets/images/user.png'}}" alt="image">
       <p>{{result.name}}</p>
-    </a>
+    </a> -->
   </div>
 </div>

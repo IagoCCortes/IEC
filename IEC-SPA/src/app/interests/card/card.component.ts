@@ -24,11 +24,11 @@ export class CardComponent implements OnInit {
   entityTypeVerification() {
     if (this.entityType === 'movies') {
       this.entity.name = this.entity.title;
-      this.entity.image = this.entity.posterUrl;
+      this.entity.imageUrl = this.entity.posterUrl;
       this.entity.date = this.entity.releaseDate;
     } else if (this.entityType === 'artists') {
       this.entity.name = this.entity.artistName;
-      this.entity.image = this.entity.pictureUrl;
+      this.entity.imageUrl = this.entity.pictureUrl;
       this.entity.date = this.entity.birthdate;
     }
   }

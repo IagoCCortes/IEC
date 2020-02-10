@@ -1,20 +1,17 @@
-<div class="cards card mb-4 card-img-top">
-  <div class="card-img-wrapper">
-    <button title="add to {{entityType}} list" *ngIf="!entity.isInUserList" class="btn animate text-center entity-info member-top"
-      (click)="checkBeforeAddingToList(entity.id)">
-      <i class="fa fa-plus"></i>
+<div class="cards">
+    <button title="{{entity.isInUserList ? 'remove from' : 'add to'}} {{entityType}} list"
+      class="btn--add-list cards__info" 
+      [ngClass]="entity.isInUserList ? 'bg-check' : ''"
+      (click)="entity.isInUserList ? removeFromEntityList(entity.id) : checkBeforeAddingToList(entity.id)">
+      <i [ngClass]="entity.isInUserList ? 'fa fa-check' : 'fa fa-plus'"></i>
     </button>
-    <button title="remove from {{entityType}} list" *ngIf="entity.isInUserList" class="btn animate text-center entity-info member-top bg-check"
-      (click)="removeFromEntityList(entity.id)">
-      <i class="fa fa-check"></i>
-    </button>
-    <div class="card-body p-1 animate text-center entity-info member-bottom">
-      <span class="card-title text-center mb-1">
+    <div class="card-body cards__info">
+      <span class="card-title mb-1">
         {{entity.name}}
       </span>
-      <p class="card-text text-muted text-center">{{entity.date | date: 'mediumDate'}}</p>
+      <p class="card-text text-muted">{{entity.date | date: 'mediumDate'}}</p>
     </div>
-    <a [routerLink]="['/' + entityType + '/', entity.id]"><img src="{{entity.image || '../../assets/images/user.png'}}" alt="{{entity.name}}"
-        class="card-img-top"></a>
-  </div>
+    <a [routerLink]="['/' + entityType + '/', entity.id]">
+      <img src="{{entity.imageUrl || '../../assets/images/user.png'}}" alt="{{entity.name}}" class="cards__img">
+    </a>
 </div>

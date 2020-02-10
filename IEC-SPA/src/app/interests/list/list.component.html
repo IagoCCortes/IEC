@@ -1,52 +1,48 @@
 <div class="list" [ngClass]="{'movies':'movies-color','artists':'artists-color'}[entityType]">
-  <div class="filter-bar u-flex">
-    <ul>
-      <li class="dropdown filter-li" dropdown>
+  <div class="list__filters u-flex">
+    <ul class="list__filters__options">
+      <li class="dropdown list__filters__options__item" dropdown>
       <span class="dropdown-toggle" dropdownToggle>{{entityType}}</span>
         <div class="dropdown-menu ignore" *dropdownMenu>
-          <a class="dd-item" href="#" [routerLink]="['/movies']">Movies</a>
-          <a class="dd-item" href="#" [routerLink]="['/artists']">Artists</a>
-          <!-- <a class="dd-item" href="#">Something else here</a> -->
+          <a class="dropdown-menu__item" href="#" [routerLink]="['/movies']">Movies</a>
+          <a class="dropdown-menu__item" href="#" [routerLink]="['/artists']">Artists</a>
+          <!-- <a class="dropdown-menu__item" href="#">Something else here</a> -->
         </div>
       </li>
-      <li class="dropdown filter-li" *ngIf="entityType === 'movies'" dropdown>
+      <li class="dropdown list__filters__options__item" *ngIf="entityType === 'movies'" dropdown>
         <span class="dropdown-toggle" dropdownToggle>Genres</span>
         <div class="dropdown-menu" *dropdownMenu>
-          <span class="dd-item" *ngFor="let genre of genreKeys" (click)="genresChanged(genre)" 
+          <span class="dropdown-menu__item" *ngFor="let genre of genreKeys" (click)="genresChanged(genre)" 
           [ngClass]="entityParams[1].values.includes(genre) ? 'selected' : ''">{{genres[genre]}}</span>
         </div>
       </li>
-      <li class="dropdown filter-li" dropdown>
+      <li class="dropdown list__filters__options__item" dropdown>
         <span class="dropdown-toggle" dropdownToggle>Order by</span>
         <div *ngIf="entityType === 'movies'">
           <div class="dropdown-menu ignore" *dropdownMenu>
-            <span class="dd-item" (click)="orderByChanged('title')" 
+            <span class="dropdown-menu__item" (click)="orderByChanged('title')" 
             [ngClass]="entityParams[0].values === 'title' ? 'selected' : ''">Title</span>
-            <span class="dd-item" (click)="orderByChanged('runtime')" 
+            <span class="dropdown-menu__item" (click)="orderByChanged('runtime')" 
             [ngClass]="entityParams[0].values === 'runtime' ? 'selected' : ''">Runtime</span>
-            <span class="dd-item" (click)="orderByChanged('release')" 
+            <span class="dropdown-menu__item" (click)="orderByChanged('release')" 
             [ngClass]="entityParams[0].values === 'release' ? 'selected' : ''">Release date</span>
           </div>
         </div>
         <div *ngIf="entityType === 'artists'">
           <div class="dropdown-menu ignore" *dropdownMenu>
-            <span class="dd-item" (click)="orderByChanged('name')" 
+            <span class="dropdown-menu__item" (click)="orderByChanged('name')" 
             [ngClass]="entityParams[0].values === 'name' ? 'selected' : ''">Name</span>
-            <span class="dd-item" (click)="orderByChanged('birthdate')" 
+            <span class="dropdown-menu__item" (click)="orderByChanged('birthdate')" 
             [ngClass]="entityParams[0].values === 'birthdate' ? 'selected' : ''">Birthdate</span>
           </div>
         </div>
       </li>
     </ul>
   </div>
-  <div class="text-center">
-    <div class="row justify-content-center">
-      <div *ngFor="let entity of entities" class="col-lg-p col-md-p col-sm-p card-wrapper">
-        <app-card [entityType]="entityType" [entity]="entity"></app-card>
-      </div>
-    </div>
+  <div class="list__cards">
+    <app-card class="list__cards--center" *ngFor="let entity of entities" [entityType]="entityType" [entity]="entity"></app-card>
   </div>
-  <div class="u-flex justify-content-center stick-bottom">
+  <div class="list__pagination u-flex">
     <pagination [boundaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
       [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
       firstText="&laquo;" lastText="&raquo;" [maxSize]="maxSize">

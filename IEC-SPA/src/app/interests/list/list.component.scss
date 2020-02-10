@@ -2,27 +2,84 @@
 
 .list {
     font-size: 1.5rem;
-}
 
-.card-wrapper {
-    margin: 0 .2rem;
-    padding: 0;
-}
+    /********Filters********/
+    &__filters {
+        background-color: var(--filter-bar);
+        height: 3rem;
+        position: fixed;
+        top: 4.8rem;
+        width: 100%;
+        z-index: 999;
 
-/*************************
-********Pagination********
-*************************/
-.stick-bottom {
-    bottom: 0;
-    opacity: 70%;
-    position: fixed;
-    width: 100%;
-}
+        &__options {
+            margin: auto 0 auto 5rem;
+            text-transform: capitalize;
 
-.stick-bottom:hover {
-    opacity: 1;
-}
+            &__item {
+                display: inline-block;
+                margin: 0 1.5rem;
+                color: #fff;
+                list-style: none;
 
+                & > span {
+                    padding: 0;
+                }
+                
+                & > span:after {
+                    vertical-align: 0;
+                }
+                
+                & div {
+                    background-color: rgb(233, 233, 233);
+                    border-radius: 0%;
+                }
+                
+                & a,
+                & div span {
+                    color: #000;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                }
+                
+                .selected,
+                & a:hover,
+                & div span:hover {
+                    background-image: var(--filter-li);
+                    background-color: transparent;
+                }
+            }
+        }
+    }
+
+    /********Cards********/
+    &__cards {
+        margin-top: 10rem;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: auto;
+        gap: 1rem;
+    
+        &--center {
+            align-self: center;
+        }
+    }
+
+    /********Pagination********/
+    &__pagination {
+        bottom: 0;
+        opacity: 70%;
+        position: fixed;
+        width: 100%;
+        justify-content: center;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
 /*************************
 ********Responsive********
 *************************/
@@ -48,80 +105,24 @@
 }
 
 /*************************
-********Filter-bar********
+********Dropdown********
 *************************/
-.filter-bar {
-    background-color: var(--filter-bar);
-    height: 3rem;
-    position: fixed;
-    top: 4.8rem;
-    width: 100%;
-    z-index: 999;
-}
-
-.text-center {
-    margin-top: 10rem;
-}
-
-.filter-bar > ul {
-    margin: auto 0 auto 5rem;
-    text-transform: capitalize;
-}
-
-.filter-li {
-    display: inline-block;
-    margin: 0 1.5rem;
-    color: #fff;
-    list-style: none;
-}
-
-.dd-item {
-    font-size: 1.5rem;
-    display: block;
-    width: 100%;
-    padding: 0.25rem 1.5rem;
-}
-
-.filter-li > span {
-    padding: 0;
-}
-
-.filter-li > span:after {
-    vertical-align: 0;
-}
-
-.filter-li div {
-    background-color: rgb(233, 233, 233);
-    border-radius: 0%;
-    /* margin-top: 0; */
-}
-
-.filter-li a,
-.filter-li div span {
-    color: #000;
-}
-
-.filter-li:hover {
-    cursor: pointer;
-}
-
-.selected,
-.filter-li a:hover,
-.filter-li div span:hover {
-    background-image: var(--filter-li);
-    background-color: transparent;
-}
-
 .dropdown-menu {
     animation: dropdownInTop 0.5s ease-out;
     backface-visibility: hidden;
-    /* animation-duration: 0.5s;
-    animation-timing-function: ease-out; */
-}
 
-.dropdown-menu:not(.ignore) {
-    height: 36rem;
-    overflow-x: hidden;
+    &:not(.ignore) {
+        height: 36rem;
+        overflow-x: hidden;
+    }
+
+    &__item {
+        font-size: 1.5rem;
+        display: block;
+        width: 100%;
+        padding: 0.25rem 1.5rem;
+        text-decoration: none;
+    }
 }
 
 /*Animation*/

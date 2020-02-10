@@ -1,68 +1,58 @@
+@import 'abstracts/variables';
+
 .cards {
     font-size: 1.4rem;
-}
-
-.card-img-wrapper {
     overflow: hidden;
     position: relative;
+
+    &__info {
+        position: absolute;
+        opacity: 0;
+        background-color: #222;
+        transition: all 0.3s ease-in-out;
+    
+        &:not(.card-body) {
+            font-size: 1.6rem;
+            top: 30%;
+            right: 10%;
+            border: solid .1rem #fff;
+            color: #fff;
+        }
+        &:not(.btn--add-list) {
+            bottom: -30%;
+            left: 0;
+            right: 0;
+            padding: 0.25rem;
+            text-align: center;
+        }
+    }
+
+    &:hover &__info:not(.card-body) {
+        opacity: 1;
+        top: 5%;
+        right: 10%;
+    }
+    
+    &:hover &__info:not(.btn--add-list) {
+        opacity: 1;
+        bottom: 0;
+    }
+    
+    &:hover {
+        transition-timing-function: ease-out;
+    }
+
+    &__img {
+        width: 100%;
+    }
 }
 
-.card-img-top {
-    height: 30rem;
-    width: 20rem;
-    margin-left: auto;
-    margin-right: auto;
+.btn--add-list {
+    padding: .375rem 1rem;
+    border-radius: 0.25rem;
+    line-height: 1.5;
 }
 
-/* .card-img-top:hover {
-    cursor: pointer;
-} */
-
-.member-top {
-    font-size: 1.6rem;
-    top: 30%;
-    right: 10%;
-    background-color: #222;
-    border: solid .1rem #fff;
-    color: #fff;
-}
-
-.member-bottom {
-    bottom: -30%;
-    left: 0;
-    right: 0;
-    background-color: #222;
-}
-
-.entity-info {
-    position: absolute;
-    margin-right: auto;
-    margin-left: auto;
-    opacity: 0;
-}
-
-.card-img-wrapper:hover .member-top {
-    opacity: 1;
-    top: 5%;
-    right: 10%;
-}
-
-.card-img-wrapper:hover .member-bottom {
-    opacity: 1;
-    bottom: 0;
-}
-
-.card-img-wrapper:hover {
-    /* box-shadow: 0px 10px 8px; */
-    transition-timing-function: ease-out;
-    /* transform: translateY(-0.25em); */
-}
-
-.animate {
-    transition: all 0.3s ease-in-out;
-}
-
-.bg-check { 
-    /* background-color: #02760b; */
-    background-color: #c4aa00; 
+.bg-check {
+    background-color: $main-yellow; 
 }

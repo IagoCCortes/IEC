@@ -9,7 +9,7 @@ import { GenericRestService } from '../_services/generic-rest.service';
 @Injectable()
 export class MovieListResolver implements Resolve<MovieList[]> {
     pageNumber = 1;
-    pageSize = 12;
+    pageSize = 14;
 
     constructor(private genericRestService: GenericRestService<MovieList>, private router: Router, private alertify: AlertifyService) {}
 
