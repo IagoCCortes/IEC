@@ -1,33 +1,24 @@
-<div class="container mt-4 pt-5">
-    <div class="row">
-        <div class="col-sm-12 col backdrop">
-            <h3 class="text-center side-lines"><span>{{movie.title}}</span></h3>
+<div class="details">
+    <div class="details__grid">
+        <h3 class="details__grid--title"><span>{{movie.title}}</span></h3>
+        <img class="details__grid--image" src="{{movie.posterUrl}}" alt="poster for {{movie.title}}">
+        <div class="details__grid__text" *ngIf="!infoFlag">
+            <span class="details__grid__text--info" title="info" (click)="infoFlag = !infoFlag">&#9432;</span>
+            <span class="details__grid__text--qte">&ldquo;</span>
+            <p class="details__grid__text--prg">{{movie.plot}}</p>
+            <span class="details__grid__text--qte">&rdquo;</span>
+        </div>
+        <div class="details__grid__text" *ngIf="infoFlag">
+            <span class="details__grid__text--info" title="plot" (click)="infoFlag = !infoFlag">P</span>
+            <p>{{movie.genres.join(', ')}} &#x25cf; {{movie.releaseDate | date: 'mediumDate'}} &#x25cf;
+                {{runtime}}</p>
+            <h3>Director</h3>
+            <p>{{movie.directors.join(', ')}}</p>
+            <h3>Stars</h3>
+            <p>{{movie.stars.join(', ')}}</p>
         </div>
     </div>
-    <div class="row bg-dark p-2 rounded-bottom">
-        <div class="col-sm-4 col">
-            <div class="card">
-                <img class="card-img-top img-thumbnail" src="{{movie.posterUrl}}" alt="poster for {{movie.title}}">
-                <div class="card-body">
-                    <div>
-                        <p>{{movie.genres.join(', ')}} &#x25cf; {{movie.releaseDate | date: 'mediumDate'}} &#x25cf;
-                            {{runtime}}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-8 col backdrop">
-            <tabset [justified]="true">
-                <tab heading="Plot">
-                    <p class="mt-4">{{movie.plot}}</p>
-                </tab>
-                <tab heading="Cast">
-                    <h5 class="mt-4">Director</h5>
-                    <p>{{movie.directors}}</p>
-                    <h5>Stars</h5>
-                    <p>{{movie.stars}}</p>
-                </tab>
-            </tabset>
-        </div>
-    </div>
+</div>
+<div>
+    
 </div>

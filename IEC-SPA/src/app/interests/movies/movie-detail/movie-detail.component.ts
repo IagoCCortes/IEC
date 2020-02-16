@@ -11,6 +11,7 @@ import { GenericRestService } from 'src/app/_services/generic-rest.service';
 export class MovieDetailComponent implements OnInit {
   movie: Movie;
   runtime: string;
+  infoFlag = false;
 
   constructor(private genericRestService: GenericRestService<Movie>, private route: ActivatedRoute) { }
 
