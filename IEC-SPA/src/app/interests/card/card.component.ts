@@ -30,6 +30,10 @@ export class CardComponent implements OnInit {
       this.entity.name = this.entity.artistName;
       this.entity.imageUrl = this.entity.pictureUrl;
       this.entity.date = this.entity.birthdate;
+    } else if (this.entityType === 'moviesS') {
+      this.entityType = 'movies';
+    } else if (this.entityType === 'artistsS') {
+      this.entityType = 'artists';
     }
   }
 

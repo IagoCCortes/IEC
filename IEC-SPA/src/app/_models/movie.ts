@@ -10,4 +10,5 @@ export interface Movie {
     stars: string[];
     directors: string[];
     writers: string[];
+    isInUserList: boolean;
 }

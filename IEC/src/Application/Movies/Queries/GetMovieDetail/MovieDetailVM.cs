@@ -19,9 +19,11 @@ namespace Application.Movies.Queries.GetMovieDetail
         public List<string> Genres { get; set; }
         public List<string> Stars { get; set; }
         public List<string> Directors { get; set; }
+        public bool IsInUserList { get; set; }
 
         public void Mapping(Profile profile)
         {
+            int userId = 0;
             profile.CreateMap<Movie, MovieDetailVM>()
             .ForMember(m => m.PosterUrl, opt => opt.MapFrom(m => m.ImageUrl))
             .ForMember(m => m.Title, opt => opt.MapFrom(m => m.Name))
@@ -35,7 +37,11 @@ namespace Application.Movies.Queries.GetMovieDetail
             .ForMember(m => m.Directors,
                 opt => opt.MapFrom(ps => ps.MovieArtists
                     .Where(ma => ma.RoleId == (int) MovieRoleEnum.Director)
-                    .Select(ma => ma.Artist.Name)));
+                    .Select(ma => ma.Artist.Name)))
+            .ForMember(m => m.IsInUserList, opt => opt.MapFrom(m => 
+                    m.UserProfilesMovie
+                        .Any(up => up.UserProfileId == userId && up.MovieId == m.Id)
+                ));
         }
     } 
 }

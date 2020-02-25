@@ -1,0 +1,141 @@
+@import 'abstracts/variables';
+
+.mdl {
+    font-size: 2rem;
+    padding: 1rem;
+    position: relative;
+
+    &__frm {
+        & label {
+            display: block;
+            margin: 0;
+        }
+
+        &--rvw {
+            border-radius: .5rem;
+            font-size: 1.6rem;
+            padding: 1rem;
+            width: 100%;
+            &:focus {
+                outline: 0;
+                box-shadow: 0 0 0 .2rem $main-yellow;
+            }
+        }
+
+        &__grp {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 0 2rem 0;
+
+            &__stts {
+                background-color: $color-white;
+                border-radius: .5rem;
+                color: $color-black;
+                font-size: 1.6rem;
+                padding: .3rem 1rem;
+
+                &__lst {
+                    background-color: $color-white;
+                    color: $color-black;
+                    font-size: 1.6rem;
+
+                    &--itm {
+                        cursor: pointer;
+                        padding: 0 .5rem;
+                    
+                        &:hover {
+                            color: $color-white;
+                            background-color: $color-dark-grey;
+                        }
+                    }
+                }
+            }
+
+            &--strs {
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:not(:last-of-type) {
+                    margin-right: .3rem;
+                }
+            }
+        }
+    }
+}
+
+.fill {
+    color: $main-yellow;
+}
+
+.focus-border {
+    border: 2px solid transparent;
+}
+
+
+.header {
+    display: flex;
+    align-items: flex-start;
+    font-size: 2rem;
+    justify-content: space-between;
+    padding: .5rem 1rem;
+    border-bottom: 1px solid #282828;
+
+    &__title {
+        color: $main-yellow;
+        font-size: 2.5rem;
+        margin: 0;
+    }
+
+    &__cls {
+        border: 0;
+        background-color: transparent;
+        color: $color-white;
+        position: absolute;
+        right: 1rem;
+        top: 0;
+        z-index: 9999;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:focus {
+            outline: 0;
+        }
+    }
+}
+
+.footer {
+    align-items: center;
+    border-top: 1px solid #282828;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem;
+
+    .bttn--cancel,
+    .bttn--submit {
+        border: 0;
+        border-radius: .5rem;
+        color: $color-white;
+        font-size: 1.6rem;
+        padding: .1rem 1rem;
+
+        &:focus {
+            outline: 0;
+        }
+    }
+
+    .bttn--cancel {
+        background-color: $color-dark-grey;
+    }
+
+    .bttn--submit {
+        background-color: $main-yellow;
+    }
+}
+
+.grouper {
+    display: flex;
+    flex-direction: column;
+}

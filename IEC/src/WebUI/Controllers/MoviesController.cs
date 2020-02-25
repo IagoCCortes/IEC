@@ -44,7 +44,11 @@ namespace WebUI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<MovieDetailVM>> GetMovieAsync(int id)
         {
-            var movie = await Mediator.Send(new GetMovieDetailQuery { Id = id });
+            var request = new GetMovieDetailQuery { Id = id };
+            if (Request.Headers["Authorization"] != default(string))
+                request.UserId = int.Parse(User.FindFirst("UserProfileId").Value);
+
+            var movie = await Mediator.Send(request);
 
             return Ok(movie);
         }

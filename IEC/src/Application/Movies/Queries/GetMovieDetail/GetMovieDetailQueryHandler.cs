@@ -24,7 +24,7 @@ namespace Application.Movies.Queries.GetMovieDetail
 
         public async Task<MovieDetailVM> Handle(GetMovieDetailQuery request, CancellationToken cancellationToken)
         {
-            var movie = await _mapper.ProjectTo<MovieDetailVM>(_context.Movies)
+            var movie = await _mapper.ProjectTo<MovieDetailVM>(_context.Movies, new { userId = request.UserId ?? 0})
                 .FirstOrDefaultAsync(m => m.Id == request.Id)
                 ?? throw new NotFoundException(nameof(Movie), request.Id);
 

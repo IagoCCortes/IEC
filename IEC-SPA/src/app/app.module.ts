@@ -34,6 +34,7 @@ import { HomeComponent } from './home/home.component';
 import { SearchComponent } from './search/search.component';
 import { SearchResolver } from './_resolver/search.resolver';
 import { ProfileAddedComponent } from './user/profile-added/profile-added.component';
+import { MovieModalComponent } from './interests/movies/movie-modal/movie-modal.component';
 
 export function tokenGetter() {
    return localStorage.getItem('token');
@@ -50,6 +51,7 @@ export function tokenGetter() {
       ListComponent,
       LogRegModalComponent,
       MovieDetailComponent,
+      MovieModalComponent,
       NavComponent,
       ProfileAddedComponent,
       ProfileComponent,
@@ -93,6 +95,7 @@ export function tokenGetter() {
    ],
    entryComponents: [
       LogRegModalComponent,
+      MovieModalComponent,
       RolesModalComponent
    ],
    bootstrap: [

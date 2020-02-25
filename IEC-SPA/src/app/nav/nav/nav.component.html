@@ -7,7 +7,7 @@
   </button> -->
 
   <div class="navBar__collapse u-flex" dropdown>
-     <!-- [collapse]="isCollapsed"> -->
+    <!-- [collapse]="isCollapsed"> -->
     <ul class="navBar__list u-flex">
       <li class="navBar__list__item">
         <a class="btn--text" [routerLink]="['/movies']">Browse</a>
@@ -18,7 +18,7 @@
     </ul>
     <form class="navBar__search u-flex" [ngClass]="{'navBar__search--focus': isFocused}" (ngSubmit)="searchEntities()">
       <div class="navBar__search__categories dropdown" ng-init="category = 'All'" dropdown>
-      <label class="categories__current dropdown-toggle" dropdownToggle>{{searchIn.displayVal}}</label>
+        <label class="categories__current dropdown-toggle" dropdownToggle>{{searchIn.displayVal}}</label>
         <ul class="categories__list dropdown-menu" *dropdownMenu>
           <li class="dropdown-item" (click)="searchIn = {returnVal: 'All', displayVal: 'All'}">All</li>
           <li class="dropdown-item" (click)="searchIn = {returnVal: 'Artist', displayVal: 'Artists'}">Artists</li>
@@ -26,10 +26,11 @@
         </ul>
       </div>
       <div class="navBar__search__container" [ngClass]="{'navBar__search--focus': isFocused}">
-        <input name="search" [(ngModel)]="searchStr" class="search__input" type="text" placeholder="Search" (focus)="isFocused=true" (blur)="isFocused=false">
+        <input name="search" [(ngModel)]="searchStr" class="search__input" type="text" placeholder="Search"
+          (focus)="isFocused=true" (blur)="isFocused=false">
       </div>
       <div class="navBar__search__button">
-        <button class="btn--search"  type="submit"><i class="fa fa-search"></i></button>
+        <button class="btn--search" type="submit"><i class="fa fa-search"></i></button>
       </div>
     </form>
     <div class="navBar__user">
@@ -44,9 +45,10 @@
         <a class="dropdown-toggle user" dropdownToggle (click)="false">
           {{authService.decodedToken?.unique_name | titlecase}}
         </a>
-      
+
         <div class="dropdown-menu dd-user-menu" *dropdownMenu>
-          <a class="dropdown-item" [routerLink]="['/users/' + authService.decodedToken.UserProfileId]" ><i class="fa fa-user"></i> My Profile</a>
+          <a class="dropdown-item" [routerLink]="['/users/' + authService.decodedToken.UserProfileId]"><i
+              class="fa fa-user"></i> My Profile</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
         </div>

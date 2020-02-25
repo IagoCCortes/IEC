@@ -1,13 +1,13 @@
 <div class="search-results">
   <div class="list__cards">
-    <app-card class="list__cards--center" *ngFor="let entity of results.artists" [entity]="entity"></app-card>
+    <app-card class="list__cards--center" *ngFor="let entity of results.artists" [entityType]="'artistsS'" [entity]="entity"></app-card>
     <!-- <a [routerLink]="['/artists/', result.id]">
       <img src="{{result.imageUrl || '../../assets/images/user.png'}}" alt="image">
       <p>{{result.name}}</p>
     </a> -->
   </div>
   <div class="list__cards">
-    <app-card class="list__cards--center" *ngFor="let entity of results.movies" [entity]="entity"></app-card>
+    <app-card class="list__cards--center" *ngFor="let entity of results.movies" [entityType]="'moviesS'" [entity]="entity"></app-card>
     <!-- <a [routerLink]="['/movies/', result.id]">
       <img src="{{result.imageUrl || '../../assets/images/user.png'}}" alt="image">
       <p>{{result.name}}</p>

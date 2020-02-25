@@ -1,15 +1,20 @@
 <div class="details">
+    <div class="details__actions">
+        <i class="fa fa-info-circle details__actions--info" title="toggle info" (click)="infoFlag = !infoFlag"></i>
+        <i *ngIf="!movie.isInUserList" class="fa fa-plus-circle details__actions--manage" title="add to watchlist" 
+           (click)="checkBeforeAddingToList(movie.id)"></i>
+        <i *ngIf="movie.isInUserList" class="fa fa-check-circle details__actions--manage" title="manage movie" 
+           (click)="editRolesModal()"></i>
+    </div>
     <div class="details__grid">
         <h3 class="details__grid--title"><span>{{movie.title}}</span></h3>
         <img class="details__grid--image" src="{{movie.posterUrl}}" alt="poster for {{movie.title}}">
         <div class="details__grid__text" *ngIf="!infoFlag">
-            <span class="details__grid__text--info" title="info" (click)="infoFlag = !infoFlag">&#9432;</span>
             <span class="details__grid__text--qte">&ldquo;</span>
             <p class="details__grid__text--prg">{{movie.plot}}</p>
             <span class="details__grid__text--qte">&rdquo;</span>
         </div>
         <div class="details__grid__text" *ngIf="infoFlag">
-            <span class="details__grid__text--info" title="plot" (click)="infoFlag = !infoFlag">P</span>
             <p>{{movie.genres.join(', ')}} &#x25cf; {{movie.releaseDate | date: 'mediumDate'}} &#x25cf;
                 {{runtime}}</p>
             <h3>Director</h3>
@@ -19,6 +24,6 @@
         </div>
     </div>
 </div>
-<div>
-    
+<div >
+    <!-- <div style="height: 100%;background-color: #000;"></!-->
 </div>
