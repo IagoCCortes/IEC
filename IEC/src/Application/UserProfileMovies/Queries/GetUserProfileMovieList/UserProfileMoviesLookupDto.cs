@@ -2,7 +2,7 @@ using Application.Common.Mappings;
 using AutoMapper;
 using Domain.Entities;
 
-namespace Application.UserProfileMovies.Queries
+namespace Application.UserProfileMovies.Queries.GetUserProfileMovieList
 {
     public class UserProfileMovieLookupDto : IMapFrom<UserProfileMovie>
     {

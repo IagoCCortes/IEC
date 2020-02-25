@@ -82,19 +82,9 @@ export class MovieDetailComponent implements OnInit {
 
   editRolesModal() {
     const initialState = {
+      id: this.movie.id,
       title: this.movie.title
     };
     this.bsModalRef = this.modalService.show(MovieModalComponent, {initialState});
-    // this.bsModalRef.content.updateSelectedRoles.subscribe((values) => {
-    //   const rolesToUpdate = {
-    //     roleNames: [...values.filter(el => el.checked === true).map(el => el.name)]
-    //   };
-    //   if (rolesToUpdate) {
-    //     this.genericRestService.postEntity('admin/editRoles/' + user.userName, {roleNames: rolesToUpdate.roleNames})
-    //     .subscribe(() => {
-    //       user.roles = [...rolesToUpdate.roleNames];
-    //     }, error => this.alertify.error(error));
-    //   }
-    // });
   }
 }

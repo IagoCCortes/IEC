@@ -10,7 +10,7 @@ namespace Application.UserProfileMovies.Commands.UpdateUserProfileMovie
         public string Review { get; set; }  
         public int? Rating { get; set; }
         public bool Favorited { get; set; }
-        public int UserMovieStatusId { get; set; }
+        public int UserProfileMovieStatusId { get; set; }
 
         public void Mapping(Profile profile)
         {

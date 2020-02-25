@@ -9,18 +9,18 @@ using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.UserProfileMovies.Queries
+namespace Application.UserProfileMovies.Queries.GetUserProfileMovieList
 {
-    public class UserProfileMovieQueryHandler : IRequestHandler<UserProfileMovieQuery, UserProfileMovieListVM>
+    public class UserProfileMovieListQueryHandler : IRequestHandler<UserProfileMovieListQuery, UserProfileMovieListVM>
     {
         private readonly IIECDbContext _context;
         private readonly IMapper _mapper;
-        public UserProfileMovieQueryHandler(IIECDbContext context, IMapper mapper)
+        public UserProfileMovieListQueryHandler(IIECDbContext context, IMapper mapper)
         {
             _mapper = mapper;
             _context = context;
         }
-        public async Task<UserProfileMovieListVM> Handle(UserProfileMovieQuery request, CancellationToken cancellationToken)
+        public async Task<UserProfileMovieListVM> Handle(UserProfileMovieListQuery request, CancellationToken cancellationToken)
         {
             var movies = await _context.UserProfileMovies
                 .Where(u => u.UserProfileId == request.UserProfileId)

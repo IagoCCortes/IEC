@@ -6,5 +6,5 @@ export interface UserMovie {
     rating?: number;
     favorited: boolean;
     posterUrl: string;
-    status: number;
+    userProfileMovieStatusId: number;
 }

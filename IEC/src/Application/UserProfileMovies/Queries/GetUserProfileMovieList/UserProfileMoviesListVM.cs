@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Application.UserProfileMovies.Queries
+namespace Application.UserProfileMovies.Queries.GetUserProfileMovieList
 {
     public class UserProfileMovieListVM
     {

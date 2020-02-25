@@ -5,20 +5,20 @@
   </button>
 </div>
 <div class="mdl">
-  <form class="mdl__frm" #rolesForm="ngForm" id="rolesForm">
+  <form class="mdl__frm" (ngSubmit)="save()" id="movieForm" *ngIf="isDataLoaded">
     <div class="mdl__frm__grp">
       <div class="grouper">
         <label>Status</label>
         <div class="mdl__frm__grp__stts dropdown" dropdown>
-          <label class="mdl__frm__grp__stts--lbl dropdown-toggle" dropdownToggle>{{curStatus.displayVal}}</label>
+          <label class="mdl__frm__grp__stts--lbl dropdown-toggle" dropdownToggle>{{curStatus}}</label>
           <ul class="mdl__frm__grp__stts__lst dropdown-menu" *dropdownMenu>
-            <li class="mdl__frm__grp__stts__lst--itm" (click)="searchIn = {returnVal: '1', displayVal: 'To watch'}">To
+            <li class="mdl__frm__grp__stts__lst--itm" (click)="changeStatus(1)">To
               watch</li>
-            <li class="mdl__frm__grp__stts__lst--itm" (click)="searchIn = {returnVal: '2', displayVal: 'Watching'}">
+            <li class="mdl__frm__grp__stts__lst--itm" (click)="changeStatus(2)">
               Watching</li>
-            <li class="mdl__frm__grp__stts__lst--itm" (click)="searchIn = {returnVal: '3', displayVal: 'Watched'}">
+            <li class="mdl__frm__grp__stts__lst--itm" (click)="changeStatus(3)">
               Watched</li>
-            <li class="mdl__frm__grp__stts__lst--itm" (click)="searchIn = {returnVal: '3', displayVal: 'Dropped'}">
+            <li class="mdl__frm__grp__stts__lst--itm" (click)="changeStatus(4)">
               Dropped</li>
           </ul>
         </div>
@@ -27,23 +27,29 @@
         <label>Rating</label>
         <div>
           <i class="fa fa-star mdl__frm__grp--strs" [ngClass]="{'fill':stars>=1}" (mouseenter)="stars=1"
-            (mouseleave)="stars=0" title="did not like it" aria-hidden="true"></i>
+            (mouseleave)="stars=userMovie.rating" title="did not like it" aria-hidden="true"
+            (click)="userMovie.rating = stars"></i>
           <i class="fa fa-star mdl__frm__grp--strs" [ngClass]="{'fill':stars>=2}" (mouseenter)="stars=2"
-            (mouseleave)="stars=0" title="it was ok" aria-hidden="true"></i>
+            (mouseleave)="stars=userMovie.rating" title="it was ok" aria-hidden="true"
+            (click)="userMovie.rating = stars"></i>
           <i class="fa fa-star mdl__frm__grp--strs" [ngClass]="{'fill':stars>=3}" (mouseenter)="stars=3"
-            (mouseleave)="stars=0" title="liked it" aria-hidden="true"></i>
+            (mouseleave)="stars=userMovie.rating" title="liked it" aria-hidden="true"
+            (click)="userMovie.rating = stars"></i>
           <i class="fa fa-star mdl__frm__grp--strs" [ngClass]="{'fill':stars>=4}" (mouseenter)="stars=4"
-            (mouseleave)="stars=0" title="really liked it" aria-hidden="true"></i>
+            (mouseleave)="stars=userMovie.rating" title="really liked it" aria-hidden="true"
+            (click)="userMovie.rating = stars"></i>
           <i class="fa fa-star mdl__frm__grp--strs" [ngClass]="{'fill':stars==5}" (mouseenter)="stars=5"
-            (mouseleave)="stars=0" title="it was amazing" aria-hidden="true"></i>
+            (mouseleave)="stars=userMovie.rating" title="it was amazing" aria-hidden="true"
+            (click)="userMovie.rating = stars"></i>
         </div>
       </div>
     </div>
     <label>Review</label>
-    <textarea class="mdl__frm--rvw" rows="4"></textarea>
+    <textarea class="mdl__frm--rvw" rows="4" [(ngModel)]="userMovie.review"
+      [ngModelOptions]="{standalone: true}">{{userMovie.review || ''}}</textarea>
   </form>
 </div>
 <div class="footer">
   <button type="button" class="bttn--cancel" (click)="bsModalRef.hide()">Cancel</button>
-  <button type="button" class="bttn--submit" (click)="updateRoles()" form="roleForm">Submit</button>
+  <button type="button" class="bttn--submit" form="movieForm" type="submit">Submit</button>
 </div>
