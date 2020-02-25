@@ -1,10 +1,14 @@
 <div class="details">
     <div class="details__actions">
         <i class="fa fa-info-circle details__actions--info" title="toggle info" (click)="infoFlag = !infoFlag"></i>
-        <i *ngIf="!movie.isInUserList" class="fa fa-plus-circle details__actions--manage" title="add to watchlist" 
-           (click)="checkBeforeAddingToList(movie.id)"></i>
-        <i *ngIf="movie.isInUserList" class="fa fa-check-circle details__actions--manage" title="manage movie" 
-           (click)="editRolesModal()"></i>
+        <i *ngIf="!movie.isInUserList" class="fa fa-plus-circle details__actions--manage" title="add to watchlist"
+            (click)="checkBeforeAction(movie.id, 1)"></i>
+        <i *ngIf="movie.isInUserList" class="fa fa-check-circle details__actions--manage" title="manage movie"
+            (click)="editRolesModal()"></i>
+        <i *ngIf="!movie.isFavorited" class="fa fa-star details__actions--fav" title="add to favorites"
+            (click)="checkBeforeAction(movie.id, 2)"></i>
+        <i *ngIf="movie.isFavorited" class="fa fa-star details__actions--unfav" title="remove from favorites"
+            (click)="toggleFavorite(movie.id, 2)"></i>
     </div>
     <div class="details__grid">
         <h3 class="details__grid--title"><span>{{movie.title}}</span></h3>
@@ -24,6 +28,6 @@
         </div>
     </div>
 </div>
-<div >
+<div>
     <!-- <div style="height: 100%;background-color: #000;"></!-->
 </div>

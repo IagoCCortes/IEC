@@ -57,6 +57,10 @@ export class GenericRestService<T> {
     return this.http.post(this.baseUrl + url, entity);
   }
 
+  putEntity(url: string, entity: object) {
+    return this.http.put(this.baseUrl + url, entity);
+  }
+
   deleteEntity(url: string) {
     return this.http.delete(this.baseUrl + url);
   }

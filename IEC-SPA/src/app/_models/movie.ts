@@ -11,4 +11,5 @@ export interface Movie {
     directors: string[];
     writers: string[];
     isInUserList: boolean;
+    isFavorited: boolean;
 }

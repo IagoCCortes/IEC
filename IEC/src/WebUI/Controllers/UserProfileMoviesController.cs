@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using Application.UserProfileMovies.Commands.CreateUserProfileMovie;
 using Application.UserProfileMovies.Commands.DeleteUserProfileMovie;
+using Application.UserProfileMovies.Commands.FavoriteUserProfileMovie;
 using Application.UserProfileMovies.Commands.UpdateUserProfileMovie;
 using Application.UserProfileMovies.Queries;
 using Microsoft.AspNetCore.Authorization;
@@ -40,6 +41,17 @@ namespace WebUI.Controllers
             command.UserProfileId = userId;
             command.MovieId = movieId;
             await Mediator.Send(command);
+
+            return Ok();
+        }
+
+        [HttpPut("{movieId}/favorite")]
+        public async Task<IActionResult> FavoriteUserProfileMovieAsync(int userId, int movieId)
+        {
+            if(userId != int.Parse(User.FindFirst("UserProfileId").Value))
+                return Unauthorized();
+                
+            await Mediator.Send(new FavoriteUserProfileMovieCommand { UserProfileId = userId, MovieId = movieId });
 
             return Ok();
         }

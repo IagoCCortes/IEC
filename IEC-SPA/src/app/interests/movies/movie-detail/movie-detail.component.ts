@@ -34,14 +34,20 @@ export class MovieDetailComponent implements OnInit {
     this.runtime = quotient + 'h ' + remainder + 'm';
   }
 
-  checkBeforeAddingToList(entityId: number) {
+  // action 1: add to watchlist
+  // action 2: favorite
+  checkBeforeAction(entityId: number, action: number) {
     if (!this.authService.loggedIn()) {
       this.openAuthModal.openModal();
       this.openAuthModal.logged.subscribe(() => {
         this.addToEntityList(entityId);
       });
     } else {
-      this.addToEntityList(entityId);
+      if (action === 1) {
+        this.addToEntityList(entityId);
+      } else {
+        this.toggleFavorite(entityId);
+      }
     }
   }
 
@@ -57,12 +63,18 @@ export class MovieDetailComponent implements OnInit {
     });
   }
 
-  removeFromEntityList(entityId: number) {
+  toggleFavorite(entityId: number) {
     this.genericRestService
-    .deleteEntity('users/' + this.authService.decodedToken.UserProfileId + '/movies/' + entityId)
+    .putEntity('users/' + this.authService.decodedToken.UserProfileId + '/movies/' + this.movie.id + '/favorite', {})
     .subscribe(() => {
-      this.alertify.success('You have removed: ' + this.movie.title);
-      this.movie.isInUserList = false;
+      if (this.movie.isFavorited) {
+        this.alertify.success('You have unfavorited: ' + this.movie.title);
+        this.movie.isFavorited = false;
+      } else {
+        this.alertify.success('You have favorited: ' + this.movie.title);
+        this.movie.isInUserList = true;
+        this.movie.isFavorited = true;
+      }
     }, error => {
       this.alertify.error(error);
     });

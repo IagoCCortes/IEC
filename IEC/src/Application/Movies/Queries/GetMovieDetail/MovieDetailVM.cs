@@ -20,6 +20,7 @@ namespace Application.Movies.Queries.GetMovieDetail
         public List<string> Stars { get; set; }
         public List<string> Directors { get; set; }
         public bool IsInUserList { get; set; }
+        public bool IsFavorited { get; set; }
 
         public void Mapping(Profile profile)
         {
@@ -41,6 +42,10 @@ namespace Application.Movies.Queries.GetMovieDetail
             .ForMember(m => m.IsInUserList, opt => opt.MapFrom(m => 
                     m.UserProfilesMovie
                         .Any(up => up.UserProfileId == userId && up.MovieId == m.Id)
+                ))
+            .ForMember(m => m.IsFavorited, opt => opt.MapFrom(m => 
+                    m.UserProfilesMovie
+                        .Any(up => up.UserProfileId == userId && up.MovieId == m.Id && up.Favorited)
                 ));
         }
     } 
