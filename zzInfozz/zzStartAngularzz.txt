@@ -1,0 +1,4 @@
+-ng new <name>
+-npm install bootstrap font-awesome
+-add new styles to styles.css
+-npm install ngx-bootstrap

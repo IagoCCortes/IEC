@@ -1,0 +1,50 @@
+[ ] . Angular unsubscribe
+[ ] . Extra database table to save unique styles for movies, artists, etc
+[ ] . Save predominant color from images to table to display cooler pages
+[ ] . Reset Forms
+[ ] . AutoComplete on search bar
+[ ] . Implement the search function, it'll return results across all valid entities (maybe return only image and name)
+[ ] . Infinite scroll
+[ ] . Download images and store them locally
+[ ] . SPA - Fix image sizes
+[ ] . SPA - User page
+[ ] . Search for a movie that is not in the database and get all of its info from imdb with a webscraper
+[ ] . When a new user registers assign role
+[ ] . In case the query pageNumber is greater than the actual number of pages, get last real page, and if less get the first pg
+[ ] . Store posters and photos somewhere and resize them, so as to increase site performance
+[ ] . SPA - Add movie
+[ ] . Infrastructure integration tests
+[ ] . Persistence integration tests
+[ ] . WebUI integration tests
+[ ] . Discussion thread for each movie, artist, music, game, anime, manga, book......
+[ ] . User can upload user image
+[ ] . User can follow other users
+[ ] . Register email with confirmation
+[ ] . If user follows artist and new artist movie is uploaded user receives email with the news
+[X] . Register not checking whether password and confirm pwd are equal
+[X] . Update UserMovie command
+[X] . Fix URL's
+[X] . Get user query
+[X] . Get userList query
+[X] . Global exception handling
+[x] . Set all [ProducesResponseType] on controllers methods
+[o] . when dealing with requests all mappings are being made, even those related to other entities, make it so only the required mapping is made
+[X] . Use restiful recommended return values of the primary HTTP methods
+[X] . User can only review or rate movie if the usermoviestatus = 3 (watched)
+[X] . Domain unit tests
+[X] . Code IMapTo
+[X] . Application unit tests
+[X] . Add pagination to get lists
+[X] . Turn pagination into a component
+[X] . SPA - Pagination
+[X] . SPA - Login
+[X] . SPA - SignUp
+[X] . Tornar os serviços como movieService e artistservice em um serviço genérico e controlar as saídas pelos resolvers
+[X] . SPA - Genric card component
+[X] . User can follow movies
+[X] . User can follow artists
+[X] . Modify Auth modal so you can choose whether to login or register from there
+[X] . redirect user after logout
+[X] . Dashboard for admins
+[X] . Make it so StringIdentifier is ignored on migrations but available on queries
+ICsvFileBuilder, CustomExceptionHandlerMiddleware

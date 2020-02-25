@@ -1,0 +1,25 @@
+-text-align: justify
+
+-Centraliza o componente
+ marguin-left: auto;
+ margin-right: auto;
+
+ -colocar position: relative; np div q contém elementos e position absolute nos elementos com posições absolutas, controlar usando top: x, right: x, left...
+ 
+ -dotnet new sln -n "IEC"
+ -dotnet sln IEC.sln add ./Tests/Domain.UnitTests/Domain.UnitTests.csproj 
+ -dotnet new webapi -n "IEC"
+ -dotnet new xunit -n "Domain.UnitTests" 
+ -dotnet new classlib -n "Domain"
+
+-Removes from github and stays on the local prject (must add datapp.db to .gitignore)
+ git rm dataapp.db --cached
+
+ -Run from Infrastructure
+ dotnet ef --startup-project ../WebUI/ migrations add Initial -o Persistence/Migrations
+
+ -generate guard Angular CLI
+ ng g guard <name> --skipTests
+
+ -command
+ ctrl+d selects current and next and next and next... of selected text
