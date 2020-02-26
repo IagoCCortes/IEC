@@ -54,7 +54,10 @@
     <div class="details__grid__text" *ngIf="infoFlag">
       <h3>Birth name</h3>
       <p>{{artist.realName}} &#x25cf; {{artist.height}}</p>
-      <p><i class="fa fa-hourglass-start"></i>{{artist.birthdate | date: 'mediumDate'}} - <i class="fa fa-hourglass-end"></i>{{artist.deathdate | date: 'mediumDate'}}</p>
+      <p *ngIf="artist.birthdate !== null"><i
+          class="fa fa-hourglass-start"></i> {{artist.birthdate | date: 'mediumDate'}}<span
+          *ngIf="artist.deathdate !== null"> - <i
+            class="fa fa-hourglass-end"></i> {{artist.deathdate | date: 'mediumDate'}}</span></p>
       <h3>Stars</h3>
       <p>{{artist.movies.movieTitles.join(', ')}}</p>
       <h3>Stars</h3>
