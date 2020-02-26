@@ -1,4 +1,4 @@
-<div class="container mt-4 pt-5">
+<!-- <div class="container mt-4 pt-5">
   <div class="row">
     <div class="col-sm-12 col backdrop">
       <h3 class="text-center side-lines"><span>{{artist.artistName}}</span></h3>
@@ -37,4 +37,31 @@
       </tabset>
     </div>
   </div>
+</div> -->
+
+<div class="details">
+  <div class="details__actions">
+    <i class="fa fa-info-circle details__actions--info" title="toggle info" (click)="infoFlag = !infoFlag"></i>
+  </div>
+  <div class="details__grid">
+    <h3 class="details__grid--title"><span>{{artist.artistName}}</span></h3>
+    <img class="details__grid--image" src="{{artist.pictureUrl}}" alt="poster for {{artist.artistName}}">
+    <div class="details__grid__text" *ngIf="!infoFlag">
+      <span class="details__grid__text--qte">&ldquo;</span>
+      <p class="details__grid__text--prg">{{artist.bio}}</p>
+      <span class="details__grid__text--qte">&rdquo;</span>
+    </div>
+    <div class="details__grid__text" *ngIf="infoFlag">
+      <h3>Birth name</h3>
+      <p>{{artist.realName}} &#x25cf; {{artist.height}}</p>
+      <p><i class="fa fa-hourglass-start"></i>{{artist.birthdate | date: 'mediumDate'}} - <i class="fa fa-hourglass-end"></i>{{artist.deathdate | date: 'mediumDate'}}</p>
+      <h3>Stars</h3>
+      <p>{{artist.movies.movieTitles.join(', ')}}</p>
+      <h3>Stars</h3>
+      <p>{{artist.birthplace}}</p>
+    </div>
+  </div>
+</div>
+<div>
+  <!-- <div style="height: 100%;background-color: #000;"></!-->
 </div>

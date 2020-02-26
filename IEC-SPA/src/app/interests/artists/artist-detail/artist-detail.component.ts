@@ -10,6 +10,7 @@ import { MovieArtist } from 'src/app/_models/movieArtist';
 })
 export class ArtistDetailComponent implements OnInit {
   artist: Artist;
+  infoFlag = false;
   roles = {star: [], director: []};
 
   constructor(

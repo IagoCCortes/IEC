@@ -5,6 +5,7 @@ export class Artist {
     artistName: string;
     realName: string;
     birthdate: Date;
+    deathdate: string;
     birthplace: string;
     height: number;
     bio: string;
