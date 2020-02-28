@@ -18,6 +18,10 @@ hr {
     &__choice {
         color: #fff;
         cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 
