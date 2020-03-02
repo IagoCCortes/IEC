@@ -39,32 +39,39 @@
   </div>
 </div> -->
 
-<div class="details">
-  <div class="details__actions">
-    <i class="fa fa-info-circle details__actions--info" title="toggle info" (click)="infoFlag = !infoFlag"></i>
-  </div>
-  <div class="details__grid">
-    <h3 class="details__grid--title"><span>{{artist.artistName}}</span></h3>
-    <img class="details__grid--image" src="{{artist.pictureUrl}}" alt="poster for {{artist.artistName}}">
-    <div class="details__grid__text" *ngIf="!infoFlag">
-      <span class="details__grid__text--qte">&ldquo;</span>
-      <p class="details__grid__text--prg">{{artist.bio}}</p>
-      <span class="details__grid__text--qte">&rdquo;</span>
+<div class="background">
+  <div class="details">
+    <div class="details__actions">
+      <!-- <i class="fa fa-info-circle details__actions--info" title="toggle info" (click)="infoFlag = !infoFlag"></i> -->
     </div>
-    <div class="details__grid__text" *ngIf="infoFlag">
-      <h3>Birth name</h3>
-      <p>{{artist.realName}} &#x25cf; {{artist.height}}</p>
-      <p *ngIf="artist.birthdate !== null"><i
-          class="fa fa-hourglass-start"></i> {{artist.birthdate | date: 'mediumDate'}}<span
-          *ngIf="artist.deathdate !== null"> - <i
-            class="fa fa-hourglass-end"></i> {{artist.deathdate | date: 'mediumDate'}}</span></p>
-      <h3>Stars</h3>
-      <p>{{artist.movies.movieTitles.join(', ')}}</p>
-      <h3>Stars</h3>
-      <p>{{artist.birthplace}}</p>
+    <div class="details__grid">
+      <h3 class="details__grid--title"><span>{{artist.artistName}}</span></h3>
+      <img class="details__grid--image" src="{{artist.pictureUrl || '../../assets/images/user.png'}}"
+        alt="poster for {{artist.artistName}}">
+      <!-- <div class="details__grid__text" *ngIf="!infoFlag">
+        <span class="details__grid__text--qte">&ldquo;</span>
+        <p class="details__grid__text--prg">{{artist.bio}}</p>
+        <span class="details__grid__text--qte">&rdquo;</span>
+      </div> -->
+      <div class="details__grid__text">
+        <div *ngIf="artist.realName !== null">
+          <h3>Birth name</h3>
+          <p>{{artist.realName}}</p>
+        </div>
+        <p *ngIf="artist.birthplace !== null">{{artist.birthplace}}</p>
+        <p *ngIf="artist.birthdate !== null"><i class="fa fa-hourglass-start"></i>
+          {{artist.birthdate | date: 'mediumDate'}}<span *ngIf="artist.deathdate !== null"> - <i
+              class="fa fa-hourglass-end"></i> {{artist.deathdate | date: 'mediumDate'}}</span></p>
+        <div *ngIf="artist.height !== null">
+          <h3>Height</h3>
+          <p>{{artist.height}}cm</p>
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<div>
-  <!-- <div style="height: 100%;background-color: #000;"></!-->
+  <div class="bio-section">
+    <p class="bio-section--text" [ngClass]="clippedText ? 'bio-section--text-clipped' : ''" (click)="clippedText = !clippedText">
+      {{artist.bio}}
+    </p>
+  </div>
 </div>

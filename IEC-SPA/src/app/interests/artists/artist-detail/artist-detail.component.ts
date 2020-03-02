@@ -10,7 +10,7 @@ import { MovieArtist } from 'src/app/_models/movieArtist';
 })
 export class ArtistDetailComponent implements OnInit {
   artist: Artist;
-  infoFlag = false;
+  clippedText: boolean;
   roles = {star: [], director: []};
 
   constructor(
@@ -26,6 +26,8 @@ export class ArtistDetailComponent implements OnInit {
         console.log(error);
       }
     );
+
+    this.clippedText = true;
 
     this.splitMoviesByRoles(this.artist.movies);
   }

@@ -51,14 +51,19 @@
 
 @import 'abstracts/variables';
 
+.background {
+    background-color: #fff;
+    margin: 0 20rem;
+}
+
 .details {
     background-color: #eee;
     clip-path: polygon(0 0, 100% 0, 100% 81vh, 0 100%);
     font-size: 1.6rem;
     height: 100vh;
-    margin: 0 20rem;
     padding-top: 4.8rem;
     position: relative;
+    z-index: 1;
 
     &__actions {
         color: $main-yellow;
@@ -117,9 +122,8 @@
             grid-row-start: 2;
             grid-row-end: 3;
             display: block;
-            // height: 100%;
-            // width: auto;
-            width: 100%;
+            max-height: 100%;
+            max-width: 100%;
             margin: auto;
             object-fit: cover;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -161,6 +165,31 @@
                 color: #868686;
             }
         }
+    }
+}
+
+.bio-section {
+    color: #000;
+    display: grid;
+    grid-template-columns: 5% auto 5%;
+
+    &--text {
+        font-size: 1.8rem;
+        grid-column-start: 2;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        line-height: 200%;
+        margin: 5rem;
+        text-align: justify;
+    }
+
+    &--text-clipped {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 17;
     }
 }
 
